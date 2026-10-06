@@ -615,115 +615,169 @@
       </div>
     </div>
 
-    <!-- ── SCREEN 5: PROFILE SCREEN (MOCKUP SCREEN 5 - REAL USER & STORE DATA) ── -->
+    <!-- ── SCREEN 5: PROFILE SCREEN (MOCKUP SCREEN 5 - EXACT TEMPLATE MATCH) ── -->
     <div class="app-screen-container" id="appScreenProfile">
       <div class="app-profile-wrapper">
         
-        <!-- USER PROFILE CARD (REAL CURRENT USER OR GUEST) -->
-        <div class="app-profile-header-card">
+        <!-- USER PROFILE HEADER AREA (REAL CURRENT USER OR GUEST SIGN-IN) -->
+        <div class="app-profile-header-card" onclick="if(!currentUser && !localStorage.getItem('saforio_currentUser')) openAuth()">
           <div class="app-profile-avatar">
-            <img src="https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_150/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg" alt="User Profile" id="appUserAvatar">
+            <img src="https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_200/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg" alt="User Profile" id="appUserAvatar">
           </div>
           <div class="app-profile-info">
             <h2 class="app-profile-name" id="appProfileName">Welcome Customer</h2>
             <p class="app-profile-email" id="appProfileEmail">Sign in to track orders</p>
-            <span class="app-profile-member-badge" id="appProfileBadge">✦ ROKEA Privileged Customer</span>
+            <span class="app-profile-member-badge" id="appProfileBadge">Premium Member</span>
           </div>
         </div>
 
-        <!-- MENU ITEMS CARD (REAL ACTIONS) -->
+        <!-- MENU CARD GROUP 1 (5 ITEMS: Orders, Wishlist, Appointments, Custom Blouse, Measurements) -->
         <div class="app-menu-list-card">
+          <!-- 1. My Orders -->
           <div class="app-menu-row" onclick="toggleCart()">
             <div class="app-menu-row-left">
-              <span class="app-menu-icon">📦</span>
-              <div>
-                <p class="app-menu-text-title">My Orders &amp; Bag</p>
-                <p class="app-menu-text-sub" id="appMenuOrdersSub">View bag &amp; track shipments</p>
+              <div class="app-menu-icon-wrap">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7A6855" stroke-width="1.8"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+              </div>
+              <div class="app-menu-text-wrap">
+                <p class="app-menu-text-title">My Orders</p>
+                <p class="app-menu-text-sub" id="appMenuOrdersSub">View order history &amp; track</p>
               </div>
             </div>
             <span class="app-menu-arrow">&rsaquo;</span>
           </div>
 
+          <!-- 2. Wishlist -->
           <div class="app-menu-row" onclick="toggleWishlist()">
             <div class="app-menu-row-left">
-              <span class="app-menu-icon">💖</span>
-              <div>
+              <div class="app-menu-icon-wrap">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7A6855" stroke-width="1.8"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+              </div>
+              <div class="app-menu-text-wrap">
                 <p class="app-menu-text-title">Wishlist</p>
-                <p class="app-menu-text-sub" id="appMenuWishSub">Saved favorite pieces</p>
+                <p class="app-menu-text-sub" id="appMenuWishSub">Saved items for later</p>
               </div>
             </div>
             <span class="app-menu-arrow">&rsaquo;</span>
           </div>
 
+          <!-- 3. Appointments -->
           <div class="app-menu-row" onclick="openAppointmentModal()">
             <div class="app-menu-row-left">
-              <span class="app-menu-icon">📅</span>
-              <div>
-                <p class="app-menu-text-title">Book Boutique Appointment</p>
-                <p class="app-menu-text-sub">Personal styling &amp; bridal consultation</p>
+              <div class="app-menu-icon-wrap">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7A6855" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="8" cy="14" r="1" fill="#7A6855"/><circle cx="12" cy="14" r="1" fill="#7A6855"/><circle cx="16" cy="14" r="1" fill="#7A6855"/><circle cx="8" cy="18" r="1" fill="#7A6855"/><circle cx="12" cy="18" r="1" fill="#7A6855"/></svg>
+              </div>
+              <div class="app-menu-text-wrap">
+                <p class="app-menu-text-title">Appointments</p>
+                <p class="app-menu-text-sub">Book styling &amp; consultation</p>
               </div>
             </div>
             <span class="app-menu-arrow">&rsaquo;</span>
           </div>
 
+          <!-- 4. Custom Blouse -->
           <div class="app-menu-row" onclick="openCustomBlouseModal()">
             <div class="app-menu-row-left">
-              <span class="app-menu-icon">✂️</span>
-              <div>
-                <p class="app-menu-text-title">Custom Blouse Studio</p>
-                <p class="app-menu-text-sub">Select necklines, sleeves &amp; lining</p>
+              <div class="app-menu-icon-wrap">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7A6855" stroke-width="1.8"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg>
+              </div>
+              <div class="app-menu-text-wrap">
+                <p class="app-menu-text-title">Custom Blouse</p>
+                <p class="app-menu-text-sub">Design your perfect blouse</p>
               </div>
             </div>
             <span class="app-menu-arrow">&rsaquo;</span>
           </div>
 
+          <!-- 5. Saved Measurements -->
           <div class="app-menu-row" onclick="openMeasureVideo()">
             <div class="app-menu-row-left">
-              <span class="app-menu-icon">📏</span>
-              <div>
+              <div class="app-menu-icon-wrap">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7A6855" stroke-width="1.8"><rect x="6" y="2" width="12" height="20" rx="2"/><line x1="6" y1="6" x2="10" y2="6"/><line x1="6" y1="10" x2="9" y2="10"/><line x1="6" y1="14" x2="11" y2="14"/><line x1="6" y1="18" x2="9" y2="18"/></svg>
+              </div>
+              <div class="app-menu-text-wrap">
                 <p class="app-menu-text-title">Saved Measurements</p>
-                <p class="app-menu-text-sub">Video guide &amp; size specifications</p>
-              </div>
-            </div>
-            <span class="app-menu-arrow">&rsaquo;</span>
-          </div>
-
-          <div class="app-menu-row" onclick="openPincodeSelector()">
-            <div class="app-menu-row-left">
-              <span class="app-menu-icon">📍</span>
-              <div>
-                <p class="app-menu-text-title">Delivery Location</p>
-                <p class="app-menu-text-sub" id="appMenuPincodeSub">Check delivery to your pincode</p>
-              </div>
-            </div>
-            <span class="app-menu-arrow">&rsaquo;</span>
-          </div>
-
-          <div class="app-menu-row" onclick="window.open('https://wa.me/917010394051?text=Hi%20ROKEA%20by%20RK%2C%20I%20need%20help%20with%20my%20order', '_blank')">
-            <div class="app-menu-row-left">
-              <span class="app-menu-icon">💬</span>
-              <div>
-                <p class="app-menu-text-title">Help &amp; WhatsApp Support</p>
-                <p class="app-menu-text-sub">+91 70103 94051 · Instant assistance</p>
-              </div>
-            </div>
-            <span class="app-menu-arrow">&rsaquo;</span>
-          </div>
-
-          <div class="app-menu-row" onclick="window.open('https://instagram.com/rokeabyrk', '_blank')">
-            <div class="app-menu-row-left">
-              <span class="app-menu-icon">📸</span>
-              <div>
-                <p class="app-menu-text-title">Instagram @rokeabyrk</p>
-                <p class="app-menu-text-sub">Follow our bridal stories &amp; reels</p>
+                <p class="app-menu-text-sub">Manage your size details</p>
               </div>
             </div>
             <span class="app-menu-arrow">&rsaquo;</span>
           </div>
         </div>
 
-        <button class="app-btn-logout" id="appAuthActionBtn" onclick="handleAppLogout()">🚪 Log In / Register</button>
-        <div class="app-footer-motto">✦ Luxury In Every Thread ✦</div>
+        <!-- MENU CARD GROUP 2 (4 ITEMS: Address Book, Payment Methods, Help & Support, About) -->
+        <div class="app-menu-list-card">
+          <!-- 6. Address Book -->
+          <div class="app-menu-row" onclick="openPincodeSelector()">
+            <div class="app-menu-row-left">
+              <div class="app-menu-icon-wrap">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7A6855" stroke-width="1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="app-menu-text-wrap">
+                <p class="app-menu-text-title">Address Book</p>
+                <p class="app-menu-text-sub" id="appMenuPincodeSub">Delivery addresses</p>
+              </div>
+            </div>
+            <span class="app-menu-arrow">&rsaquo;</span>
+          </div>
+
+          <!-- 7. Payment Methods -->
+          <div class="app-menu-row" onclick="openPincodeSelector()">
+            <div class="app-menu-row-left">
+              <div class="app-menu-icon-wrap">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7A6855" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+              </div>
+              <div class="app-menu-text-wrap">
+                <p class="app-menu-text-title">Payment Methods</p>
+                <p class="app-menu-text-sub">Cards &amp; UPI</p>
+              </div>
+            </div>
+            <span class="app-menu-arrow">&rsaquo;</span>
+          </div>
+
+          <!-- 8. Help & Support -->
+          <div class="app-menu-row" onclick="window.open('https://wa.me/917010394051?text=Hi%20ROKEA%20by%20RK%2C%20I%20need%20assistance', '_blank')">
+            <div class="app-menu-row-left">
+              <div class="app-menu-icon-wrap">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7A6855" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <div class="app-menu-text-wrap">
+                <p class="app-menu-text-title">Help &amp; Support</p>
+                <p class="app-menu-text-sub">FAQs, contact us</p>
+              </div>
+            </div>
+            <span class="app-menu-arrow">&rsaquo;</span>
+          </div>
+
+          <!-- 9. About ROKEA -->
+          <div class="app-menu-row" onclick="window.location.href='/about.html'">
+            <div class="app-menu-row-left">
+              <div class="app-menu-icon-wrap">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#7A6855" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              </div>
+              <div class="app-menu-text-wrap">
+                <p class="app-menu-text-title">About ROKEA</p>
+                <p class="app-menu-text-sub">Our story, values &amp; heritage</p>
+              </div>
+            </div>
+            <span class="app-menu-arrow">&rsaquo;</span>
+          </div>
+        </div>
+
+        <!-- LOG OUT / LOG IN ACTION BUTTON -->
+        <button class="app-btn-logout" id="appAuthActionBtn" onclick="handleAppLogout()">
+          <span id="appAuthActionIcon">🚪</span>
+          <span id="appAuthActionBtnText">Log Out</span>
+        </button>
+
+        <!-- FOOTER MOTTO -->
+        <div class="app-footer-motto-wrap">
+          <div class="app-footer-motto-line">
+            <span>───</span>
+            <span class="app-footer-motto-text">Luxury In Every Thread</span>
+            <span>───</span>
+          </div>
+          <div class="app-footer-motto-diamond">✦</div>
+        </div>
 
       </div>
     </div>

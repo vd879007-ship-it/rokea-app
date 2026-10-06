@@ -4938,27 +4938,33 @@ window.addEventListener('popstate', function () {
     }
   };
 
-  // 6. User Profile Screen (Screen 5 - Real User & Store Data)
+  // 6. User Profile Screen (Screen 5 - Real Dynamic User & Store Data)
   window.syncAppProfileData = function () {
     const profileName = document.getElementById('appProfileName');
     const profileEmail = document.getElementById('appProfileEmail');
     const profileBadge = document.getElementById('appProfileBadge');
-    const authBtn = document.getElementById('appAuthActionBtn');
+    const authBtnText = document.getElementById('appAuthActionBtnText');
+    const authIcon = document.getElementById('appAuthActionIcon');
+    const userAvatar = document.getElementById('appUserAvatar');
     const wishSub = document.getElementById('appMenuWishSub');
+    const ordersSub = document.getElementById('appMenuOrdersSub');
     const pincodeSub = document.getElementById('appMenuPincodeSub');
 
     const activeUser = currentUser || JSON.parse(localStorage.getItem('saforio_currentUser'));
 
     if (activeUser) {
-      if (profileName) profileName.innerText = activeUser.name || activeUser.displayName || 'Privileged Member';
-      if (profileEmail) profileEmail.innerText = activeUser.email || activeUser.phone || 'ROKEA Exclusive';
-      if (profileBadge) profileBadge.innerText = '✦ Premium VIP Member';
-      if (authBtn) authBtn.innerText = '🚪 Log Out';
+      if (profileName) profileName.innerText = activeUser.name || activeUser.displayName || 'Karthikeyani M';
+      if (profileEmail) profileEmail.innerText = activeUser.email || activeUser.phone || 'karthikeyani@gmail.com';
+      if (profileBadge) profileBadge.innerText = 'Premium Member';
+      if (authBtnText) authBtnText.innerText = 'Log Out';
+      if (authIcon) authIcon.innerText = '🚪';
+      if (userAvatar && activeUser.photoURL) userAvatar.src = activeUser.photoURL;
     } else {
-      if (profileName) profileName.innerText = 'Welcome Guest';
-      if (profileEmail) profileEmail.innerText = 'Sign in to access exclusive bridal perks';
-      if (profileBadge) profileBadge.innerText = '✦ ROKEA Customer';
-      if (authBtn) authBtn.innerText = '🚪 Sign In / Register';
+      if (profileName) profileName.innerText = 'Welcome Customer';
+      if (profileEmail) profileEmail.innerText = 'Sign in to access your orders & perks';
+      if (profileBadge) profileBadge.innerText = 'Guest Member';
+      if (authBtnText) authBtnText.innerText = 'Log In / Register';
+      if (authIcon) authIcon.innerText = '🔐';
     }
 
     if (wishSub) {
@@ -4966,9 +4972,14 @@ window.addEventListener('popstate', function () {
       wishSub.innerText = `${count} saved item${count === 1 ? '' : 's'}`;
     }
 
+    if (ordersSub) {
+      const cartCount = Array.isArray(cart) ? cart.reduce((s, i) => s + (i.quantity || 1), 0) : 0;
+      ordersSub.innerText = cartCount > 0 ? `${cartCount} item${cartCount === 1 ? '' : 's'} in bag` : 'View order history & track';
+    }
+
     if (pincodeSub) {
       const savedPin = localStorage.getItem('saforio_pincode');
-      pincodeSub.innerText = savedPin ? `Delivery to Pincode ${savedPin}` : 'Check delivery to your pincode';
+      pincodeSub.innerText = savedPin ? `Delivery to ${savedPin}` : 'Delivery addresses';
     }
   };
 
@@ -4980,9 +4991,9 @@ window.addEventListener('popstate', function () {
       } else {
         localStorage.removeItem('saforio_currentUser');
         currentUser = null;
-        window.syncAppProfileData();
         if (typeof showToast === 'function') showToast('Logged out successfully');
       }
+      window.syncAppProfileData();
     } else {
       if (typeof openAuth === 'function') {
         openAuth();
