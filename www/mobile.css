@@ -2953,7 +2953,7 @@
        ================================================================ */
 
     .app-stylist-wrapper {
-        padding: 18px 16px 24px 16px;
+        padding: 18px 16px 30px 16px;
     }
 
     .app-stylist-header {
@@ -2963,16 +2963,18 @@
 
     .app-stylist-title {
         font-family: 'Playfair Display', serif;
-        font-size: 20px;
+        font-size: 22px;
         font-weight: 700;
         color: var(--app-text-main);
         margin: 0 0 4px 0;
+        letter-spacing: -0.2px;
     }
 
     .app-stylist-subtitle {
-        font-size: 10.5px;
+        font-size: 11px;
         color: var(--app-text-muted);
         margin: 0;
+        font-weight: 400;
     }
 
     .app-upload-card {
@@ -2981,53 +2983,58 @@
         padding: 24px 18px;
         text-align: center;
         border: 1px solid var(--app-card-border);
-        box-shadow: 0 8px 24px rgba(43, 31, 23, 0.06);
-        margin-bottom: 20px;
+        box-shadow: 0 8px 24px rgba(43, 31, 23, 0.05);
+        margin-bottom: 22px;
     }
 
     .app-upload-avatar-circle {
-        width: 68px;
-        height: 68px;
+        width: 74px;
+        height: 74px;
         border-radius: 50%;
-        background: #F5EDE4;
+        background: #FAF6EE;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 32px;
-        margin: 0 auto 12px auto;
-        border: 1px solid rgba(201, 168, 76, 0.3);
+        margin: 0 auto 14px auto;
+        border: 1px solid rgba(201, 168, 76, 0.25);
     }
 
     .app-upload-title {
         font-family: 'Playfair Display', serif;
-        font-size: 16px;
+        font-size: 17px;
         font-weight: 700;
         color: var(--app-text-main);
         margin: 0 0 6px 0;
     }
 
     .app-upload-desc {
-        font-size: 10.5px;
+        font-size: 11px;
         color: var(--app-text-muted);
-        line-height: 1.45;
-        max-width: 260px;
-        margin: 0 auto 16px auto;
+        line-height: 1.5;
+        max-width: 270px;
+        margin: 0 auto 18px auto;
     }
 
     .app-btn-upload-photo {
-        background: linear-gradient(135deg, #C9A84C 0%, #A07828 100%);
+        background: linear-gradient(135deg, #DEB866 0%, #C59A3F 100%);
         color: #140C06;
         border: none;
-        padding: 10px 24px;
+        padding: 11px 26px;
         border-radius: 30px;
-        font-size: 11px;
+        font-size: 11.5px;
         font-weight: 700;
         letter-spacing: 1px;
         cursor: pointer;
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 6px;
         box-shadow: 0 4px 14px rgba(201, 168, 76, 0.4);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .app-btn-upload-photo:active {
+        transform: scale(0.97);
     }
 
     .app-stylist-divider {
@@ -3036,11 +3043,93 @@
         justify-content: center;
         gap: 10px;
         margin-bottom: 18px;
-        font-size: 8.5px;
+        font-size: 9px;
         letter-spacing: 2px;
         color: #9C8E80;
         text-transform: uppercase;
         font-weight: 600;
+    }
+
+    .app-sample-styles-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .app-sample-card {
+        background: #FFFFFF;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid var(--app-card-border);
+        box-shadow: 0 4px 14px rgba(43, 31, 23, 0.04);
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .app-sample-card:active {
+        transform: scale(0.98);
+    }
+
+    .app-sample-img-wrap {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+        background: #F5EDE4;
+    }
+
+    .app-sample-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    .app-sample-wishlist-btn {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.85);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid rgba(201, 168, 76, 0.3);
+        color: #1A120C;
+        cursor: pointer;
+        z-index: 2;
+        padding: 0;
+    }
+
+    .app-sample-info {
+        padding: 10px 10px 12px 10px;
+    }
+
+    .app-sample-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: var(--app-text-main);
+        margin: 0 0 3px 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .app-sample-subtitle {
+        font-size: 10.5px;
+        color: var(--app-text-muted);
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .app-stylist-dark-bar {
@@ -3049,31 +3138,47 @@
         padding: 14px 16px;
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 14px;
         color: #FFFFFF;
         border: 1px solid rgba(201, 168, 76, 0.3);
-        margin-top: 18px;
+        box-shadow: 0 6px 20px rgba(20, 12, 6, 0.3);
+        margin-top: 14px;
     }
 
     .app-ai-circle-icon {
-        width: 38px;
-        height: 38px;
+        width: 40px;
+        height: 40px;
         border-radius: 50%;
         background: linear-gradient(135deg, #2A1D12, #140C06);
-        border: 1px solid #C9A84C;
+        border: 1.5px solid #C9A84C;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 800;
         color: #C9A84C;
         flex-shrink: 0;
+        position: relative;
+        box-shadow: 0 0 12px rgba(201, 168, 76, 0.2);
     }
 
     .app-ai-bar-text {
-        font-size: 9.5px;
+        flex: 1;
+    }
+
+    .app-ai-bar-headline {
+        color: #FFFFFF;
+        font-size: 13.5px;
+        font-family: 'Playfair Display', serif;
+        display: block;
+        margin: 0 0 2px 0;
+    }
+
+    .app-ai-bar-desc {
+        font-size: 10.5px;
         line-height: 1.4;
         color: #D1C5B8;
+        margin: 0;
     }
 
     /* ================================================================

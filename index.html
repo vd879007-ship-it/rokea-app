@@ -553,7 +553,7 @@
       </div>
     </div>
 
-    <!-- ── SCREEN 4: AI VIRTUAL STYLIST (MOCKUP SCREEN 4 - REAL INVENTORY MATCH) ── -->
+    <!-- ── SCREEN 4: AI VIRTUAL STYLIST (MOCKUP SCREEN 4 - EXACT TEMPLATE MATCH) ── -->
     <div class="app-screen-container" id="appScreenStylist">
       <div class="app-stylist-wrapper">
         <div class="app-stylist-header">
@@ -561,36 +561,55 @@
           <p class="app-stylist-subtitle">Your Personal Saree &amp; Jewellery Recommendation</p>
         </div>
 
+        <!-- UPLOAD PHOTO CARD -->
         <div class="app-upload-card" id="appStylistUploadCard">
           <div class="app-upload-avatar-circle">
-            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#C9A84C" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <svg viewBox="0 0 100 100" width="46" height="46" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="50" cy="50" r="46" stroke="rgba(201,168,76,0.2)" stroke-width="1.5" fill="#FAF6EE"/>
+              <path d="M50 24 C40 24 34 32 34 44 C34 54 38 63 45 70 C48 73 50 77 50 80 C50 77 52 73 55 70 C62 63 66 54 66 44 C66 32 60 24 50 24 Z" fill="none" stroke="#C9A84C" stroke-width="1.8"/>
+              <path d="M38 38 C40 28 60 28 62 38 C63 46 60 56 57 63 C54 68 51 72 50 75 C49 72 46 68 43 63 C40 56 37 46 38 38 Z" fill="#F4ECE1" stroke="#C9A84C" stroke-width="1.2"/>
+              <path d="M43 45 C45 45 46 47 46 49 C46 52 44 54 42 55" stroke="#C9A84C" stroke-width="1.4"/>
+              <path d="M57 45 C55 45 54 47 54 49 C54 52 56 54 58 55" stroke="#C9A84C" stroke-width="1.4"/>
+              <path d="M49 53 L51 56 L48 57" stroke="#C9A84C" stroke-width="1.4"/>
+              <path d="M46 62 Q50 65 54 62" stroke="#C9A84C" stroke-width="1.4"/>
+              <circle cx="50" cy="40" r="1.5" fill="#C9A84C"/>
+              <path d="M36 40 C34 47 34 57 39 64 C43 69 47 73 50 77 C53 73 57 69 61 64 C66 57 66 47 64 40" stroke="#C9A84C" stroke-width="1.5"/>
+              <path d="M33 39 Q50 22 67 39" stroke="#C9A84C" stroke-width="2"/>
+            </svg>
           </div>
           <h3 class="app-upload-title">Upload Your Photo</h3>
-          <p class="app-upload-desc">Get personalized saree and jewellery recommendations based on your style, skin tone and occasion from our live inventory.</p>
+          <p class="app-upload-desc">Get personalized saree and jewellery recommendations based on your style, skin tone and occasion.</p>
           <button class="app-btn-upload-photo" onclick="triggerStylistUpload()">
-            📷 UPLOAD PHOTO
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            UPLOAD PHOTO
           </button>
           <input type="file" id="stylistFileInput" accept="image/*" style="display:none;" onchange="handleStylistFile(this)">
         </div>
 
+        <!-- DIVIDER -->
         <div class="app-stylist-divider">
-          <span>─ OR EXPLORE CURATED PAIRINGS ─</span>
+          <span>─── OR TRY OUR SAMPLE STYLES ───</span>
         </div>
 
-        <div class="app-section-header">
-          <h3 class="app-section-title" style="font-size:15px;">Handpicked Matching Sets</h3>
+        <!-- RECOMMENDED SECTION -->
+        <div class="app-section-header" style="margin-bottom:12px;">
+          <h3 class="app-section-title" style="font-size:16px;">Recommended For You</h3>
           <span class="app-section-link" onclick="switchAppScreen('shop')">View All &rarr;</span>
         </div>
 
-        <div class="app-featured-grid" id="appStylistPairsGrid">
-          <!-- Populated dynamically with real saree & jewellery pairs from live inventory -->
+        <!-- 2-COLUMN SAMPLE STYLES GRID -->
+        <div class="app-sample-styles-grid" id="appStylistSampleGrid">
+          <!-- Populated dynamically with exact card designs from mockup -->
         </div>
 
+        <!-- DARK BOTTOM STYLIST PROMO BANNER -->
         <div class="app-stylist-dark-bar">
-          <div class="app-ai-circle-icon">AI</div>
+          <div class="app-ai-circle-icon">
+            <span>AI</span>
+          </div>
           <div class="app-ai-bar-text">
-            <strong style="color:#fff; display:block; margin-bottom:2px;">Style your unique story</strong>
-            Handcrafted luxury matched to your personal elegance.
+            <strong class="app-ai-bar-headline">Style your unique story</strong>
+            <p class="app-ai-bar-desc">Not just a recommendation, it's your personal style guide.</p>
           </div>
         </div>
       </div>

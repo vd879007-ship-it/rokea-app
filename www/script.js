@@ -4851,36 +4851,63 @@ window.addEventListener('popstate', function () {
     window.updateAppBadges();
     if (window.currentAppScreen === 'shop') window.renderAppShopGrid();
     if (window.currentAppScreen === 'home') window.renderAppHomeScreen();
+    if (window.currentAppScreen === 'stylist') window.renderAppStylistScreen();
   };
 
-  // 5. Real Inventory AI Stylist Screen (Screen 4)
+  // 5. Real Inventory AI Stylist Screen (Screen 4 - Exact Template Match)
   window.renderAppStylistScreen = function () {
-    const pairsGrid = document.getElementById('appStylistPairsGrid');
-    if (!pairsGrid || !Array.isArray(products) || products.length === 0) return;
+    const sampleGrid = document.getElementById('appStylistSampleGrid');
+    if (!sampleGrid) return;
 
-    const sarees = products.filter(p => !((p.category || '').toLowerCase().includes('jewel')));
-    const jewels = products.filter(p => (p.category || '').toLowerCase().includes('jewel') || (p.name || '').toLowerCase().includes('necklace'));
+    const sarees = (Array.isArray(products) && products.length > 0)
+      ? products.filter(p => !((p.category || '').toLowerCase().includes('jewel')))
+      : [];
+    const jewels = (Array.isArray(products) && products.length > 0)
+      ? products.filter(p => (p.category || '').toLowerCase().includes('jewel') || (p.name || '').toLowerCase().includes('necklace'))
+      : [];
 
-    const s1 = sarees[0] || products[0];
-    const j1 = jewels[0] || (products.length > 1 ? products[1] : products[0]);
+    const p1 = sarees[0] || (products && products[0]) || {
+      id: 'style_trad_1',
+      name: 'Traditional Elegance',
+      price: 18500,
+      image: 'https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_500/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'
+    };
 
-    pairsGrid.innerHTML = `
-      <div class="app-featured-card" onclick="openAppProductDetail('${s1.id}')">
-        <div class="app-featured-img">
-          <img src="${s1.image || 'https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_300/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'}" alt="${s1.name}">
+    const p2 = sarees[1] || jewels[0] || (products && products[1]) || {
+      id: 'style_royal_1',
+      name: 'Royal Bridal',
+      price: 26000,
+      image: 'https://static.wixstatic.com/media/9881b8_1e967a508927429188094cfbb323fcf6~mv2.jpg/v1/fill/w_500,h_625,al_c,q_80/jewellery.jpg'
+    };
+
+    const currentWish = (JSON.parse(localStorage.getItem('saforio_wishlist') || '[]')).map(x => String(x.id));
+    const wish1 = currentWish.includes(String(p1.id));
+    const wish2 = currentWish.includes(String(p2.id));
+
+    sampleGrid.innerHTML = `
+      <div class="app-sample-card" onclick="openAppProductDetail('${p1.id}')">
+        <div class="app-sample-img-wrap">
+          <img src="${p1.image || 'https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_500/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'}" alt="Traditional Elegance" loading="lazy" onerror="this.src='https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_500/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'">
+          <button class="app-sample-wishlist-btn" onclick="event.stopPropagation(); toggleAppWishlist('${p1.id}')" aria-label="Add to Wishlist">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="${wish1 ? '#e91e63' : 'none'}" stroke="${wish1 ? '#e91e63' : '#1A120C'}" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </button>
         </div>
-        <div class="app-featured-info">
-          <h4 class="app-featured-title" style="font-size:12.5px;">${s1.name}</h4>
-          <p class="app-featured-desc"><span>₹ ${Number(s1.price).toLocaleString('en-IN')} · Handpicked Silk</span></p>
+        <div class="app-sample-info">
+          <h4 class="app-sample-title">Traditional Elegance</h4>
+          <p class="app-sample-subtitle">Saree + Temple Jewellery</p>
         </div>
       </div>
-      <div class="app-featured-card" onclick="openAppProductDetail('${j1.id}')">
-        <div class="app-featured-img">
-          <img src="${j1.image || 'https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_300/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'}" alt="${j1.name}">
+
+      <div class="app-sample-card" onclick="openAppProductDetail('${p2.id}')">
+        <div class="app-sample-img-wrap">
+          <img src="${p2.image || 'https://static.wixstatic.com/media/9881b8_1e967a508927429188094cfbb323fcf6~mv2.jpg/v1/fill/w_500,h_625,al_c,q_80/jewellery.jpg'}" alt="Royal Bridal" loading="lazy" onerror="this.src='https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_500/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'">
+          <button class="app-sample-wishlist-btn" onclick="event.stopPropagation(); toggleAppWishlist('${p2.id}')" aria-label="Add to Wishlist">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="${wish2 ? '#e91e63' : 'none'}" stroke="${wish2 ? '#e91e63' : '#1A120C'}" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          </button>
         </div>
-        <div class="app-featured-info">
-          <h4 class="app-featured-title" style="font-size:12.5px;">${j1.name}</h4>
-          <p class="app-featured-desc"><span>₹ ${Number(j1.price).toLocaleString('en-IN')} · Temple Jewellery</span></p>
+        <div class="app-sample-info">
+          <h4 class="app-sample-title">Royal Bridal</h4>
+          <p class="app-sample-subtitle">Saree + Polki Jewellery</p>
         </div>
       </div>
     `;
@@ -4898,12 +4925,12 @@ window.addEventListener('popstate', function () {
         const uploadCard = document.getElementById('appStylistUploadCard');
         if (uploadCard) {
           uploadCard.innerHTML = `
-            <div style="width:72px; height:72px; border-radius:50%; overflow:hidden; margin:0 auto 12px; border:2.5px solid #C9A84C; box-shadow:0 4px 15px rgba(201,168,76,0.4);">
+            <div style="width:74px; height:74px; border-radius:50%; overflow:hidden; margin:0 auto 12px; border:2.5px solid #C9A84C; box-shadow:0 4px 15px rgba(201,168,76,0.4);">
               <img src="${e.target.result}" style="width:100%; height:100%; object-fit:cover;">
             </div>
-            <h3 class="app-upload-title" style="color:#C9A84C; font-size:16px;">✨ Analysis Complete!</h3>
-            <p class="app-upload-desc">We matched your skin undertone with our <strong>Handpicked Silk Sarees &amp; Antique Temple Jewellery</strong>.</p>
-            <button class="app-btn-upload-photo" onclick="switchAppScreen('shop')">EXPLORE MATCHED COLLECTION &rarr;</button>
+            <h3 class="app-upload-title" style="color:#C9A84C; font-size:16px; margin-bottom:4px;">✨ Stylist Analyzed!</h3>
+            <p class="app-upload-desc">We matched your skin tone and occasion with our <strong>Handpicked Silk Sarees &amp; Temple Jewellery</strong>.</p>
+            <button class="app-btn-upload-photo" onclick="switchAppScreen('shop')">EXPLORE MATCHED LOOKS &rarr;</button>
           `;
         }
       };
