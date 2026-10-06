@@ -2818,88 +2818,39 @@
         color: #140C06;
     }
 
-    .app-detail-section-label {
-        font-size: 12px;
-        font-weight: 600;
-        color: var(--app-text-main);
-        margin-bottom: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .app-color-swatches {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 18px;
-    }
-
-    .app-color-dot {
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
-        cursor: pointer;
-        border: 2px solid #FFFFFF;
-        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
-        transition: transform 0.2s ease;
-    }
-
-    .app-color-dot.active {
-        box-shadow: 0 0 0 2px #C9A84C;
-        transform: scale(1.1);
-    }
-
-    .app-size-swatches {
-        display: flex;
-        gap: 8px;
-        margin-bottom: 18px;
-    }
-
-    .app-size-btn {
-        flex: 1;
-        padding: 8px 0;
-        border-radius: 8px;
-        background: #FFFFFF;
-        border: 1px solid #DCD5CD;
-        font-size: 11px;
-        font-weight: 600;
-        color: var(--app-text-main);
-        cursor: pointer;
-    }
-
-    .app-size-btn.active {
-        background: #140C06;
-        color: #C9A84C;
-        border-color: #140C06;
-    }
-
     .app-blouse-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background: #F8F4ED;
-        border: 1px solid var(--app-card-border);
-        border-radius: 12px;
+        background: #FAF6F0;
+        border: 1px solid #DFD5C6;
+        border-radius: 14px;
         padding: 12px 14px;
-        margin-bottom: 22px;
+        margin-bottom: 20px;
         cursor: pointer;
     }
 
     .app-blouse-left {
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 12px;
     }
 
-    .app-blouse-icon {
-        font-size: 18px;
+    .app-blouse-icon-wrap {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: #F3EBDD;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .app-blouse-title {
         font-size: 12px;
-        font-weight: 600;
+        font-weight: 700;
         color: var(--app-text-main);
-        margin: 0;
+        margin: 0 0 2px 0;
     }
 
     .app-blouse-desc {
@@ -2908,40 +2859,90 @@
         margin: 0;
     }
 
-    .app-detail-actions {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 16px;
+    .app-blouse-arrow {
+        color: #8B6914;
+        font-size: 18px;
     }
 
-    .app-btn-add-bag {
-        flex: 1;
+    /* ── STACKED FULL-WIDTH ACTION BUTTONS (EXACTLY AS IN MOCKUP) ── */
+    .app-detail-actions-vertical {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 14px;
+    }
+
+    .app-btn-add-bag-full {
+        width: 100%;
         background: #140C06;
         color: #FFFFFF;
         border: none;
-        padding: 14px;
+        padding: 15px;
         border-radius: 30px;
-        font-size: 12px;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        box-shadow: 0 4px 15px rgba(20, 12, 6, 0.25);
+        transition: transform 0.15s ease;
+    }
+
+    .app-btn-add-bag-full:active {
+        transform: scale(0.98);
+    }
+
+    .app-btn-buy-now-full {
+        width: 100%;
+        background: linear-gradient(135deg, #D4AF37 0%, #AA8022 100%);
+        color: #140C06;
+        border: none;
+        padding: 15px;
+        border-radius: 30px;
+        font-size: 13px;
         font-weight: 700;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 6px;
+        box-shadow: 0 4px 16px rgba(201, 168, 76, 0.4);
+        transition: transform 0.15s ease;
     }
 
-    .app-btn-buy-now {
-        flex: 1;
-        background: linear-gradient(135deg, #C9A84C 0%, #A07828 100%);
-        color: #140C06;
-        border: none;
-        padding: 14px;
-        border-radius: 30px;
-        font-size: 12px;
-        font-weight: 700;
-        cursor: pointer;
+    .app-btn-buy-now-full:active {
+        transform: scale(0.98);
+    }
+
+    /* ── ORIGINAL PRODUCT DESCRIPTION BOX ── */
+    .app-product-desc-box {
+        border-top: 1px solid #EBE3D8;
+        padding-top: 16px;
+        margin-top: 8px;
+    }
+
+    .app-desc-header {
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+
+    .app-desc-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--app-text-main);
+    }
+
+    .app-desc-body {
+        font-size: 11px;
+        color: #6E6255;
+        line-height: 1.65;
+        margin-top: 10px;
+    }
         justify-content: center;
         gap: 6px;
         box-shadow: 0 4px 14px rgba(201, 168, 76, 0.4);

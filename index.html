@@ -468,22 +468,22 @@
 
     </div>
 
-    <!-- ── SCREEN 3: PRODUCT DETAILS (MOCKUP SCREEN 3 - REAL DATA) ── -->
+    <!-- ── SCREEN 3: PRODUCT DETAILS (MATCHING UPLOADED TEMPLATE WITH REAL DESCRIPTIONS) ── -->
     <div class="app-screen-container" id="appScreenDetail">
       <div class="app-detail-slider">
         <img id="appDetailImg" src="https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_600/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg" alt="Product Detail">
-        <div class="app-detail-page-badge" id="appDetailPageBadge">1/1</div>
+        <div class="app-detail-page-badge" id="appDetailPageBadge">1/5</div>
       </div>
 
       <div class="app-detail-card">
-        <h1 class="app-detail-title" id="appDetailTitle">Handcrafted Luxury Saree</h1>
+        <h1 class="app-detail-title" id="appDetailTitle">Kanchipuram Silk Saree</h1>
         <div style="display:flex; align-items:baseline; gap:10px; margin-bottom:4px;">
-          <div class="app-detail-price" id="appDetailPrice">₹ 4,999</div>
+          <div class="app-detail-price" id="appDetailPrice">₹ 24,999</div>
           <div style="font-size:13px; color:#A09284; text-decoration:line-through; font-family:'Playfair Display',serif;" id="appDetailOriginalPrice"></div>
         </div>
-        <div class="app-detail-tagline" id="appDetailTagline">Pure Silk | Handwoven | Authentic Heritage</div>
+        <div class="app-detail-tagline" id="appDetailTagline">Pure Kanchipuram Silk | Handwoven | Zari Border</div>
 
-        <!-- 3 Feature Badges (Dynamically updated for Saree vs Jewellery) -->
+        <!-- 3 Feature Badges -->
         <div class="app-detail-badges" id="appDetailBadgesContainer">
           <div class="app-badge-box">
             <span class="app-badge-icon" id="appBadge1Icon">🥻</span>
@@ -499,71 +499,57 @@
           </div>
         </div>
 
-        <!-- Colour selector -->
-        <div class="app-detail-section-label">
-          <span>Colour Variant: <strong id="appSelectedColorName">Signature</strong></span>
-        </div>
-        <div class="app-color-swatches" id="appDetailColorSwatches">
-          <div class="app-color-dot active" style="background:#5C101B;" onclick="selectColorSwatch(this, 'Royal Maroon')"></div>
-          <div class="app-color-dot" style="background:#1B4D3E;" onclick="selectColorSwatch(this, 'Emerald Green')"></div>
-          <div class="app-color-dot" style="background:#1C2951;" onclick="selectColorSwatch(this, 'Midnight Blue')"></div>
-          <div class="app-color-dot" style="background:#4B2354;" onclick="selectColorSwatch(this, 'Imperial Purple')"></div>
-          <div class="app-color-dot" style="background:#D4AF37;" onclick="selectColorSwatch(this, 'Antique Gold')"></div>
-        </div>
-
-        <!-- Size selector -->
-        <div class="app-detail-section-label" id="appSizeLabelContainer">
-          <span>Size / Draping</span>
-          <span style="font-size:10px; color:#8B6914; text-decoration:underline; cursor:pointer;" onclick="openMeasureVideo()">Size Guide &amp; Measurement</span>
-        </div>
-        <div class="app-size-swatches" id="appDetailSizeSwatches">
-          <button class="app-size-btn" onclick="selectSize(this)">Standard (5.5m)</button>
-          <button class="app-size-btn active" onclick="selectSize(this)">With Blouse (6.3m)</button>
-        </div>
-
         <!-- Custom Blouse Tile (Opens Real Blouse Customizer) -->
         <div class="app-blouse-row" onclick="openCustomBlouseModal()">
           <div class="app-blouse-left">
-            <span class="app-blouse-icon">✂️</span>
+            <div class="app-blouse-icon-wrap">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#8B6914" stroke-width="2"><path d="M20.38 3.46L16 2a4 4 0 01-8 0L3.62 3.46a2 2 0 00-1.34 2.23l.58 3.47a1 1 0 00.99.84H6v10a2 2 0 002 2h8a2 2 0 002-2V10h2.15a1 1 0 00.99-.84l.58-3.47a2 2 0 00-1.34-2.23z"/></svg>
+            </div>
             <div>
               <p class="app-blouse-title">Blouse Customization</p>
-              <p class="app-blouse-desc">Add matching designer blouse &amp; custom stitching</p>
+              <p class="app-blouse-desc">Add custom blouse design</p>
             </div>
           </div>
-          <span style="color:#8B6914; font-size:16px;">&rsaquo;</span>
+          <span class="app-blouse-arrow">&rsaquo;</span>
         </div>
 
-        <!-- WhatsApp Quick Chat Button -->
-        <div style="margin-bottom:14px;">
-          <button onclick="askProductOnWhatsApp()" style="width:100%; background:#25D366; color:#fff; border:none; padding:12px; border-radius:24px; font-size:11.5px; font-weight:700; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; box-shadow:0 4px 12px rgba(37,211,102,0.3);">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-5.46-4.45-9.92-9.91-9.92z"/></svg>
-            Ask Stylist on WhatsApp
-          </button>
-        </div>
-
-        <!-- Action CTAs -->
-        <div class="app-detail-actions">
-          <button class="app-btn-add-bag" onclick="addCurrentDetailToCart()">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        <!-- Action CTAs (Add to Bag & Buy Now) -->
+        <div class="app-detail-actions-vertical">
+          <button class="app-btn-add-bag-full" onclick="addCurrentDetailToCart()">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
             Add to Bag
           </button>
-          <button class="app-btn-buy-now" onclick="buyCurrentDetailNow()">
+          <button class="app-btn-buy-now-full" onclick="buyCurrentDetailNow()">
             ⚡ Buy Now
           </button>
         </div>
 
-        <!-- Accordions: Product Details & Care Instructions -->
-        <div style="border-top:1px solid #eee; padding-top:12px; font-size:11.5px; font-weight:600; color:#555; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleDetailAccordion()">
-          <span>Product Description</span>
-          <span id="appDetailAccArrow">▾</span>
+        <!-- WhatsApp Quick Chat Button -->
+        <div style="margin-bottom:18px;">
+          <button onclick="askProductOnWhatsApp()" style="width:100%; background:#FAF6F0; color:#140C06; border:1px solid #DFD5C6; padding:11px; border-radius:30px; font-size:11.5px; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="#25D366"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-5.46-4.45-9.92-9.91-9.92z"/></svg>
+            Ask Stylist on WhatsApp
+          </button>
         </div>
-        <p id="appDetailFullDesc" style="font-size:10.5px; color:#777; line-height:1.6; margin-top:8px; display:block;"></p>
 
-        <div style="border-top:1px solid #eee; padding-top:12px; margin-top:12px; font-size:11.5px; font-weight:600; color:#555; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleCareAccordion()">
-          <span>Care &amp; Safety Guidelines</span>
-          <span id="appCareAccArrow">▾</span>
+        <!-- Real Original Product Details Section -->
+        <div class="app-product-desc-box">
+          <div class="app-desc-header" onclick="toggleDetailAccordion()">
+            <span class="app-desc-title">Product Details</span>
+            <span id="appDetailAccArrow">▾</span>
+          </div>
+          <div id="appDetailFullDesc" class="app-desc-body">
+            <!-- Populated dynamically with real original descriptions -->
+          </div>
+
+          <div class="app-desc-header" style="margin-top:14px;" onclick="toggleCareAccordion()">
+            <span class="app-desc-title">Care &amp; Safety Guidelines</span>
+            <span id="appCareAccArrow">▾</span>
+          </div>
+          <div id="appDetailCareDesc" class="app-desc-body" style="display:none; white-space:pre-line;">
+            <!-- Populated dynamically with real care guidelines -->
+          </div>
         </div>
-        <p id="appDetailCareDesc" style="font-size:10px; color:#888; line-height:1.6; margin-top:8px; display:none; white-space:pre-line;"></p>
       </div>
     </div>
 
