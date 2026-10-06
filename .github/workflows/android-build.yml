@@ -16,7 +16,7 @@ jobs:
       - name: 1. Checkout Repository
         uses: actions/checkout@v4
 
-      - name: 2. Set up Node.js 20
+      - name: 2. Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -27,40 +27,29 @@ jobs:
           distribution: 'temurin'
           java-version: '21'
 
-      - name: 4. Accept Android SDK Licenses
-        run: |
-          yes | sdkmanager --licenses || true
-
-      - name: 5. Install NPM Dependencies
+      - name: 4. Install Dependencies
         run: npm install --legacy-peer-deps
 
-      - name: 6. Build Web Assets
+      - name: 5. Build Web Bundle
         run: npm run build
 
-      - name: 7. Sync Capacitor Android
+      - name: 6. Sync Capacitor Android
         run: npx cap sync android
 
-      - name: 8. Make Gradlew Executable
-        run: chmod +x ./android/gradlew
-
-      - name: 9. Build Debug APK
+      - name: 7. Build Debug APK & Release AAB
         run: |
           cd android
-          ./gradlew assembleDebug --no-daemon --stacktrace
+          chmod +x ./gradlew
+          ./gradlew assembleDebug bundleRelease --no-daemon
 
-      - name: 10. Build Release AAB
-        run: |
-          cd android
-          ./gradlew bundleRelease --no-daemon --stacktrace
-
-      - name: 11. Upload Debug APK
+      - name: 8. Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
           name: Rokea-by-RK-Debug-APK
           path: android/app/build/outputs/apk/debug/*.apk
           retention-days: 30
 
-      - name: 12. Upload Release AAB
+      - name: 9. Upload Release AAB
         uses: actions/upload-artifact@v4
         with:
           name: Rokea-by-RK-Release-AAB
