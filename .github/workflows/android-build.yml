@@ -7,6 +7,9 @@ on:
       - master
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build-android:
     name: Build Android APK & AAB
@@ -42,16 +45,33 @@ jobs:
           chmod +x ./gradlew
           ./gradlew assembleDebug bundleRelease --no-daemon
 
-      - name: 8. Upload Debug APK
+      - name: 8. Prepare Direct APK & AAB Files
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk ./Rokea-by-RK.apk
+          cp android/app/build/outputs/bundle/release/app-release.aab ./Rokea-by-RK.aab
+
+      - name: 9. Upload Debug APK Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Rokea-by-RK-Debug-APK
-          path: android/app/build/outputs/apk/debug/*.apk
+          path: ./Rokea-by-RK.apk
           retention-days: 30
 
-      - name: 9. Upload Release AAB
+      - name: 10. Upload Release AAB Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Rokea-by-RK-Release-AAB
-          path: android/app/build/outputs/bundle/release/*.aab
+          path: ./Rokea-by-RK.aab
           retention-days: 30
+
+      - name: 11. Publish Direct Mobile Download Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          name: "Rokea by RK Mobile App v1.0.0"
+          body: "Official Android App for Rokea by RK. Tap Rokea-by-RK.apk to download directly on mobile."
+          files: |
+            ./Rokea-by-RK.apk
+            ./Rokea-by-RK.aab
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
