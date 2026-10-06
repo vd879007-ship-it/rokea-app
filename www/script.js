@@ -4436,6 +4436,19 @@ window.addEventListener('popstate', function () {
       }
     }
 
+    // Header Right: On shop screen, show Search 🔍; on other screens show Wishlist ♡
+    const searchWrap = document.getElementById('appHeaderSearchWrap');
+    const wishWrap = document.getElementById('appHeaderWishWrap');
+    if (searchWrap && wishWrap) {
+      if (screenName === 'shop') {
+        searchWrap.style.display = 'block';
+        wishWrap.style.display = 'none';
+      } else {
+        searchWrap.style.display = 'none';
+        wishWrap.style.display = 'block';
+      }
+    }
+
     if (screenName === 'home') {
       window.renderAppHomeScreen();
     } else if (screenName === 'shop') {
@@ -4447,6 +4460,18 @@ window.addEventListener('popstate', function () {
     }
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  window.toggleAppHeaderSearch = function () {
+    const dropdown = document.getElementById('appHeaderSearchDropdown');
+    const input = document.getElementById('appLiveSearchInput');
+    if (dropdown) {
+      const isHidden = dropdown.style.display === 'none' || dropdown.style.display === '';
+      dropdown.style.display = isHidden ? 'block' : 'none';
+      if (isHidden && input) {
+        input.focus();
+      }
+    }
   };
 
   window.handleAppHeaderLeft = function () {
@@ -4484,36 +4509,6 @@ window.addEventListener('popstate', function () {
     if (featImgJewel && jewellery.length > 0 && jewellery[0].image) {
       featImgJewel.src = jewellery[0].image;
     }
-
-    // Populate Trending Grid on Home Screen
-    const homeTrendingGrid = document.getElementById('appHomeTrendingGrid');
-    if (homeTrendingGrid) {
-      const trendingList = products.slice(0, 4);
-      homeTrendingGrid.innerHTML = trendingList.map(p => {
-        const pName = p.name || 'Handcrafted Luxury';
-        const pPrice = Number(p.price) ? '₹ ' + Number(p.price).toLocaleString('en-IN') : '₹ 4,999';
-        const pImg = p.image || 'https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_400/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg';
-        const isWishlisted = Array.isArray(wishlist) && wishlist.some(w => String(w.id) === String(p.id));
-
-        return `
-          <div class="app-grid-card" onclick="openAppProductDetail('${p.id}')">
-            <span class="app-card-badge-new">Trending</span>
-            <div class="app-card-img-wrap">
-              <img src="${pImg}" alt="${pName}" loading="lazy" onerror="this.src='https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_400/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'">
-              <button class="app-card-heart-btn" onclick="event.stopPropagation(); toggleWishlistFromApp('${p.id}')" aria-label="Add to Wishlist">
-                <svg viewBox="0 0 24 24" fill="${isWishlisted ? '#e91e63' : 'none'}" stroke="${isWishlisted ? '#e91e63' : '#140C06'}" stroke-width="2">
-                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                </svg>
-              </button>
-            </div>
-            <div class="app-card-body">
-              <h3 class="app-card-name">${pName}</h3>
-              <p class="app-card-price">${pPrice}</p>
-            </div>
-          </div>
-        `;
-      }).join('');
-    }
   };
 
   // 3. Real Store Data Shop Screen Renderer
@@ -4549,44 +4544,16 @@ window.addEventListener('popstate', function () {
     window.appSearchQuery = (query || '').toLowerCase().trim();
     if (window.currentAppScreen !== 'shop') {
       window.switchAppScreen('shop');
-      const shopInput = document.getElementById('appShopSearchInput');
-      if (shopInput) shopInput.value = query;
     }
     window.renderAppShopGrid();
   };
 
   window.renderAppShopGrid = function (explicitFilter) {
     const gridEl = document.getElementById('appShopProductGrid');
-    const chipsContainer = document.getElementById('appShopFilterChips');
     if (!gridEl) return;
 
     const filter = explicitFilter || window.currentShopCategory || 'all';
     const isJewelleryTab = window.currentShopTab === 'jewellery';
-
-    // Populate Dynamic Filter Chips from real categories
-    if (chipsContainer) {
-      const chips = isJewelleryTab
-        ? [
-            { id: 'all', label: 'All Jewellery' },
-            { id: 'necklace', label: 'Necklaces' },
-            { id: 'antique', label: 'Antique Gold' },
-            { id: 'choker', label: 'Chokers' },
-            { id: 'earring', label: 'Earrings' }
-          ]
-        : [
-            { id: 'all', label: 'All Sarees' },
-            { id: 'silk', label: 'Soft Silk' },
-            { id: 'dubion', label: 'Dubion' },
-            { id: 'viscose', label: 'Glow Viscose' },
-            { id: 'bridal', label: 'Bridal' }
-          ];
-
-      chipsContainer.innerHTML = chips.map(c => `
-        <button class="app-filter-chip ${filter === c.id ? 'active' : ''}" onclick="window.selectShopFilterChip('${c.id}')" style="white-space:nowrap; padding:6px 14px; border-radius:20px; font-size:11px; font-weight:600; cursor:pointer; border:1px solid ${filter === c.id ? '#140C06' : '#DFD5C6'}; background:${filter === c.id ? '#140C06' : '#FFFFFF'}; color:${filter === c.id ? '#C9A84C' : '#23180F'}; transition:all 0.2s ease;">
-          ${c.label}
-        </button>
-      `).join('');
-    }
 
     let list = Array.isArray(products) ? [...products] : [];
 
@@ -4606,7 +4573,7 @@ window.addEventListener('popstate', function () {
       });
     }
 
-    // Filter by category chip
+    // Filter by category
     if (filter !== 'all' && filter !== 'jewellery') {
       list = list.filter(p => {
         const text = ((p.category || '') + ' ' + (p.name || '') + ' ' + (p.description || '')).toLowerCase();
@@ -4634,22 +4601,22 @@ window.addEventListener('popstate', function () {
     if (list.length === 0) {
       gridEl.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: #7E7267;">
-          <p style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">No matching products found</p>
-          <p style="font-size: 11px;">Try searching for Soft Silk, Dubion, or explore all collections.</p>
+          <p style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">No products found</p>
+          <p style="font-size: 11px;">Explore our other handcrafted collections.</p>
         </div>
       `;
       return;
     }
 
     gridEl.innerHTML = list.map(p => {
-      const pName = p.name || 'Handcrafted Luxury';
+      const pName = p.name || 'Handcrafted Luxury Saree';
       const pPrice = Number(p.price) ? '₹ ' + Number(p.price).toLocaleString('en-IN') : '₹ 4,999';
       const pImg = p.image || 'https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_400/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg';
       const isWishlisted = Array.isArray(wishlist) && wishlist.some(w => String(w.id) === String(p.id));
 
       return `
         <div class="app-grid-card" onclick="openAppProductDetail('${p.id}')">
-          <span class="app-card-badge-new">${p.category ? p.category.toUpperCase() : 'NEW'}</span>
+          <span class="app-card-badge-new">${p.badge || 'New'}</span>
           <div class="app-card-img-wrap">
             <img src="${pImg}" alt="${pName}" loading="lazy" onerror="this.src='https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_400/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'">
             <button class="app-card-heart-btn" onclick="event.stopPropagation(); toggleWishlistFromApp('${p.id}')" aria-label="Add to Wishlist">
@@ -4660,7 +4627,14 @@ window.addEventListener('popstate', function () {
           </div>
           <div class="app-card-body">
             <h3 class="app-card-name">${pName}</h3>
-            <p class="app-card-price">${pPrice}</p>
+            <div class="app-card-price-row">
+              <p class="app-card-price">${pPrice}</p>
+              <span class="app-card-heart-icon-small" onclick="event.stopPropagation(); toggleWishlistFromApp('${p.id}')">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="${isWishlisted ? '#e91e63' : 'none'}" stroke="${isWishlisted ? '#e91e63' : '#8C7D6E'}" stroke-width="1.8">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </span>
+            </div>
           </div>
         </div>
       `;

@@ -330,15 +330,27 @@
       </a>
 
       <div class="app-header-actions">
-        <div class="app-header-badge-wrap" onclick="toggleWishlist()">
+        <div class="app-header-badge-wrap" id="appHeaderSearchWrap" style="display:none;" onclick="toggleAppHeaderSearch()">
+          <svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="app-header-badge-wrap" id="appHeaderWishWrap" onclick="toggleWishlist()">
           <svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
         </div>
         <div class="app-header-badge-wrap" onclick="toggleCart()">
           <svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
-          <span class="app-header-badge" id="appCartBadge">2</span>
+          <span class="app-header-badge" id="appCartBadge">0</span>
         </div>
       </div>
     </header>
+
+    <!-- SEARCH OVERLAY BAR (TOGGLED VIA 🔍 ICON) -->
+    <div id="appHeaderSearchDropdown" style="display:none; background:#181008; padding:8px 16px; border-bottom:1px solid rgba(201,168,76,0.3);">
+      <div style="background:#2A1F16; border-radius:12px; border:1px solid rgba(201,168,76,0.3); display:flex; align-items:center; padding:8px 12px; gap:8px;">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#C9A84C" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="appLiveSearchInput" placeholder="Search real silk sarees, necklaces..." style="border:none; outline:none; width:100%; font-size:12px; font-family:'Poppins',sans-serif; background:transparent; color:#fff;" oninput="handleAppLiveSearch(this.value)">
+        <span style="color:#C9A84C; font-size:16px; cursor:pointer;" onclick="toggleAppHeaderSearch()">×</span>
+      </div>
+    </div>
 
     <!-- ── SCREEN 1: HOME SCREEN (EXACT MATCH TO TEMPLATE MOCKUP) ── -->
     <div class="app-screen-container active-screen" id="appScreenHome">
@@ -415,54 +427,43 @@
 
     </div>
 
-    <!-- ── SCREEN 2: SHOP / COLLECTIONS SCREEN (MOCKUP SCREEN 2) ── -->
+    <!-- ── SCREEN 2: SHOP / COLLECTIONS SCREEN (MATCHING UPLOADED TEMPLATE) ── -->
     <div class="app-screen-container" id="appScreenShop">
       
-      <!-- HEADER BANNER -->
-      <div class="app-shop-header-card">
-        <div class="app-shop-header-left">
-          <h2 class="app-shop-title">Shop Our<br>Collections</h2>
+      <!-- HEADER BANNER FULL-BLEED (WITH WHITE ROSES & SILK SAREE) -->
+      <div class="app-shop-header-banner">
+        <div class="app-shop-header-content">
+          <h1 class="app-shop-title"><span style="color:#C9A84C;">Shop Our</span><br>Collections</h1>
           <p class="app-shop-subtitle">Exquisite sarees &amp; jewellery, crafted with heritage and love.</p>
         </div>
-        <div class="app-shop-header-img">
-          <img id="appShopHeaderImg" src="https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_200/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg" alt="Saree Collection">
+      </div>
+
+      <!-- WHITE / CREAM SHEET WITH ROUNDED TOP CORNERS -->
+      <div class="app-shop-sheet">
+        <!-- TABS (SAREES | JEWELLERY) -->
+        <div class="app-shop-tabs">
+          <div class="app-shop-tab active" id="shopTabSarees" onclick="switchShopTab('sarees')">Sarees</div>
+          <div class="app-shop-tab" id="shopTabJewellery" onclick="switchShopTab('jewellery')">Jewellery</div>
         </div>
-      </div>
 
-      <!-- SHOP SEARCH BAR -->
-      <div style="padding: 0 16px 10px 16px;">
-        <div style="background:#fff; border-radius:14px; border:1px solid var(--app-card-border); display:flex; align-items:center; padding:10px 14px; gap:10px; box-shadow:0 4px 12px rgba(43,31,23,0.04);">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#8B6914" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="appShopSearchInput" placeholder="Search by name, fabric, style..." style="border:none; outline:none; width:100%; font-size:12px; font-family:'Poppins',sans-serif; background:transparent; color:#23180F;" oninput="handleAppLiveSearch(this.value)">
+        <!-- FILTER & SORT BAR (2 ROUNDED PILL BUTTONS) -->
+        <div class="app-filter-bar">
+          <button class="app-filter-btn" onclick="toggleShopFilter()">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/></svg>
+            <span>Filter</span>
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <button class="app-filter-btn" onclick="toggleShopSort()">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="10" y1="18" x2="14" y2="18"/></svg>
+            <span id="appSortLabel">Sort</span>
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
         </div>
-      </div>
 
-      <!-- TABS (SAREES | JEWELLERY) -->
-      <div class="app-shop-tabs">
-        <div class="app-shop-tab active" id="shopTabSarees" onclick="switchShopTab('sarees')">Sarees</div>
-        <div class="app-shop-tab" id="shopTabJewellery" onclick="switchShopTab('jewellery')">Jewellery</div>
-      </div>
-
-      <!-- DYNAMIC FILTER CHIPS FROM REAL DATA -->
-      <div class="app-filter-chips-scroll" id="appShopFilterChips" style="display:flex; gap:8px; overflow-x:auto; padding:0 16px 12px 16px; scrollbar-width:none;">
-        <!-- Populated dynamically: All, Soft Silk, Dubion, Glow Viscose, Necklaces, etc. -->
-      </div>
-
-      <!-- FILTER & SORT BAR -->
-      <div class="app-filter-bar">
-        <button class="app-filter-btn" onclick="toggleShopFilter()">
-          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/></svg>
-          Filter ▾
-        </button>
-        <button class="app-filter-btn" onclick="toggleShopSort()">
-          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
-          <span id="appSortLabel">Sort ▾</span>
-        </button>
-      </div>
-
-      <!-- 2-COLUMN LUXURY PRODUCT GRID (REAL PRODUCTS FROM DATABASE) -->
-      <div class="app-product-grid" id="appShopProductGrid">
-        <!-- Rendered dynamically by script.js from real products -->
+        <!-- 2-COLUMN LUXURY PRODUCT GRID (REAL PRODUCTS ONLY) -->
+        <div class="app-product-grid" id="appShopProductGrid">
+          <!-- Rendered dynamically by script.js from real products -->
+        </div>
       </div>
 
     </div>
