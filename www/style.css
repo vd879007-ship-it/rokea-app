@@ -6983,7 +6983,9 @@ img {
 }
 
 /* Base Desktop: Hide Mobile App specific components */
-.mobile-app-bottom-bar {
+.mobile-app-bottom-bar,
+.rokea-app-wrapper,
+.app-bottom-nav {
   display: none;
 }
 

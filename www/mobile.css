@@ -6,91 +6,38 @@
 
 @media (max-width: 1024px) {
 
-    /* ── 1. FLIPKART STYLE APP HEADER ── */
-    nav {
-        padding-top: calc(8px + var(--sat, env(safe-area-inset-top, 0px))) !important;
-        padding-bottom: 8px !important;
-        padding-left: max(14px, var(--sal, env(safe-area-inset-left, 0px))) !important;
-        padding-right: max(14px, var(--sar, env(safe-area-inset-right, 0px))) !important;
-        height: calc(52px + var(--sat, env(safe-area-inset-top, 0px))) !important;
-        min-height: calc(52px + var(--sat, env(safe-area-inset-top, 0px))) !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: space-between !important;
-        background: #181008 !important;
-        position: sticky !important;
-        top: 0 !important;
-        z-index: 9998 !important;
-        border-bottom: 1px solid rgba(201, 168, 76, 0.2) !important;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4) !important;
-    }
-
-    .nav-links,
-    .nav-cta,
-    .menu-toggle {
-        display: none !important;
-    }
-
-    .nav-logo {
-        position: static !important;
-        transform: none !important;
-        margin: 0 !important;
-        order: 1 !important;
-        display: flex !important;
-        align-items: center !important;
-    }
-
-    .logo-img {
-        height: 24px !important;
-        width: auto !important;
-    }
-
-    .nav-actions {
-        order: 2 !important;
-        display: flex !important;
-        align-items: center !important;
-        gap: 16px !important;
-        min-width: auto !important;
-    }
-
-    .nav-icon-svg {
-        width: 22px !important;
-        height: 22px !important;
-    }
-
-    .wishlist-trigger {
-        margin-right: 0 !important;
-    }
-
-    .cart-count {
-        top: -4px !important;
-        right: -8px !important;
-        min-width: 15px !important;
-        height: 15px !important;
-        font-size: 8.5px !important;
-        font-weight: 700 !important;
-        padding: 2px 4px !important;
-    }
-
-    /* ── 2. HIDE OLD WEBSITE HERO, MARQUEE & BUTTONS ON MOBILE ── */
+    /* ── 1. HIDE DESKTOP NAV & LEGACY WEBSITE SECTIONS ON MOBILE ── */
+    nav,
     .hero,
     .marquee-bar,
     .splash-scroll-indicator,
     .botanical-ornament,
     .vertical-elegance-badge,
     .curated-center-header,
-    .category-tabs {
+    .category-tabs,
+    .curated-showcase-section,
+    .about-section,
+    .categories-section,
+    .custom-blouse-section,
+    .contact-section,
+    .faq-section,
+    footer,
+    .mobile-app-header-container,
+    .mobile-app-banner-slider,
+    .mobile-app-stories-container,
+    .mobile-deals-section {
         display: none !important;
     }
 
-    .curated-showcase-section {
-        padding: 0 !important;
-        background: #120c06 !important;
+    .rokea-app-wrapper {
+        display: block !important;
+        width: 100% !important;
+        min-height: 100vh !important;
+        background: var(--app-bg) !important;
     }
 
-    .curated-wrapper {
-        padding: 0 !important;
-        max-width: 100% !important;
+    .app-bottom-nav {
+        display: flex !important;
     }
 
     /* ── 3. ABOUT ── */
@@ -2165,671 +2112,1099 @@
     }
 
     /* ================================================================
-       FLIPKART / AMAZON LUXURY MOBILE APP EXPERIENCE & ANIMATIONS
+       ROKEA BY RK — EXACT LUXURY MOBILE APP TEMPLATE (5 SCREENS)
+       MATCHING MOCKUP DESIGN SYSTEM PIXEL-FOR-PIXEL
        ================================================================ */
 
-    /* ── A. APP CONTAINER & PADDING ADJUSTMENT ── */
+    :root {
+        --app-bg: #FBF8F4;
+        --app-dark: #140C06;
+        --app-espresso: #1E140C;
+        --app-card-bg: #FFFFFF;
+        --app-card-border: rgba(201, 168, 76, 0.22);
+        --app-gold: #C9A84C;
+        --app-gold-light: #F5E1A4;
+        --app-gold-dark: #8B6914;
+        --app-text-main: #23180F;
+        --app-text-muted: #7E7267;
+        --app-accent: #E53935;
+    }
+
     body {
-        padding-bottom: calc(68px + var(--sab, env(safe-area-inset-bottom, 0px))) !important;
+        background-color: var(--app-bg) !important;
+        color: var(--app-text-main) !important;
+        font-family: 'Poppins', sans-serif !important;
+        padding-bottom: calc(65px + var(--sab, env(safe-area-inset-bottom, 0px))) !important;
+        overflow-x: hidden !important;
     }
 
-    .app-mobile-container {
-        display: block;
+    /* ── A. APP HEADER BAR (BLACK & GOLD SERIF) ── */
+    .app-header {
+        position: sticky;
+        top: 0;
+        left: 0;
         width: 100%;
-        background: #120c06;
-        padding: 0 0 15px 0;
-        box-sizing: border-box;
-    }
-
-    /* ── B. PINCODE DELIVERY STRIP (AMAZON / FLIPKART STYLE) ── */
-    .app-delivery-strip {
-        display: flex !important;
+        height: calc(54px + var(--sat, env(safe-area-inset-top, 0px)));
+        padding-top: var(--sat, env(safe-area-inset-top, 0px));
+        background: #110A05;
+        border-bottom: 1px solid rgba(201, 168, 76, 0.25);
+        display: flex;
         align-items: center;
         justify-content: space-between;
-        background: linear-gradient(90deg, #1f160e 0%, #291d12 100%);
-        padding: 10px 15px;
-        border-bottom: 1px solid rgba(201, 168, 76, 0.15);
-        color: #e6dfd5;
-        font-size: 11px;
-        cursor: pointer;
-        user-select: none;
+        padding-left: max(16px, var(--sal, env(safe-area-inset-left, 0px)));
+        padding-right: max(16px, var(--sar, env(safe-area-inset-right, 0px)));
+        box-sizing: border-box;
+        z-index: 10000;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     }
 
-    .app-delivery-left {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
-    .app-pin-icon {
-        width: 14px;
-        height: 14px;
-        color: #C9A84C;
-    }
-
-    .app-delivery-label strong {
-        color: #fff;
-        font-weight: 600;
-    }
-
-    .app-delivery-arrow {
-        color: #C9A84C;
-        font-size: 12px;
-    }
-
-    .app-delivery-badge {
-        font-size: 10px;
-        font-weight: 600;
-        color: #4caf50;
-        background: rgba(76, 175, 80, 0.12);
-        padding: 3px 8px;
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        gap: 3px;
-        border: 1px solid rgba(76, 175, 80, 0.25);
-    }
-
-    /* ── C. ANIMATED APP SEARCH BAR ── */
-    .app-search-section {
-        padding: 12px 15px 8px 15px;
-        background: #120c06;
-    }
-
-    .app-search-input-box {
-        display: flex;
-        align-items: center;
-        background: #241910;
-        border: 1.5px solid rgba(201, 168, 76, 0.35);
-        border-radius: 28px;
-        padding: 2px 14px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
-        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    }
-
-    .app-search-input-box:focus-within {
-        border-color: #C9A84C;
-        box-shadow: 0 0 15px rgba(201, 168, 76, 0.35);
-        background: #2a1e13;
-    }
-
-    .app-search-icon {
-        width: 18px;
-        height: 18px;
-        color: #C9A84C;
-        margin-right: 8px;
-        flex-shrink: 0;
-    }
-
-    #appSearchInput {
-        flex: 1;
+    .app-header-btn {
         background: transparent;
         border: none;
-        outline: none;
         color: #fff;
-        font-size: 13px;
-        padding: 10px 0;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    #appSearchInput::placeholder {
-        color: #998a7a;
-        font-size: 12.5px;
-        transition: opacity 0.3s ease;
-    }
-
-    .app-search-voice {
-        background: transparent;
-        border: none;
-        color: #C9A84C;
-        padding: 6px;
+        font-size: 20px;
         cursor: pointer;
+        padding: 4px;
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    .app-search-voice svg {
-        width: 16px;
-        height: 16px;
+    .app-header-btn svg {
+        width: 22px;
+        height: 22px;
+        stroke: #fff;
     }
 
-    /* ── D. CIRCULAR STORY CATEGORY BUBBLES ── */
-    .app-stories-row {
+    .app-header-brand {
         display: flex;
-        gap: 14px;
-        padding: 14px 15px;
-        overflow-x: auto;
-        scroll-snap-type: x proximity;
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
     }
 
-    .app-stories-row::-webkit-scrollbar {
+    .app-brand-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 2.5px;
+        color: #C9A84C;
+        line-height: 1;
+        text-transform: uppercase;
+    }
+
+    .app-brand-subtitle {
+        font-size: 7.5px;
+        letter-spacing: 3px;
+        color: #d8c7b5;
+        font-weight: 500;
+        margin-top: 2px;
+        text-transform: uppercase;
+    }
+
+    .app-header-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .app-header-badge-wrap {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .app-header-badge {
+        position: absolute;
+        top: -5px;
+        right: -7px;
+        background: #C9A84C;
+        color: #110A05;
+        font-size: 8.5px;
+        font-weight: 800;
+        min-width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* ── B. MULTI-SCREEN SWITCHING SYSTEM ── */
+    .app-screen-container {
         display: none;
+        width: 100%;
+        background: var(--app-bg);
+        animation: fadeInScreen 0.3s cubic-bezier(0.25, 1, 0.5, 1);
     }
 
-    .app-story-item {
+    .app-screen-container.active-screen {
+        display: block;
+    }
+
+    @keyframes fadeInScreen {
+        from { opacity: 0; transform: translateY(8px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ================================================================
+       SCREEN 1: HOME SCREEN (MOCKUP SCREEN 1)
+       ================================================================ */
+
+    /* ── 1. HERO BANNER CARD ── */
+    .app-home-hero {
+        margin: 14px 16px 16px 16px;
+        background: linear-gradient(135deg, #1A1209 0%, #2A1D12 100%);
+        border-radius: 20px;
+        padding: 20px 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+        border: 1px solid rgba(201, 168, 76, 0.3);
+        box-shadow: 0 10px 30px rgba(26, 18, 9, 0.35);
+    }
+
+    .app-hero-left {
+        flex: 1;
+        z-index: 2;
+        padding-right: 10px;
+    }
+
+    .app-hero-tag {
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: #C9A84C;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .app-hero-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 21px;
+        font-weight: 600;
+        color: #FFFFFF;
+        line-height: 1.25;
+        margin: 0 0 8px 0;
+    }
+
+    .app-hero-subtitle {
+        font-size: 10.5px;
+        color: #D1C5B8;
+        line-height: 1.45;
+        margin: 0 0 14px 0;
+    }
+
+    .app-hero-btn {
+        background: linear-gradient(135deg, #C9A84C 0%, #A07828 100%);
+        color: #140C06;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 24px;
+        font-size: 10.5px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 4px 12px rgba(201, 168, 76, 0.4);
+    }
+
+    .app-hero-visual {
+        width: 110px;
+        height: 140px;
+        border-radius: 16px;
+        overflow: hidden;
+        flex-shrink: 0;
+        border: 1.5px solid rgba(201, 168, 76, 0.4);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .app-hero-visual img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* ── 2. CATEGORY TILES (4 TILES ON HOME SCREEN) ── */
+    .app-home-categories {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        padding: 0 16px 20px 16px;
+    }
+
+    .app-cat-tile {
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 6px;
-        min-width: 64px;
         cursor: pointer;
-        flex-shrink: 0;
-        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transition: transform 0.2s ease;
     }
 
-    .app-story-item:active {
+    .app-cat-tile:active {
         transform: scale(0.92);
     }
 
-    .app-story-avatar {
-        width: 58px;
-        height: 58px;
-        border-radius: 50%;
-        padding: 2.5px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        background: #1A1209;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-    }
-
-    .app-story-avatar img {
+    .app-cat-box {
         width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        object-fit: cover;
-        background: #2a1f14;
-    }
-
-    .app-story-icon-content {
-        font-size: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .ring-gold {
-        background: linear-gradient(45deg, #8B6914, #F5E1A4, #C9A84C, #FFE89E);
-    }
-
-    .ring-purple {
-        background: linear-gradient(45deg, #7b1fa2, #ba68c8, #ff4081);
-    }
-
-    .ring-offer {
-        background: linear-gradient(45deg, #e53935, #ff7043, #ffd54f);
-    }
-
-    .pulse-animation {
-        animation: storyPulse 2s infinite;
-    }
-
-    @keyframes storyPulse {
-        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(186, 104, 200, 0.4)); }
-        50% { transform: scale(1.04); filter: drop-shadow(0 0 10px rgba(255, 64, 129, 0.7)); }
-    }
-
-    .app-story-title {
-        font-size: 10.5px;
-        color: #d1c5b8;
-        font-weight: 500;
-        text-align: center;
-        white-space: nowrap;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .app-story-item.active .app-story-title {
-        color: #C9A84C;
-        font-weight: 700;
-    }
-
-    /* ── E. FLIPKART TOUCH CAROUSEL BANNER ── */
-    .app-banner-carousel {
-        position: relative;
-        margin: 6px 15px 12px 15px;
+        aspect-ratio: 1/1;
         border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-        border: 1px solid rgba(201, 168, 76, 0.2);
-    }
-
-    .app-carousel-track {
         display: flex;
-        transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-        width: 100%;
-    }
-
-    .app-banner-slide {
-        min-width: 100%;
-        box-sizing: border-box;
-        padding: 22px 18px;
-        display: flex;
-        flex-direction: column;
+        align-items: center;
         justify-content: center;
-        position: relative;
-        min-height: 140px;
+        font-size: 22px;
+        background: #F3EBDD;
+        border: 1px solid rgba(201, 168, 76, 0.25);
+        color: #8B6914;
+        box-shadow: 0 4px 10px rgba(43, 31, 23, 0.05);
     }
 
-    .app-banner-tag {
-        display: inline-block;
-        font-size: 9px;
-        font-weight: 700;
-        letter-spacing: 1.5px;
+    .app-cat-tile.active .app-cat-box {
+        background: #1E140C;
         color: #C9A84C;
-        background: rgba(201, 168, 76, 0.15);
-        padding: 3px 8px;
-        border-radius: 20px;
-        margin-bottom: 6px;
-        width: fit-content;
+        border-color: #C9A84C;
+        box-shadow: 0 6px 14px rgba(26, 18, 9, 0.25);
     }
 
-    .app-banner-content h3 {
-        font-family: 'Playfair Display', serif;
-        font-size: 18px;
-        color: #fff;
-        margin: 0 0 4px 0;
-        line-height: 1.25;
-    }
-
-    .app-banner-content p {
-        font-size: 11px;
-        color: #d1c5b8;
-        margin: 0 0 10px 0;
-        line-height: 1.4;
-    }
-
-    .app-banner-btn {
-        align-self: flex-start;
-        background: linear-gradient(135deg, #C9A84C, #A07828);
-        color: #1A1209;
-        border: none;
-        padding: 6px 14px;
-        border-radius: 20px;
+    .app-cat-label {
         font-size: 10.5px;
+        font-weight: 600;
+        color: var(--app-text-main);
+        text-align: center;
+    }
+
+    .app-cat-tile.active .app-cat-label {
+        color: #8B6914;
         font-weight: 700;
-        cursor: pointer;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.3);
     }
 
-    .app-carousel-dots {
-        position: absolute;
-        bottom: 8px;
-        right: 14px;
-        display: flex;
-        gap: 5px;
+    /* ── 3. FEATURED COLLECTIONS (HOME SCREEN 2 CARDS) ── */
+    .app-featured-section {
+        padding: 0 16px 24px 16px;
     }
 
-    .app-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.35);
-        transition: all 0.3s ease;
-        cursor: pointer;
-    }
-
-    .app-dot.active {
-        width: 16px;
-        border-radius: 6px;
-        background: #C9A84C;
-    }
-
-    /* ── F. FLASH DEAL OF THE DAY TICKER ── */
-    .app-deal-ticker {
+    .app-section-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin: 0 15px 12px 15px;
-        padding: 10px 14px;
-        background: linear-gradient(90deg, #24140a 0%, #3d1c10 100%);
-        border-radius: 12px;
-        border: 1px solid rgba(229, 57, 53, 0.3);
-        box-shadow: 0 4px 14px rgba(229, 57, 53, 0.15);
+        margin-bottom: 12px;
     }
 
-    .app-deal-left {
+    .app-section-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 17px;
+        font-weight: 700;
+        color: var(--app-text-main);
+        margin: 0;
+    }
+
+    .app-section-link {
+        font-size: 11px;
+        font-weight: 600;
+        color: #8B6914;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    .app-featured-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .app-featured-card {
+        background: #FFFFFF;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid var(--app-card-border);
+        box-shadow: 0 6px 16px rgba(43, 31, 23, 0.06);
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.2s ease;
+    }
+
+    .app-featured-card:active {
+        transform: scale(0.97);
+    }
+
+    .app-featured-img {
+        aspect-ratio: 4/3;
+        width: 100%;
+        overflow: hidden;
+        background: #2a1f14;
+    }
+
+    .app-featured-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .app-featured-info {
+        padding: 12px;
+    }
+
+    .app-featured-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--app-text-main);
+        margin: 0 0 3px 0;
+    }
+
+    .app-featured-desc {
+        font-size: 9.5px;
+        color: var(--app-text-muted);
+        line-height: 1.35;
+        margin: 0;
         display: flex;
         align-items: center;
-        gap: 6px;
-        font-size: 11px;
+        justify-content: space-between;
     }
 
-    .app-deal-flame {
-        font-size: 14px;
-        animation: flameBounce 1s infinite alternate;
-    }
+    /* ================================================================
+       SCREEN 2: SHOP / COLLECTIONS SCREEN (MOCKUP SCREEN 2)
+       ================================================================ */
 
-    @keyframes flameBounce {
-        from { transform: translateY(0) scale(1); }
-        to { transform: translateY(-2px) scale(1.15); }
-    }
-
-    .app-deal-title {
-        color: #fff;
-        font-weight: 700;
-        font-size: 11.5px;
-        letter-spacing: 0.5px;
-    }
-
-    .app-deal-timer {
-        background: #110804;
-        color: #ff9800;
-        padding: 2px 7px;
-        border-radius: 6px;
-        font-weight: 700;
-        font-size: 10px;
-        font-family: monospace;
-        border: 1px solid rgba(255, 152, 0, 0.3);
-    }
-
-    .app-deal-cta {
-        font-size: 10px;
-        font-weight: 700;
-        color: #C9A84C;
-        letter-spacing: 0.8px;
-        cursor: pointer;
-    }
-
-    /* ── G. HORIZONTAL FILTER CHIPS ── */
-    .app-chips-scroll {
+    .app-shop-header-card {
+        margin: 14px 16px 12px 16px;
+        background: #FFFFFF;
+        border-radius: 18px;
+        padding: 16px;
         display: flex;
-        gap: 8px;
-        padding: 0 15px 12px 15px;
-        overflow-x: auto;
-        scrollbar-width: none;
+        align-items: center;
+        justify-content: space-between;
+        border: 1px solid var(--app-card-border);
+        box-shadow: 0 6px 18px rgba(43, 31, 23, 0.05);
     }
 
-    .app-chips-scroll::-webkit-scrollbar {
-        display: none;
+    .app-shop-header-left {
+        flex: 1;
+        padding-right: 10px;
     }
 
-    .app-chip {
-        padding: 7px 14px;
-        border-radius: 20px;
-        background: #20170f;
-        border: 1px solid rgba(201, 168, 76, 0.2);
-        color: #d1c5b8;
-        font-size: 11px;
-        font-weight: 500;
-        white-space: nowrap;
-        cursor: pointer;
-        transition: all 0.25s ease;
-        flex-shrink: 0;
-        font-family: 'Poppins', sans-serif;
-    }
-
-    .app-chip.active {
-        background: linear-gradient(135deg, #C9A84C, #9a7322);
-        color: #1A1209;
+    .app-shop-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 19px;
         font-weight: 700;
-        border-color: #F5E1A4;
-        box-shadow: 0 3px 12px rgba(201, 168, 76, 0.3);
-        transform: translateY(-1px);
+        color: var(--app-text-main);
+        margin: 0 0 4px 0;
     }
 
-    /* ── H. FLIPKART / AMAZON 2-COLUMN PRODUCT GRID & CARDS ── */
-    .products-grid {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr) !important;
-        gap: 12px !important;
-        padding: 10px 14px 20px 14px !important;
+    .app-shop-subtitle {
+        font-size: 10px;
+        color: var(--app-text-muted);
+        line-height: 1.4;
+        margin: 0;
     }
 
-    .product-card {
-        background: #1c140c !important;
-        border-radius: 14px !important;
-        overflow: hidden !important;
-        border: 1px solid rgba(201, 168, 76, 0.15) !important;
-        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35) !important;
-        display: flex !important;
-        flex-direction: column !important;
-        position: relative !important;
-        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease !important;
+    .app-shop-header-img {
+        width: 80px;
+        height: 80px;
+        border-radius: 12px;
+        overflow: hidden;
+        flex-shrink: 0;
+        border: 1px solid rgba(201, 168, 76, 0.3);
     }
 
-    .product-card:active {
-        transform: scale(0.97) !important;
+    .app-shop-header-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
-    .product-img {
-        position: relative !important;
-        aspect-ratio: 3/4 !important;
-        overflow: hidden !important;
-        background: #2b1f13 !important;
+    /* ── SHOP TABS (SAREES | JEWELLERY) ── */
+    .app-shop-tabs {
+        display: flex;
+        border-bottom: 1.5px solid rgba(201, 168, 76, 0.2);
+        margin: 0 16px 12px 16px;
     }
 
-    .product-img img.img-main {
-        width: 100% !important;
-        height: 100% !important;
-        object-fit: cover !important;
-        transition: transform 0.4s ease !important;
+    .app-shop-tab {
+        flex: 1;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--app-text-muted);
+        cursor: pointer;
+        position: relative;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
 
-    /* Flipkart Badges on Card */
-    .app-card-discount {
+    .app-shop-tab.active {
+        color: #140C06;
+        font-weight: 700;
+    }
+
+    .app-shop-tab.active::after {
+        content: '';
+        position: absolute;
+        bottom: -1.5px;
+        left: 20%;
+        right: 20%;
+        height: 2.5px;
+        background: #C9A84C;
+        border-radius: 2px;
+    }
+
+    /* ── FILTER & SORT BAR ── */
+    .app-filter-bar {
+        display: flex;
+        gap: 10px;
+        padding: 0 16px 14px 16px;
+    }
+
+    .app-filter-btn {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: #FFFFFF;
+        border: 1px solid var(--app-card-border);
+        padding: 8px 14px;
+        border-radius: 24px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--app-text-main);
+        cursor: pointer;
+        box-shadow: 0 2px 8px rgba(43, 31, 23, 0.04);
+    }
+
+    /* ── 2-COLUMN LUXURY PRODUCT GRID (MOCKUP SCREEN 2) ── */
+    .app-product-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding: 0 16px 20px 16px;
+    }
+
+    .app-grid-card {
+        background: #FFFFFF;
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid var(--app-card-border);
+        box-shadow: 0 6px 18px rgba(43, 31, 23, 0.05);
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        position: relative;
+    }
+
+    .app-card-badge-new {
         position: absolute;
         top: 8px;
         left: 8px;
-        background: linear-gradient(135deg, #e53935, #c62828);
-        color: #fff;
-        font-size: 8.5px;
-        font-weight: 800;
-        padding: 3px 7px;
-        border-radius: 6px;
-        z-index: 5;
-        letter-spacing: 0.5px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    }
-
-    .app-card-rating {
-        position: absolute;
-        bottom: 8px;
-        left: 8px;
-        background: rgba(0, 0, 0, 0.75);
-        backdrop-filter: blur(4px);
-        color: #fff;
-        font-size: 9px;
-        font-weight: 700;
-        padding: 3px 7px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        gap: 3px;
-        z-index: 5;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-    }
-
-    .app-card-rating em {
-        color: #9e9e9e;
-        font-style: normal;
-        font-weight: 400;
+        background: #140C06;
+        color: #C9A84C;
         font-size: 8px;
-    }
-
-    .product-wish {
-        position: absolute !important;
-        top: 8px !important;
-        right: 8px !important;
-        width: 32px !important;
-        height: 32px !important;
-        background: rgba(0, 0, 0, 0.6) !important;
-        backdrop-filter: blur(4px) !important;
-        border-radius: 50% !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        z-index: 6 !important;
-        border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    }
-
-    .product-wish svg {
-        width: 16px !important;
-        height: 16px !important;
-    }
-
-    .product-info {
-        padding: 10px 10px 12px 10px !important;
-        display: flex !important;
-        flex-direction: column !important;
-        flex-grow: 1 !important;
-    }
-
-    .product-type {
-        font-size: 8.5px !important;
-        color: #C9A84C !important;
-        font-weight: 600 !important;
-        letter-spacing: 1px !important;
-        text-transform: uppercase !important;
-        margin-bottom: 3px !important;
-    }
-
-    .product-name {
-        font-size: 12px !important;
-        font-weight: 600 !important;
-        color: #f5ede6 !important;
-        line-height: 1.3 !important;
-        margin: 0 0 6px 0 !important;
-        display: -webkit-box !important;
-        -webkit-line-clamp: 2 !important;
-        -webkit-box-orient: vertical !important;
-        overflow: hidden !important;
-        height: 31px !important;
-    }
-
-    .app-card-price-row {
-        display: flex;
-        align-items: baseline;
-        gap: 6px;
-        margin-bottom: 6px;
-    }
-
-    .price-main {
-        font-size: 15px !important;
-        font-weight: 700 !important;
-        color: #fff !important;
-    }
-
-    .price-mrp {
-        font-size: 10.5px;
-        color: #887d72;
-        text-decoration: line-through;
-    }
-
-    .price-save {
-        font-size: 10px;
         font-weight: 700;
-        color: #4caf50;
+        padding: 3px 8px;
+        border-radius: 12px;
+        z-index: 2;
+        letter-spacing: 0.5px;
     }
 
-    .app-card-delivery {
-        font-size: 9px;
-        color: #b0a496;
-        display: flex;
-        align-items: center;
-        gap: 3px;
-        margin-bottom: 8px;
-    }
-
-    .product-card .btn-primary {
-        width: 100% !important;
-        padding: 8px 0 !important;
-        font-size: 10.5px !important;
-        font-weight: 700 !important;
-        letter-spacing: 0.5px !important;
-        border-radius: 8px !important;
-        margin-top: auto !important;
-        background: linear-gradient(135deg, #C9A84C, #8e6d2c) !important;
-        color: #1A1209 !important;
-        border: none !important;
-    }
-
-    /* ── I. SKELETON SHIMMER LOADING (USER CONDITION) ── */
-    .app-skeleton-card {
-        background: #1c140c;
-        border-radius: 14px;
-        overflow: hidden;
-        border: 1px solid rgba(201, 168, 76, 0.1);
-        display: flex;
-        flex-direction: column;
-    }
-
-    .app-skeleton-img {
+    .app-card-img-wrap {
         aspect-ratio: 3/4;
         width: 100%;
-        background: linear-gradient(90deg, #241910 0%, #362619 50%, #241910 100%);
-        background-size: 200% 100%;
-        animation: shimmerSlide 1.5s infinite;
+        position: relative;
+        overflow: hidden;
+        background: #f0e6d6;
     }
 
-    .app-skeleton-info {
+    .app-card-img-wrap img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .app-card-heart-btn {
+        position: absolute;
+        bottom: 8px;
+        right: 8px;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 3;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .app-card-heart-btn svg {
+        width: 15px;
+        height: 15px;
+    }
+
+    .app-card-body {
         padding: 10px;
         display: flex;
         flex-direction: column;
+        flex-grow: 1;
+    }
+
+    .app-card-name {
+        font-family: 'Playfair Display', serif;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--app-text-main);
+        margin: 0 0 4px 0;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .app-card-price {
+        font-family: 'Playfair Display', serif;
+        font-size: 13.5px;
+        font-weight: 700;
+        color: #140C06;
+        margin: 0;
+    }
+
+    /* ================================================================
+       SCREEN 3: PRODUCT DETAILS (MOCKUP SCREEN 3)
+       ================================================================ */
+
+    .app-detail-slider {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 4/5;
+        background: #140C06;
+    }
+
+    .app-detail-slider img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .app-detail-page-badge {
+        position: absolute;
+        bottom: 14px;
+        right: 16px;
+        background: rgba(0, 0, 0, 0.65);
+        color: #fff;
+        font-size: 9px;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 12px;
+    }
+
+    .app-detail-card {
+        background: #FFFFFF;
+        border-radius: 24px 24px 0 0;
+        margin-top: -20px;
+        position: relative;
+        z-index: 5;
+        padding: 22px 18px 30px 18px;
+        box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .app-detail-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--app-text-main);
+        margin: 0 0 4px 0;
+    }
+
+    .app-detail-price {
+        font-family: 'Playfair Display', serif;
+        font-size: 20px;
+        font-weight: 700;
+        color: #140C06;
+        margin: 0 0 6px 0;
+    }
+
+    .app-detail-tagline {
+        font-size: 10px;
+        color: var(--app-text-muted);
+        margin: 0 0 16px 0;
+        letter-spacing: 0.3px;
+    }
+
+    .app-detail-badges {
+        display: flex;
         gap: 8px;
+        margin-bottom: 20px;
     }
 
-    .app-skeleton-line {
-        height: 12px;
-        border-radius: 4px;
-        background: linear-gradient(90deg, #241910 0%, #362619 50%, #241910 100%);
-        background-size: 200% 100%;
-        animation: shimmerSlide 1.5s infinite;
+    .app-badge-box {
+        flex: 1;
+        background: #F8F4ED;
+        border: 1px solid var(--app-card-border);
+        border-radius: 12px;
+        padding: 8px 4px;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3px;
     }
 
-    @keyframes shimmerSlide {
-        0% { background-position: 200% 0; }
-        100% { background-position: -200% 0; }
+    .app-badge-icon {
+        font-size: 16px;
     }
 
-    /* ── J. SCROLL ANIMATION & REVEAL (USER CONDITION) ── */
-    .app-scroll-reveal {
-        opacity: 0;
-        transform: translateY(24px) scale(0.96);
-        transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-        will-change: opacity, transform;
+    .app-badge-text {
+        font-size: 8.5px;
+        font-weight: 600;
+        color: #140C06;
     }
 
-    .app-scroll-reveal.revealed {
-        opacity: 1;
-        transform: translateY(0) scale(1);
+    .app-detail-section-label {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--app-text-main);
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
-    /* ── K. FLIPKART STICKY BOTTOM NAVIGATION BAR ── */
+    .app-color-swatches {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 18px;
+    }
+
+    .app-color-dot {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        cursor: pointer;
+        border: 2px solid #FFFFFF;
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+        transition: transform 0.2s ease;
+    }
+
+    .app-color-dot.active {
+        box-shadow: 0 0 0 2px #C9A84C;
+        transform: scale(1.1);
+    }
+
+    .app-size-swatches {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 18px;
+    }
+
+    .app-size-btn {
+        flex: 1;
+        padding: 8px 0;
+        border-radius: 8px;
+        background: #FFFFFF;
+        border: 1px solid #DCD5CD;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--app-text-main);
+        cursor: pointer;
+    }
+
+    .app-size-btn.active {
+        background: #140C06;
+        color: #C9A84C;
+        border-color: #140C06;
+    }
+
+    .app-blouse-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #F8F4ED;
+        border: 1px solid var(--app-card-border);
+        border-radius: 12px;
+        padding: 12px 14px;
+        margin-bottom: 22px;
+        cursor: pointer;
+    }
+
+    .app-blouse-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .app-blouse-icon {
+        font-size: 18px;
+    }
+
+    .app-blouse-title {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--app-text-main);
+        margin: 0;
+    }
+
+    .app-blouse-desc {
+        font-size: 9.5px;
+        color: var(--app-text-muted);
+        margin: 0;
+    }
+
+    .app-detail-actions {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    .app-btn-add-bag {
+        flex: 1;
+        background: #140C06;
+        color: #FFFFFF;
+        border: none;
+        padding: 14px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+    }
+
+    .app-btn-buy-now {
+        flex: 1;
+        background: linear-gradient(135deg, #C9A84C 0%, #A07828 100%);
+        color: #140C06;
+        border: none;
+        padding: 14px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        box-shadow: 0 4px 14px rgba(201, 168, 76, 0.4);
+    }
+
+    /* ================================================================
+       SCREEN 4: AI VIRTUAL STYLIST (MOCKUP SCREEN 4)
+       ================================================================ */
+
+    .app-stylist-wrapper {
+        padding: 18px 16px 24px 16px;
+    }
+
+    .app-stylist-header {
+        text-align: center;
+        margin-bottom: 18px;
+    }
+
+    .app-stylist-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--app-text-main);
+        margin: 0 0 4px 0;
+    }
+
+    .app-stylist-subtitle {
+        font-size: 10.5px;
+        color: var(--app-text-muted);
+        margin: 0;
+    }
+
+    .app-upload-card {
+        background: #FFFFFF;
+        border-radius: 20px;
+        padding: 24px 18px;
+        text-align: center;
+        border: 1px solid var(--app-card-border);
+        box-shadow: 0 8px 24px rgba(43, 31, 23, 0.06);
+        margin-bottom: 20px;
+    }
+
+    .app-upload-avatar-circle {
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        background: #F5EDE4;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        margin: 0 auto 12px auto;
+        border: 1px solid rgba(201, 168, 76, 0.3);
+    }
+
+    .app-upload-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--app-text-main);
+        margin: 0 0 6px 0;
+    }
+
+    .app-upload-desc {
+        font-size: 10.5px;
+        color: var(--app-text-muted);
+        line-height: 1.45;
+        max-width: 260px;
+        margin: 0 auto 16px auto;
+    }
+
+    .app-btn-upload-photo {
+        background: linear-gradient(135deg, #C9A84C 0%, #A07828 100%);
+        color: #140C06;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 30px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        box-shadow: 0 4px 14px rgba(201, 168, 76, 0.4);
+    }
+
+    .app-stylist-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 18px;
+        font-size: 8.5px;
+        letter-spacing: 2px;
+        color: #9C8E80;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    .app-stylist-dark-bar {
+        background: #140C06;
+        border-radius: 16px;
+        padding: 14px 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: #FFFFFF;
+        border: 1px solid rgba(201, 168, 76, 0.3);
+        margin-top: 18px;
+    }
+
+    .app-ai-circle-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #2A1D12, #140C06);
+        border: 1px solid #C9A84C;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 800;
+        color: #C9A84C;
+        flex-shrink: 0;
+    }
+
+    .app-ai-bar-text {
+        font-size: 9.5px;
+        line-height: 1.4;
+        color: #D1C5B8;
+    }
+
+    /* ================================================================
+       SCREEN 5: PROFILE / ACCOUNT (MOCKUP SCREEN 5)
+       ================================================================ */
+
+    .app-profile-wrapper {
+        padding: 18px 16px 24px 16px;
+    }
+
+    .app-profile-header-card {
+        background: #FFFFFF;
+        border-radius: 20px;
+        padding: 18px 16px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        border: 1px solid var(--app-card-border);
+        box-shadow: 0 6px 20px rgba(43, 31, 23, 0.05);
+        margin-bottom: 18px;
+    }
+
+    .app-profile-avatar {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 2px solid #C9A84C;
+        flex-shrink: 0;
+    }
+
+    .app-profile-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .app-profile-info {
+        flex: 1;
+    }
+
+    .app-profile-name {
+        font-family: 'Playfair Display', serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--app-text-main);
+        margin: 0 0 2px 0;
+    }
+
+    .app-profile-email {
+        font-size: 10px;
+        color: var(--app-text-muted);
+        margin: 0 0 6px 0;
+    }
+
+    .app-profile-member-badge {
+        display: inline-block;
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        background: #F8F4ED;
+        color: #8B6914;
+        border: 1px solid rgba(201, 168, 76, 0.4);
+        padding: 2px 8px;
+        border-radius: 12px;
+    }
+
+    .app-menu-list-card {
+        background: #FFFFFF;
+        border-radius: 20px;
+        border: 1px solid var(--app-card-border);
+        box-shadow: 0 6px 20px rgba(43, 31, 23, 0.05);
+        overflow: hidden;
+        margin-bottom: 18px;
+    }
+
+    .app-menu-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 13px 16px;
+        border-bottom: 1px solid #F3EDE6;
+        cursor: pointer;
+        transition: background 0.15s ease;
+    }
+
+    .app-menu-row:last-child {
+        border-bottom: none;
+    }
+
+    .app-menu-row:active {
+        background: #FAF6F0;
+    }
+
+    .app-menu-row-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .app-menu-icon {
+        font-size: 16px;
+        width: 22px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .app-menu-text-title {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--app-text-main);
+        margin: 0;
+    }
+
+    .app-menu-text-sub {
+        font-size: 9px;
+        color: var(--app-text-muted);
+        margin: 0;
+    }
+
+    .app-menu-arrow {
+        font-size: 14px;
+        color: #A39587;
+    }
+
+    .app-btn-logout {
+        width: 100%;
+        background: transparent;
+        border: 1px solid #DCD5CD;
+        padding: 12px;
+        border-radius: 30px;
+        font-size: 11.5px;
+        font-weight: 600;
+        color: var(--app-text-main);
+        cursor: pointer;
+        margin-bottom: 14px;
+    }
+
+    .app-footer-motto {
+        text-align: center;
+        font-size: 9.5px;
+        letter-spacing: 2px;
+        color: #8B6914;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    /* ================================================================
+       STICKY BOTTOM APP NAVIGATION (EXACT 5 TABS FROM MOCKUP)
+       ================================================================ */
     .app-bottom-nav {
-        display: flex !important;
         position: fixed !important;
         bottom: 0 !important;
         left: 0 !important;
         width: 100% !important;
         height: calc(56px + var(--sab, env(safe-area-inset-bottom, 0px))) !important;
         padding-bottom: var(--sab, env(safe-area-inset-bottom, 0px)) !important;
-        background: rgba(18, 12, 6, 0.96) !important;
-        backdrop-filter: blur(14px) !important;
-        -webkit-backdrop-filter: blur(14px) !important;
+        background: #110A05 !important;
         border-top: 1px solid rgba(201, 168, 76, 0.25) !important;
-        z-index: 9999 !important;
+        display: flex !important;
         align-items: center !important;
         justify-content: space-around !important;
+        z-index: 10000 !important;
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6) !important;
     }
 
     .app-nav-item {
+        flex: 1 !important;
         display: flex !important;
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
-        color: #a39587 !important;
+        color: #8A7E74 !important;
         text-decoration: none !important;
         font-size: 9.5px !important;
         font-weight: 500 !important;
-        flex: 1 !important;
-        height: 100% !important;
         gap: 2px !important;
-        position: relative !important;
+        cursor: pointer !important;
         transition: all 0.2s ease !important;
     }
 
@@ -2837,65 +3212,28 @@
         transform: scale(0.9);
     }
 
+    .app-nav-item.active {
+        color: #C9A84C !important;
+        font-weight: 700 !important;
+    }
+
     .app-nav-icon {
-        width: 22px !important;
-        height: 22px !important;
+        width: 20px !important;
+        height: 20px !important;
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
     }
 
     .app-nav-icon svg {
-        width: 20px !important;
-        height: 20px !important;
+        width: 18px !important;
+        height: 18px !important;
     }
 
-    .app-nav-item.active {
-        color: #C9A84C !important;
-        font-weight: 700 !important;
+    /* WhatsApp Floating Button in App */
+    .whatsapp-fab {
+        bottom: calc(72px + var(--sab, env(safe-area-inset-bottom, 0px))) !important;
+        right: 16px !important;
     }
-
-    .app-nav-item.active .app-nav-dot {
-        position: absolute;
-        bottom: calc(4px + var(--sab, env(safe-area-inset-bottom, 0px)));
-        width: 4px;
-        height: 4px;
-        border-radius: 50%;
-        background: #C9A84C;
-        box-shadow: 0 0 6px #C9A84C;
-    }
-
-    .stylist-sparkle {
-        font-size: 16px;
-        animation: spinSparkle 3s linear infinite;
-    }
-
-    @keyframes spinSparkle {
-        0% { transform: rotate(0deg) scale(1); }
-        50% { transform: rotate(180deg) scale(1.2); }
-        100% { transform: rotate(360deg) scale(1); }
-    }
-
-    .app-nav-badge {
-        position: absolute;
-        top: -4px;
-        right: -6px;
-        background: #e91e63;
-        color: #fff;
-        font-size: 8px;
-        font-weight: 700;
-        min-width: 14px;
-        height: 14px;
-        border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0 3px;
-        box-shadow: 0 2px 5px rgba(233, 30, 99, 0.5);
-    }
-
-    /* Hide standard floating buttons when app bottom nav is active */
-    .ai-fab, .whatsapp-fab {
-        bottom: calc(70px + var(--sab, env(safe-area-inset-bottom, 0px))) !important;
-    }
-}
+}
+

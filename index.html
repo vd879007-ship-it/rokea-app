@@ -313,127 +313,405 @@
 
 
 
-  <!-- ========================================== -->
-  <!-- NATIVE MOBILE & APP EXPERIENCE (FLIPKART / AMAZON STYLE) -->
-  <!-- ========================================== -->
-  <div class="app-mobile-container" id="appMobileDiscovery">
-    
-    <!-- 1. PINCODE DELIVERY STRIP (FLIPKART / AMAZON STYLE) -->
-    <div class="app-delivery-strip" onclick="openPincodeSelector()">
-      <div class="app-delivery-left">
-        <svg class="app-pin-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <span class="app-delivery-label">Deliver to <strong id="appUserPincode">Coimbatore - 641001</strong></span>
-        <span class="app-delivery-arrow">▾</span>
+  <!-- ================================================================ -->
+  <!-- ROKEA BY RK — EXACT LUXURY MOBILE APP (5 SCREENS TEMPLATE) -->
+  <!-- ================================================================ -->
+  <div class="rokea-app-wrapper" id="rokeaAppRoot">
+
+    <!-- ── 1. UNIFIED APP HEADER (TOP BAR) ── -->
+    <header class="app-header" id="appMainHeader">
+      <button class="app-header-btn" id="appHeaderLeftBtn" onclick="handleAppHeaderLeft()">
+        <svg id="appHeaderLeftIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+
+      <a href="javascript:void(0)" onclick="switchAppScreen('home')" class="app-header-brand">
+        <span class="app-brand-title">ROKEA</span>
+        <span class="app-brand-subtitle">BY RK</span>
+      </a>
+
+      <div class="app-header-actions">
+        <div class="app-header-badge-wrap" onclick="toggleWishlist()">
+          <svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+        </div>
+        <div class="app-header-badge-wrap" onclick="toggleCart()">
+          <svg class="nav-icon-svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="app-header-badge" id="appCartBadge">2</span>
+        </div>
       </div>
-      <div class="app-delivery-badge">
-        <span class="app-lightning">⚡</span> Free Next-Day Delivery
+    </header>
+
+    <!-- ── SCREEN 1: HOME SCREEN (MOCKUP SCREEN 1) ── -->
+    <div class="app-screen-container active-screen" id="appScreenHome">
+      
+      <!-- HERO BANNER CARD -->
+      <div class="app-home-hero">
+        <div class="app-hero-left">
+          <div class="app-hero-tag">✦ TIMELESS TRADITION ✦ MODERN YOU</div>
+          <h1 class="app-hero-title">Handpicked<br>Sarees &amp; Jewellery</h1>
+          <p class="app-hero-subtitle">Discover exquisite sarees, jewellery and handcrafted elegance — curated for you.</p>
+          <button class="app-hero-btn" onclick="switchAppScreen('shop')">EXPLORE COLLECTIONS &rarr;</button>
+        </div>
+        <div class="app-hero-visual">
+          <img src="https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_400/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg" alt="Rokea Bride">
+        </div>
       </div>
+
+      <!-- 4 CATEGORY TILES (MOCKUP) -->
+      <div class="app-home-categories">
+        <div class="app-cat-tile active" onclick="openShopCategory('all')">
+          <div class="app-cat-box">🥻</div>
+          <span class="app-cat-label">Sarees</span>
+        </div>
+        <div class="app-cat-tile" onclick="openShopCategory('jewellery')">
+          <div class="app-cat-box">💎</div>
+          <span class="app-cat-label">Jewellery</span>
+        </div>
+        <div class="app-cat-tile" onclick="openShopCategory('silk')">
+          <div class="app-cat-box">👑</div>
+          <span class="app-cat-label">Bridal</span>
+        </div>
+        <div class="app-cat-tile" onclick="openShopCategory('new')">
+          <div class="app-cat-box">✨</div>
+          <span class="app-cat-label">New Arrivals</span>
+        </div>
+      </div>
+
+      <!-- FEATURED COLLECTIONS (2 LARGE CARDS) -->
+      <div class="app-featured-section">
+        <div class="app-section-header">
+          <h2 class="app-section-title">Featured Collections</h2>
+          <span class="app-section-link" onclick="switchAppScreen('shop')">View All &rarr;</span>
+        </div>
+        <div class="app-featured-grid">
+          <div class="app-featured-card" onclick="openShopCategory('silk')">
+            <div class="app-featured-img">
+              <img src="https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_300/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg" alt="Sarees">
+            </div>
+            <div class="app-featured-info">
+              <h3 class="app-featured-title">Sarees</h3>
+              <p class="app-featured-desc"><span>Traditional elegance for every occasion</span> <span>&rarr;</span></p>
+            </div>
+          </div>
+          <div class="app-featured-card" onclick="openShopCategory('jewellery')">
+            <div class="app-featured-img">
+              <img src="https://static.wixstatic.com/media/9881b8_1e967a508927429188094cfbb323fcf6~mv2.jpg/v1/fill/w_300,h_225,al_c,q_80/jewellery.jpg" alt="Jewellery" onerror="this.src='https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_300/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'">
+            </div>
+            <div class="app-featured-info">
+              <h3 class="app-featured-title">Jewellery</h3>
+              <p class="app-featured-desc"><span>Timeless pieces, endless stories</span> <span>&rarr;</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <!-- 2. ANIMATED SEARCH & EXPLORE BAR -->
-    <div class="app-search-section">
-      <div class="app-search-input-box" onclick="focusAppSearch()">
-        <svg class="app-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" id="appSearchInput" placeholder="Search 'Kanjivaram Silk Sarees'..." oninput="handleAppSearch(this.value)">
-        <button class="app-search-voice" type="button" aria-label="Search" onclick="triggerSearchAction()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+    <!-- ── SCREEN 2: SHOP / COLLECTIONS SCREEN (MOCKUP SCREEN 2) ── -->
+    <div class="app-screen-container" id="appScreenShop">
+      
+      <!-- HEADER BANNER -->
+      <div class="app-shop-header-card">
+        <div class="app-shop-header-left">
+          <h2 class="app-shop-title">Shop Our<br>Collections</h2>
+          <p class="app-shop-subtitle">Exquisite sarees &amp; jewellery, crafted with heritage and love.</p>
+        </div>
+        <div class="app-shop-header-img">
+          <img src="https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_200/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg" alt="Saree Collection">
+        </div>
+      </div>
+
+      <!-- TABS (SAREES | JEWELLERY) -->
+      <div class="app-shop-tabs">
+        <div class="app-shop-tab active" id="shopTabSarees" onclick="switchShopTab('sarees')">Sarees</div>
+        <div class="app-shop-tab" id="shopTabJewellery" onclick="switchShopTab('jewellery')">Jewellery</div>
+      </div>
+
+      <!-- FILTER & SORT BAR -->
+      <div class="app-filter-bar">
+        <button class="app-filter-btn" onclick="toggleShopFilter()">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/></svg>
+          Filter ▾
+        </button>
+        <button class="app-filter-btn" onclick="toggleShopSort()">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>
+          Sort ▾
         </button>
       </div>
+
+      <!-- 2-COLUMN LUXURY PRODUCT GRID -->
+      <div class="app-product-grid" id="appShopProductGrid">
+        <!-- Rendered dynamically by script.js -->
+      </div>
+
     </div>
 
-    <!-- 3. CIRCULAR STORY CATEGORY BUBBLES (HORIZONTALLY SCROLLABLE) -->
-    <div class="app-stories-row">
-      <div class="app-story-item active" onclick="appFilterCategory('all')">
-        <div class="app-story-avatar ring-gold">
-          <img src="https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_150/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg" alt="All">
-        </div>
-        <span class="app-story-title">All Items</span>
+    <!-- ── SCREEN 3: PRODUCT DETAILS (MOCKUP SCREEN 3) ── -->
+    <div class="app-screen-container" id="appScreenDetail">
+      <div class="app-detail-slider">
+        <img id="appDetailImg" src="https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_600/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg" alt="Product Detail">
+        <div class="app-detail-page-badge">1/5</div>
       </div>
-      <div class="app-story-item" onclick="appFilterCategory('silk')">
-        <div class="app-story-avatar ring-gold">
-          <img src="https://static.wixstatic.com/media/9881b8_3ef0cfdc2ce346c7ba286bbf77a0ba1d~mv2.jpg/v1/fill/w_150,h_150,al_c,q_80/silk.jpg" alt="Silk Sarees" onerror="this.src='https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_150/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'">
-        </div>
-        <span class="app-story-title">Silk Sarees</span>
-      </div>
-      <div class="app-story-item" onclick="appFilterCategory('jewellery')">
-        <div class="app-story-avatar ring-gold">
-          <img src="https://static.wixstatic.com/media/9881b8_1e967a508927429188094cfbb323fcf6~mv2.jpg/v1/fill/w_150,h_150,al_c,q_80/jewellery.jpg" alt="Jewellery" onerror="this.src='https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_150/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'">
-        </div>
-        <span class="app-story-title">Jewellery</span>
-      </div>
-      <div class="app-story-item" onclick="location.href='#custom-blouse'">
-        <div class="app-story-avatar ring-gold">
-          <div class="app-story-icon-content">✂️</div>
-        </div>
-        <span class="app-story-title">Blouse Studio</span>
-      </div>
-      <div class="app-story-item" onclick="location.href='ai-stylist.html'">
-        <div class="app-story-avatar ring-purple pulse-animation">
-          <div class="app-story-icon-content">✨</div>
-        </div>
-        <span class="app-story-title">AI Stylist</span>
-      </div>
-      <div class="app-story-item" onclick="appFilterOffers()">
-        <div class="app-story-avatar ring-offer">
-          <div class="app-story-icon-content">🏷️</div>
-        </div>
-        <span class="app-story-title">Hot Deals</span>
-      </div>
-    </div>
 
-    <!-- 4. FLIPKART STYLE TOUCH CAROUSEL BANNER -->
-    <div class="app-banner-carousel" id="appBannerCarousel">
-      <div class="app-carousel-track" id="appCarouselTrack">
-        <div class="app-banner-slide active" style="background: linear-gradient(135deg, #1A1209 0%, #382414 100%);">
-          <div class="app-banner-content">
-            <span class="app-banner-tag">🌟 FESTIVE SPECIAL</span>
-            <h3>Pure Handloom Kanjivaram</h3>
-            <p>Flat 30% OFF • Direct from Master Weavers</p>
-            <button class="app-banner-btn" onclick="appFilterCategory('silk')">Shop Collection ›</button>
+      <div class="app-detail-card">
+        <h1 class="app-detail-title" id="appDetailTitle">Kanchipuram Silk Saree</h1>
+        <div class="app-detail-price" id="appDetailPrice">₹ 24,999</div>
+        <div class="app-detail-tagline" id="appDetailTagline">Pure Kanchipuram Silk | Handwoven | Zari Border</div>
+
+        <!-- 3 Feature Badges -->
+        <div class="app-detail-badges">
+          <div class="app-badge-box">
+            <span class="app-badge-icon">🥻</span>
+            <span class="app-badge-text">100% Pure Silk</span>
+          </div>
+          <div class="app-badge-box">
+            <span class="app-badge-icon">🏛️</span>
+            <span class="app-badge-text">Authentic Handloom</span>
+          </div>
+          <div class="app-badge-box">
+            <span class="app-badge-icon">👑</span>
+            <span class="app-badge-text">Premium Quality</span>
           </div>
         </div>
-        <div class="app-banner-slide" style="background: linear-gradient(135deg, #2b1810 0%, #522b15 100%);">
-          <div class="app-banner-content">
-            <span class="app-banner-tag">👑 ROYAL BRIDAL</span>
-            <h3>Heritage Temple Jewellery</h3>
-            <p>24k Matte Gold Finish • Handcrafted Kundan</p>
-            <button class="app-banner-btn" onclick="appFilterCategory('jewellery')">Explore Sets ›</button>
-          </div>
+
+        <!-- Colour selector -->
+        <div class="app-detail-section-label">
+          <span>Colour: <strong id="appSelectedColorName">Royal Maroon</strong></span>
         </div>
-        <div class="app-banner-slide" style="background: linear-gradient(135deg, #1f1a24 0%, #442d45 100%);">
-          <div class="app-banner-content">
-            <span class="app-banner-tag">✂️ 48-HOUR DISPATCH</span>
-            <h3>Bespoke Designer Blouses</h3>
-            <p>Aari Work • Maggam & Zari Hand Embroidery</p>
-            <button class="app-banner-btn" onclick="location.href='#custom-blouse'">Design Blouse ›</button>
-          </div>
+        <div class="app-color-swatches">
+          <div class="app-color-dot active" style="background:#5C101B;" onclick="selectColorSwatch(this, 'Royal Maroon')"></div>
+          <div class="app-color-dot" style="background:#1B4D3E;" onclick="selectColorSwatch(this, 'Emerald Green')"></div>
+          <div class="app-color-dot" style="background:#1C2951;" onclick="selectColorSwatch(this, 'Midnight Blue')"></div>
+          <div class="app-color-dot" style="background:#4B2354;" onclick="selectColorSwatch(this, 'Imperial Purple')"></div>
+          <div class="app-color-dot" style="background:#D4AF37;" onclick="selectColorSwatch(this, 'Pure Antique Gold')"></div>
         </div>
-      </div>
-      <div class="app-carousel-dots" id="appCarouselDots">
-        <span class="app-dot active" onclick="appGoToSlide(0)"></span>
-        <span class="app-dot" onclick="appGoToSlide(1)"></span>
-        <span class="app-dot" onclick="appGoToSlide(2)"></span>
+
+        <!-- Size selector -->
+        <div class="app-detail-section-label">
+          <span>Size</span>
+          <span style="font-size:10px; color:#8B6914; text-decoration:underline; cursor:pointer;" onclick="openMeasureVideo()">Size Guide</span>
+        </div>
+        <div class="app-size-swatches">
+          <button class="app-size-btn" onclick="selectSize(this)">XS</button>
+          <button class="app-size-btn" onclick="selectSize(this)">S</button>
+          <button class="app-size-btn" onclick="selectSize(this)">M</button>
+          <button class="app-size-btn active" onclick="selectSize(this)">L</button>
+          <button class="app-size-btn" onclick="selectSize(this)">XL</button>
+          <button class="app-size-btn" onclick="selectSize(this)">XXL</button>
+        </div>
+
+        <!-- Custom Blouse Tile -->
+        <div class="app-blouse-row" onclick="location.href='#custom-blouse'">
+          <div class="app-blouse-left">
+            <span class="app-blouse-icon">✂️</span>
+            <div>
+              <p class="app-blouse-title">Blouse Customization</p>
+              <p class="app-blouse-desc">Add custom blouse design</p>
+            </div>
+          </div>
+          <span style="color:#8B6914; font-size:16px;">&rsaquo;</span>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="app-detail-actions">
+          <button class="app-btn-add-bag" onclick="addCurrentDetailToCart()">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+            Add to Bag
+          </button>
+          <button class="app-btn-buy-now" onclick="buyCurrentDetailNow()">
+            ⚡ Buy Now
+          </button>
+        </div>
+
+        <div style="border-top:1px solid #eee; padding-top:12px; font-size:11.5px; font-weight:600; color:#555; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="toggleDetailAccordion()">
+          <span>Product Details</span>
+          <span id="appDetailAccArrow">▾</span>
+        </div>
+        <p id="appDetailFullDesc" style="font-size:10.5px; color:#777; line-height:1.5; margin-top:8px; display:none;"></p>
       </div>
     </div>
 
-    <!-- 5. DEAL OF THE DAY COUNTDOWN TICKER -->
-    <div class="app-deal-ticker">
-      <div class="app-deal-left">
-        <span class="app-deal-flame">🔥</span>
-        <span class="app-deal-title">Deal of the Day</span>
-        <span class="app-deal-timer" id="appDealTimer">04h : 28m : 15s</span>
+    <!-- ── SCREEN 4: AI VIRTUAL STYLIST (MOCKUP SCREEN 4) ── -->
+    <div class="app-screen-container" id="appScreenStylist">
+      <div class="app-stylist-wrapper">
+        <div class="app-stylist-header">
+          <h1 class="app-stylist-title">AI Virtual Stylist</h1>
+          <p class="app-stylist-subtitle">Your Personal Saree &amp; Jewellery Recommendation</p>
+        </div>
+
+        <div class="app-upload-card">
+          <div class="app-upload-avatar-circle">
+            <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#C9A84C" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <h3 class="app-upload-title">Upload Your Photo</h3>
+          <p class="app-upload-desc">Get personalized saree and jewellery recommendations based on your style, skin tone and occasion.</p>
+          <button class="app-btn-upload-photo" onclick="triggerStylistUpload()">
+            📷 UPLOAD PHOTO
+          </button>
+          <input type="file" id="stylistFileInput" accept="image/*" style="display:none;" onchange="handleStylistFile(this)">
+        </div>
+
+        <div class="app-stylist-divider">
+          <span>─ OR TRY OUR SAMPLE STYLES ─</span>
+        </div>
+
+        <div class="app-section-header">
+          <h3 class="app-section-title" style="font-size:15px;">Recommended For You</h3>
+          <span class="app-section-link" onclick="switchAppScreen('shop')">View All &rarr;</span>
+        </div>
+
+        <div class="app-featured-grid">
+          <div class="app-featured-card" onclick="openShopCategory('silk')">
+            <div class="app-featured-img">
+              <img src="https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_300/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg" alt="Traditional Elegance">
+            </div>
+            <div class="app-featured-info">
+              <h4 class="app-featured-title" style="font-size:12.5px;">Traditional Elegance</h4>
+              <p class="app-featured-desc"><span>Saree + Temple Jewellery</span></p>
+            </div>
+          </div>
+          <div class="app-featured-card" onclick="openShopCategory('jewellery')">
+            <div class="app-featured-img">
+              <img src="https://static.wixstatic.com/media/9881b8_1e967a508927429188094cfbb323fcf6~mv2.jpg/v1/fill/w_300,h_225,al_c,q_80/jewellery.jpg" alt="Royal Bridal" onerror="this.src='https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_300/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'">
+            </div>
+            <div class="app-featured-info">
+              <h4 class="app-featured-title" style="font-size:12.5px;">Royal Bridal</h4>
+              <p class="app-featured-desc"><span>Saree + Polki Jewellery</span></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="app-stylist-dark-bar">
+          <div class="app-ai-circle-icon">AI</div>
+          <div class="app-ai-bar-text">
+            <strong style="color:#fff; display:block; margin-bottom:2px;">Style your unique story</strong>
+            Not just a recommendation, it's your personal style guide.
+          </div>
+        </div>
       </div>
-      <div class="app-deal-cta" onclick="appFilterOffers()">VIEW ALL &rsaquo;</div>
     </div>
 
-    <!-- 6. HORIZONTAL FILTER CHIPS -->
-    <div class="app-chips-scroll">
-      <button class="app-chip active" data-chip="all" onclick="appSelectChip('all', this)">All</button>
-      <button class="app-chip" data-chip="bestseller" onclick="appSelectChip('bestseller', this)">⭐ Bestsellers</button>
-      <button class="app-chip" data-chip="under3000" onclick="appSelectChip('under3000', this)">⚡ Under ₹3000</button>
-      <button class="app-chip" data-chip="silk" onclick="appSelectChip('silk', this)">🥻 Pure Silk</button>
-      <button class="app-chip" data-chip="jewellery" onclick="appSelectChip('jewellery', this)">💎 Jewellery</button>
-      <button class="app-chip" data-chip="offers" onclick="appSelectChip('offers', this)">🏷️ 40%+ Off</button>
+    <!-- ── SCREEN 5: PROFILE SCREEN (MOCKUP SCREEN 5) ── -->
+    <div class="app-screen-container" id="appScreenProfile">
+      <div class="app-profile-wrapper">
+        
+        <!-- USER PROFILE CARD -->
+        <div class="app-profile-header-card">
+          <div class="app-profile-avatar">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="User Profile" id="appUserAvatar">
+          </div>
+          <div class="app-profile-info">
+            <h2 class="app-profile-name" id="appProfileName">Karthikeyeni M</h2>
+            <p class="app-profile-email" id="appProfileEmail">karthikeyeni@gmail.com</p>
+            <span class="app-profile-member-badge">✦ Premium Member</span>
+          </div>
+        </div>
+
+        <!-- MENU ITEMS CARD -->
+        <div class="app-menu-list-card">
+          <div class="app-menu-row" onclick="toggleCart()">
+            <div class="app-menu-row-left">
+              <span class="app-menu-icon">📦</span>
+              <div>
+                <p class="app-menu-text-title">My Orders</p>
+                <p class="app-menu-text-sub">View order history &amp; track</p>
+              </div>
+            </div>
+            <span class="app-menu-arrow">&rsaquo;</span>
+          </div>
+
+          <div class="app-menu-row" onclick="toggleWishlist()">
+            <div class="app-menu-row-left">
+              <span class="app-menu-icon">💖</span>
+              <div>
+                <p class="app-menu-text-title">Wishlist</p>
+                <p class="app-menu-text-sub">Saved items for later</p>
+              </div>
+            </div>
+            <span class="app-menu-arrow">&rsaquo;</span>
+          </div>
+
+          <div class="app-menu-row" onclick="openAppointmentModal()">
+            <div class="app-menu-row-left">
+              <span class="app-menu-icon">📅</span>
+              <div>
+                <p class="app-menu-text-title">Appointments</p>
+                <p class="app-menu-text-sub">Book styling &amp; consultation</p>
+              </div>
+            </div>
+            <span class="app-menu-arrow">&rsaquo;</span>
+          </div>
+
+          <div class="app-menu-row" onclick="location.href='#custom-blouse'">
+            <div class="app-menu-row-left">
+              <span class="app-menu-icon">✂️</span>
+              <div>
+                <p class="app-menu-text-title">Custom Blouse</p>
+                <p class="app-menu-text-sub">Design your perfect blouse</p>
+              </div>
+            </div>
+            <span class="app-menu-arrow">&rsaquo;</span>
+          </div>
+
+          <div class="app-menu-row" onclick="openMeasureVideo()">
+            <div class="app-menu-row-left">
+              <span class="app-menu-icon">📏</span>
+              <div>
+                <p class="app-menu-text-title">Saved Measurements</p>
+                <p class="app-menu-text-sub">Manage your size details</p>
+              </div>
+            </div>
+            <span class="app-menu-arrow">&rsaquo;</span>
+          </div>
+
+          <div class="app-menu-row" onclick="openPincodeSelector()">
+            <div class="app-menu-row-left">
+              <span class="app-menu-icon">📍</span>
+              <div>
+                <p class="app-menu-text-title">Address Book</p>
+                <p class="app-menu-text-sub">Delivery addresses</p>
+              </div>
+            </div>
+            <span class="app-menu-arrow">&rsaquo;</span>
+          </div>
+
+          <div class="app-menu-row" onclick="openCheckout()">
+            <div class="app-menu-row-left">
+              <span class="app-menu-icon">💳</span>
+              <div>
+                <p class="app-menu-text-title">Payment Methods</p>
+                <p class="app-menu-text-sub">Cards &amp; UPI</p>
+              </div>
+            </div>
+            <span class="app-menu-arrow">&rsaquo;</span>
+          </div>
+
+          <div class="app-menu-row" onclick="location.href='#faq'">
+            <div class="app-menu-row-left">
+              <span class="app-menu-icon">❓</span>
+              <div>
+                <p class="app-menu-text-title">Help &amp; Support</p>
+                <p class="app-menu-text-sub">FAQs, contact us</p>
+              </div>
+            </div>
+            <span class="app-menu-arrow">&rsaquo;</span>
+          </div>
+
+          <div class="app-menu-row" onclick="location.href='about.html'">
+            <div class="app-menu-row-left">
+              <span class="app-menu-icon">ℹ️</span>
+              <div>
+                <p class="app-menu-text-title">About ROKEA</p>
+                <p class="app-menu-text-sub">Our story, values &amp; heritage</p>
+              </div>
+            </div>
+            <span class="app-menu-arrow">&rsaquo;</span>
+          </div>
+        </div>
+
+        <button class="app-btn-logout" onclick="handleAppLogout()">🚪 Log Out</button>
+        <div class="app-footer-motto">✦ Luxury In Every Thread ✦</div>
+
+      </div>
     </div>
 
   </div>
@@ -2512,40 +2790,39 @@
       }
     </script>
 
-    <!-- FLIPKART-STYLE STICKY BOTTOM APP NAVIGATION BAR -->
+    <!-- EXACT MOCKUP STICKY BOTTOM APP NAVIGATION BAR -->
     <div class="app-bottom-nav" id="appBottomNav">
-      <a href="/" class="app-nav-item active" id="navHome">
+      <div class="app-nav-item active" id="tabHome" onclick="switchAppScreen('home')">
         <div class="app-nav-icon">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
         </div>
-        <span class="app-nav-label">Home</span>
-        <span class="app-nav-dot"></span>
-      </a>
-      <a href="collections.html" class="app-nav-item" id="navCategories">
+        <span>Home</span>
+      </div>
+      <div class="app-nav-item" id="tabShop" onclick="switchAppScreen('shop')">
         <div class="app-nav-icon">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3H9c0-1.66 1.34-3 3-3zm7 17H5V8h14v12z"/></svg>
         </div>
-        <span class="app-nav-label">Categories</span>
-      </a>
-      <a href="ai-stylist.html" class="app-nav-item app-nav-stylist" id="navStylist">
-        <div class="app-nav-icon stylist-sparkle">
-          ✨
+        <span>Shop</span>
+      </div>
+      <div class="app-nav-item" id="tabStylist" onclick="switchAppScreen('stylist')">
+        <div class="app-nav-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 7.2h7.6l-6.2 4.5 2.4 7.3-6.2-4.5-6.2 4.5 2.4-7.3-6.2-4.5h7.6z"/></svg>
         </div>
-        <span class="app-nav-label">AI Stylist</span>
-      </a>
-      <a href="javascript:void(0)" onclick="toggleWishlist()" class="app-nav-item" id="navWishlist">
+        <span>AI Stylist</span>
+      </div>
+      <div class="app-nav-item" id="tabWishlist" onclick="toggleWishlist()">
         <div class="app-nav-icon" style="position:relative;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          <span class="app-nav-badge wish-count-badge" id="appWishBadge">0</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+          <span class="app-header-badge wish-count-badge" id="appWishBadge">0</span>
         </div>
-        <span class="app-nav-label">Wishlist</span>
-      </a>
-      <a href="javascript:void(0)" onclick="openAuth()" class="app-nav-item" id="navAccount">
+        <span>Wishlist</span>
+      </div>
+      <div class="app-nav-item" id="tabProfile" onclick="switchAppScreen('profile')">
         <div class="app-nav-icon">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
         </div>
-        <span class="app-nav-label">Account</span>
-      </a>
+        <span>Profile</span>
+      </div>
     </div>
 
     <!-- PINCODE SELECTOR BOTTOM SHEET MODAL -->

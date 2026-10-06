@@ -4385,3 +4385,392 @@ window.addEventListener('popstate', function () {
   });
 })();
 
+// ================================================================
+// ROKEA BY RK — EXACT LUXURY 5-SCREEN MOBILE APP CONTROLLER
+// Matches Mockup Template Pixel-for-Pixel
+// ================================================================
+(function () {
+  window.currentAppScreen = 'home';
+  window.currentShopTab = 'sarees';
+  window.currentShopCategory = 'all';
+  window.currentShopSortOrder = 'newest';
+  window.currentDetailProduct = null;
+
+  // 1. Switch Screen System
+  window.switchAppScreen = function (screenName) {
+    window.currentAppScreen = screenName;
+    const screens = {
+      home: document.getElementById('appScreenHome'),
+      shop: document.getElementById('appScreenShop'),
+      detail: document.getElementById('appScreenDetail'),
+      stylist: document.getElementById('appScreenStylist'),
+      profile: document.getElementById('appScreenProfile')
+    };
+
+    // Hide all screens & show requested screen
+    Object.keys(screens).forEach(key => {
+      if (screens[key]) {
+        screens[key].classList.toggle('active-screen', key === screenName);
+      }
+    });
+
+    // Update Bottom Navigation Tabs
+    const tabMap = {
+      home: 'tabHome',
+      shop: 'tabShop',
+      stylist: 'tabStylist',
+      profile: 'tabProfile'
+    };
+
+    document.querySelectorAll('.app-nav-item').forEach(item => item.classList.remove('active'));
+    if (tabMap[screenName]) {
+      const activeTab = document.getElementById(tabMap[screenName]);
+      if (activeTab) activeTab.classList.add('active');
+    }
+
+    // Update Header Left Icon (Menu vs Back Arrow)
+    const leftIcon = document.getElementById('appHeaderLeftIcon');
+    if (leftIcon) {
+      if (screenName === 'home') {
+        leftIcon.innerHTML = `<line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>`;
+      } else {
+        leftIcon.innerHTML = `<polyline points="15 18 9 12 15 6"/><line x1="9" y1="12" x2="21" y2="12"/>`;
+      }
+    }
+
+    // If switched to shop, ensure grid is rendered
+    if (screenName === 'shop') {
+      window.renderAppShopGrid();
+    }
+
+    // If switched to profile, sync user data
+    if (screenName === 'profile') {
+      window.syncAppProfileData();
+    }
+
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Header Left Action (Hamburger on Home, Back arrow elsewhere)
+  window.handleAppHeaderLeft = function () {
+    if (window.currentAppScreen === 'home') {
+      if (typeof openAppointmentModal === 'function') {
+        openAppointmentModal();
+      }
+    } else {
+      window.switchAppScreen('home');
+    }
+  };
+
+  // 2. Category & Shop Tab Filter
+  window.openShopCategory = function (category) {
+    window.currentShopCategory = category;
+    if (category === 'jewellery') {
+      window.currentShopTab = 'jewellery';
+    } else {
+      window.currentShopTab = 'sarees';
+    }
+    window.switchAppScreen('shop');
+    window.updateShopTabUI();
+    window.renderAppShopGrid(category);
+  };
+
+  window.switchShopTab = function (tabName) {
+    window.currentShopTab = tabName;
+    window.currentShopCategory = tabName === 'jewellery' ? 'jewellery' : 'all';
+    window.updateShopTabUI();
+    window.renderAppShopGrid();
+  };
+
+  window.updateShopTabUI = function () {
+    const tabSarees = document.getElementById('shopTabSarees');
+    const tabJewellery = document.getElementById('shopTabJewellery');
+    if (tabSarees && tabJewellery) {
+      tabSarees.classList.toggle('active', window.currentShopTab === 'sarees');
+      tabJewellery.classList.toggle('active', window.currentShopTab === 'jewellery');
+    }
+  };
+
+  window.toggleShopFilter = function () {
+    // Cycle through filter modes
+    const modes = ['all', 'silk', 'designer', 'bridal'];
+    const curIdx = modes.indexOf(window.currentShopCategory);
+    const nextMode = modes[(curIdx + 1) % modes.length];
+    window.currentShopCategory = nextMode;
+    window.renderAppShopGrid(nextMode);
+    if (typeof showToast === 'function') {
+      showToast(`Filter: ${nextMode.toUpperCase()}`);
+    }
+  };
+
+  window.toggleShopSort = function () {
+    if (window.currentShopSortOrder === 'newest') {
+      window.currentShopSortOrder = 'price-low';
+      if (typeof showToast === 'function') showToast('Sorted: Price Low to High');
+    } else if (window.currentShopSortOrder === 'price-low') {
+      window.currentShopSortOrder = 'price-high';
+      if (typeof showToast === 'function') showToast('Sorted: Price High to Low');
+    } else {
+      window.currentShopSortOrder = 'newest';
+      if (typeof showToast === 'function') showToast('Sorted: Newest First');
+    }
+    window.renderAppShopGrid();
+  };
+
+  // 3. Render 2-Column Luxury Product Grid (Mockup Screen 2)
+  window.renderAppShopGrid = function (explicitFilter) {
+    const gridEl = document.getElementById('appShopProductGrid');
+    if (!gridEl) return;
+
+    const filter = explicitFilter || window.currentShopCategory || 'all';
+    const isJewelleryTab = window.currentShopTab === 'jewellery';
+
+    let list = Array.isArray(products) ? [...products] : [];
+
+    // Filter by tab & category
+    if (isJewelleryTab) {
+      list = list.filter(p => {
+        const cat = (p.category || '').toLowerCase();
+        const name = (p.name || '').toLowerCase();
+        return cat.includes('jewel') || name.includes('necklace') || name.includes('earring') || name.includes('choker') || name.includes('bangle') || name.includes('pendant');
+      });
+    } else {
+      list = list.filter(p => {
+        const cat = (p.category || '').toLowerCase();
+        const name = (p.name || '').toLowerCase();
+        const isJ = cat.includes('jewel') || name.includes('necklace') || name.includes('earring') || name.includes('choker') || name.includes('bangle');
+        if (isJ) return false;
+        if (filter === 'silk') return cat.includes('silk') || name.includes('silk') || name.includes('kanchi');
+        if (filter === 'bridal') return cat.includes('bridal') || name.includes('bridal') || name.includes('pattu');
+        if (filter === 'new') return true;
+        return true;
+      });
+    }
+
+    // Sort order
+    if (window.currentShopSortOrder === 'price-low') {
+      list.sort((a, b) => (Number(a.price) || 0) - (Number(b.price) || 0));
+    } else if (window.currentShopSortOrder === 'price-high') {
+      list.sort((a, b) => (Number(b.price) || 0) - (Number(a.price) || 0));
+    } else {
+      list.sort((a, b) => (b.id || 0) - (a.id || 0));
+    }
+
+    if (list.length === 0) {
+      gridEl.innerHTML = `
+        <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: #7E7267;">
+          <p style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">No products found</p>
+          <p style="font-size: 11px;">Explore our other handcrafted collections.</p>
+        </div>
+      `;
+      return;
+    }
+
+    gridEl.innerHTML = list.map(p => {
+      const pName = p.name || 'Handcrafted Luxury';
+      const pPrice = Number(p.price) ? '₹ ' + Number(p.price).toLocaleString('en-IN') : '₹ 4,999';
+      const pImg = p.image || 'https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_400/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg';
+      const isWishlisted = Array.isArray(wishlist) && wishlist.some(w => String(w.id) === String(p.id));
+
+      return `
+        <div class="app-grid-card" onclick="openAppProductDetail('${p.id}')">
+          <span class="app-card-badge-new">New</span>
+          <div class="app-card-img-wrap">
+            <img src="${pImg}" alt="${pName}" loading="lazy" onerror="this.src='https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_400/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'">
+            <button class="app-card-heart-btn" onclick="event.stopPropagation(); toggleWishlistFromApp('${p.id}')" aria-label="Add to Wishlist">
+              <svg viewBox="0 0 24 24" fill="${isWishlisted ? '#e91e63' : 'none'}" stroke="${isWishlisted ? '#e91e63' : '#140C06'}" stroke-width="2">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="app-card-body">
+            <h3 class="app-card-name">${pName}</h3>
+            <p class="app-card-price">${pPrice}</p>
+          </div>
+        </div>
+      `;
+    }).join('');
+  };
+
+  // Wishlist toggle from app
+  window.toggleWishlistFromApp = function (productId) {
+    const prod = products.find(p => String(p.id) === String(productId));
+    if (!prod) return;
+
+    const idx = wishlist.findIndex(w => String(w.id) === String(productId));
+    if (idx > -1) {
+      wishlist.splice(idx, 1);
+      if (typeof showToast === 'function') showToast('Removed from wishlist');
+    } else {
+      wishlist.push(prod);
+      if (typeof showToast === 'function') showToast('Added to wishlist ❤️');
+    }
+
+    localStorage.setItem('saforio_wishlist', JSON.stringify(wishlist));
+    window.updateAppBadges();
+    window.renderAppShopGrid();
+  };
+
+  // 4. Product Details Screen (Mockup Screen 3)
+  window.openAppProductDetail = function (productId) {
+    let p = products.find(item => String(item.id) === String(productId));
+    if (!p && products.length > 0) p = products[0];
+    if (!p) return;
+
+    window.currentDetailProduct = p;
+
+    const imgEl = document.getElementById('appDetailImg');
+    const titleEl = document.getElementById('appDetailTitle');
+    const priceEl = document.getElementById('appDetailPrice');
+    const taglineEl = document.getElementById('appDetailTagline');
+    const descEl = document.getElementById('appDetailFullDesc');
+
+    if (imgEl) imgEl.src = p.image || 'https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_600/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg';
+    if (titleEl) titleEl.innerText = p.name || 'Pure Luxury Saree';
+    if (priceEl) priceEl.innerText = Number(p.price) ? '₹ ' + Number(p.price).toLocaleString('en-IN') : '₹ 24,999';
+    if (taglineEl) taglineEl.innerText = p.category ? `${p.category.toUpperCase()} | Pure Silk | Handwoven` : '100% Pure Silk | Handcrafted Heritage';
+    if (descEl) descEl.innerText = p.description || 'Exquisitely handcrafted with pure zari work and authentic traditional motifs, ensuring timeless elegance for your special occasions.';
+
+    window.switchAppScreen('detail');
+  };
+
+  // Detail Swatches and Controls
+  window.selectColorSwatch = function (el, colorName) {
+    document.querySelectorAll('.app-color-dot').forEach(dot => dot.classList.remove('active'));
+    if (el) el.classList.add('active');
+    const nameEl = document.getElementById('appSelectedColorName');
+    if (nameEl) nameEl.innerText = colorName;
+  };
+
+  window.selectSize = function (el) {
+    document.querySelectorAll('.app-size-btn').forEach(btn => btn.classList.remove('active'));
+    if (el) el.classList.add('active');
+  };
+
+  window.toggleDetailAccordion = function () {
+    const descEl = document.getElementById('appDetailFullDesc');
+    const arrowEl = document.getElementById('appDetailAccArrow');
+    if (descEl) {
+      const isHidden = descEl.style.display === 'none' || descEl.style.display === '';
+      descEl.style.display = isHidden ? 'block' : 'none';
+      if (arrowEl) arrowEl.innerText = isHidden ? '▴' : '▾';
+    }
+  };
+
+  window.addCurrentDetailToCart = function () {
+    if (!window.currentDetailProduct && products.length > 0) {
+      window.currentDetailProduct = products[0];
+    }
+    if (!window.currentDetailProduct) return;
+
+    if (typeof addToCart === 'function') {
+      addToCart(window.currentDetailProduct.id);
+    } else {
+      const existing = cart.find(c => String(c.id) === String(window.currentDetailProduct.id));
+      if (existing) {
+        existing.quantity = (existing.quantity || 1) + 1;
+      } else {
+        cart.push({ ...window.currentDetailProduct, quantity: 1 });
+      }
+      localStorage.setItem('saforio_cart', JSON.stringify(cart));
+    }
+
+    window.updateAppBadges();
+    if (typeof showToast === 'function') {
+      showToast(`Added "${window.currentDetailProduct.name}" to Bag! 🛍️`);
+    } else {
+      alert(`Added "${window.currentDetailProduct.name}" to Bag! 🛍️`);
+    }
+  };
+
+  window.buyCurrentDetailNow = function () {
+    window.addCurrentDetailToCart();
+    if (typeof toggleCart === 'function') {
+      toggleCart();
+    }
+  };
+
+  // 5. AI Virtual Stylist (Mockup Screen 4)
+  window.triggerStylistUpload = function () {
+    const fileInput = document.getElementById('stylistFileInput');
+    if (fileInput) fileInput.click();
+  };
+
+  window.handleStylistFile = function (input) {
+    if (input.files && input.files[0]) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const uploadCard = document.querySelector('.app-upload-card');
+        if (uploadCard) {
+          uploadCard.innerHTML = `
+            <div style="width:70px; height:70px; border-radius:50%; overflow:hidden; margin:0 auto 12px; border:2px solid #C9A84C;">
+              <img src="${e.target.result}" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <h3 class="app-upload-title" style="color:#C9A84C;">✨ Analysis Complete!</h3>
+            <p class="app-upload-desc">We matched your skin undertone with <strong>Emerald Green Kanchipuram Silk</strong> &amp; <strong>Antique Gold Temple Jewellery</strong>.</p>
+            <button class="app-btn-upload-photo" onclick="openShopCategory('silk')">VIEW MATCHED SET &rarr;</button>
+          `;
+        }
+      };
+      reader.readAsDataURL(input.files[0]);
+    }
+  };
+
+  // 6. User Profile (Mockup Screen 5)
+  window.syncAppProfileData = function () {
+    const profileName = document.getElementById('appProfileName');
+    const profileEmail = document.getElementById('appProfileEmail');
+
+    if (currentUser) {
+      if (profileName) profileName.innerText = currentUser.name || currentUser.displayName || 'Karthikeyeni M';
+      if (profileEmail) profileEmail.innerText = currentUser.email || 'karthikeyeni@gmail.com';
+    } else {
+      if (profileName) profileName.innerText = 'Karthikeyeni M';
+      if (profileEmail) profileEmail.innerText = 'karthikeyeni@gmail.com';
+    }
+  };
+
+  window.handleAppLogout = function () {
+    if (currentUser) {
+      if (typeof handleLogout === 'function') {
+        handleLogout();
+      } else {
+        localStorage.removeItem('saforio_currentUser');
+        currentUser = null;
+        window.syncAppProfileData();
+        if (typeof showToast === 'function') showToast('Logged out successfully');
+      }
+    } else {
+      if (typeof openAuth === 'function') {
+        openAuth();
+      }
+    }
+  };
+
+  // 7. Badge Sync Updater
+  window.updateAppBadges = function () {
+    const cartCount = Array.isArray(cart) ? cart.reduce((sum, item) => sum + (item.quantity || 1), 0) : 0;
+    const wishCount = Array.isArray(wishlist) ? wishlist.length : 0;
+
+    const cartBadge = document.getElementById('appCartBadge');
+    if (cartBadge) {
+      cartBadge.innerText = cartCount;
+      cartBadge.style.display = cartCount > 0 ? 'flex' : 'none';
+    }
+
+    const wishBadge = document.getElementById('appWishBadge');
+    if (wishBadge) {
+      wishBadge.innerText = wishCount;
+      wishBadge.style.display = wishCount > 0 ? 'flex' : 'none';
+    }
+  };
+
+  // Auto init
+  document.addEventListener('DOMContentLoaded', () => {
+    window.updateAppBadges();
+    window.renderAppShopGrid();
+  });
+})();
+
+
