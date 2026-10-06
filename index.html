@@ -313,6 +313,131 @@
 
 
 
+  <!-- ========================================== -->
+  <!-- NATIVE MOBILE & APP EXPERIENCE (FLIPKART / AMAZON STYLE) -->
+  <!-- ========================================== -->
+  <div class="app-mobile-container" id="appMobileDiscovery">
+    
+    <!-- 1. PINCODE DELIVERY STRIP (FLIPKART / AMAZON STYLE) -->
+    <div class="app-delivery-strip" onclick="openPincodeSelector()">
+      <div class="app-delivery-left">
+        <svg class="app-pin-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <span class="app-delivery-label">Deliver to <strong id="appUserPincode">Coimbatore - 641001</strong></span>
+        <span class="app-delivery-arrow">▾</span>
+      </div>
+      <div class="app-delivery-badge">
+        <span class="app-lightning">⚡</span> Free Next-Day Delivery
+      </div>
+    </div>
+
+    <!-- 2. ANIMATED SEARCH & EXPLORE BAR -->
+    <div class="app-search-section">
+      <div class="app-search-input-box" onclick="focusAppSearch()">
+        <svg class="app-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="appSearchInput" placeholder="Search 'Kanjivaram Silk Sarees'..." oninput="handleAppSearch(this.value)">
+        <button class="app-search-voice" type="button" aria-label="Search" onclick="triggerSearchAction()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. CIRCULAR STORY CATEGORY BUBBLES (HORIZONTALLY SCROLLABLE) -->
+    <div class="app-stories-row">
+      <div class="app-story-item active" onclick="appFilterCategory('all')">
+        <div class="app-story-avatar ring-gold">
+          <img src="https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_150/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg" alt="All">
+        </div>
+        <span class="app-story-title">All Items</span>
+      </div>
+      <div class="app-story-item" onclick="appFilterCategory('silk')">
+        <div class="app-story-avatar ring-gold">
+          <img src="https://static.wixstatic.com/media/9881b8_3ef0cfdc2ce346c7ba286bbf77a0ba1d~mv2.jpg/v1/fill/w_150,h_150,al_c,q_80/silk.jpg" alt="Silk Sarees" onerror="this.src='https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_150/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'">
+        </div>
+        <span class="app-story-title">Silk Sarees</span>
+      </div>
+      <div class="app-story-item" onclick="appFilterCategory('jewellery')">
+        <div class="app-story-avatar ring-gold">
+          <img src="https://static.wixstatic.com/media/9881b8_1e967a508927429188094cfbb323fcf6~mv2.jpg/v1/fill/w_150,h_150,al_c,q_80/jewellery.jpg" alt="Jewellery" onerror="this.src='https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_150/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'">
+        </div>
+        <span class="app-story-title">Jewellery</span>
+      </div>
+      <div class="app-story-item" onclick="location.href='#custom-blouse'">
+        <div class="app-story-avatar ring-gold">
+          <div class="app-story-icon-content">✂️</div>
+        </div>
+        <span class="app-story-title">Blouse Studio</span>
+      </div>
+      <div class="app-story-item" onclick="location.href='ai-stylist.html'">
+        <div class="app-story-avatar ring-purple pulse-animation">
+          <div class="app-story-icon-content">✨</div>
+        </div>
+        <span class="app-story-title">AI Stylist</span>
+      </div>
+      <div class="app-story-item" onclick="appFilterOffers()">
+        <div class="app-story-avatar ring-offer">
+          <div class="app-story-icon-content">🏷️</div>
+        </div>
+        <span class="app-story-title">Hot Deals</span>
+      </div>
+    </div>
+
+    <!-- 4. FLIPKART STYLE TOUCH CAROUSEL BANNER -->
+    <div class="app-banner-carousel" id="appBannerCarousel">
+      <div class="app-carousel-track" id="appCarouselTrack">
+        <div class="app-banner-slide active" style="background: linear-gradient(135deg, #1A1209 0%, #382414 100%);">
+          <div class="app-banner-content">
+            <span class="app-banner-tag">🌟 FESTIVE SPECIAL</span>
+            <h3>Pure Handloom Kanjivaram</h3>
+            <p>Flat 30% OFF • Direct from Master Weavers</p>
+            <button class="app-banner-btn" onclick="appFilterCategory('silk')">Shop Collection ›</button>
+          </div>
+        </div>
+        <div class="app-banner-slide" style="background: linear-gradient(135deg, #2b1810 0%, #522b15 100%);">
+          <div class="app-banner-content">
+            <span class="app-banner-tag">👑 ROYAL BRIDAL</span>
+            <h3>Heritage Temple Jewellery</h3>
+            <p>24k Matte Gold Finish • Handcrafted Kundan</p>
+            <button class="app-banner-btn" onclick="appFilterCategory('jewellery')">Explore Sets ›</button>
+          </div>
+        </div>
+        <div class="app-banner-slide" style="background: linear-gradient(135deg, #1f1a24 0%, #442d45 100%);">
+          <div class="app-banner-content">
+            <span class="app-banner-tag">✂️ 48-HOUR DISPATCH</span>
+            <h3>Bespoke Designer Blouses</h3>
+            <p>Aari Work • Maggam & Zari Hand Embroidery</p>
+            <button class="app-banner-btn" onclick="location.href='#custom-blouse'">Design Blouse ›</button>
+          </div>
+        </div>
+      </div>
+      <div class="app-carousel-dots" id="appCarouselDots">
+        <span class="app-dot active" onclick="appGoToSlide(0)"></span>
+        <span class="app-dot" onclick="appGoToSlide(1)"></span>
+        <span class="app-dot" onclick="appGoToSlide(2)"></span>
+      </div>
+    </div>
+
+    <!-- 5. DEAL OF THE DAY COUNTDOWN TICKER -->
+    <div class="app-deal-ticker">
+      <div class="app-deal-left">
+        <span class="app-deal-flame">🔥</span>
+        <span class="app-deal-title">Deal of the Day</span>
+        <span class="app-deal-timer" id="appDealTimer">04h : 28m : 15s</span>
+      </div>
+      <div class="app-deal-cta" onclick="appFilterOffers()">VIEW ALL &rsaquo;</div>
+    </div>
+
+    <!-- 6. HORIZONTAL FILTER CHIPS -->
+    <div class="app-chips-scroll">
+      <button class="app-chip active" data-chip="all" onclick="appSelectChip('all', this)">All</button>
+      <button class="app-chip" data-chip="bestseller" onclick="appSelectChip('bestseller', this)">⭐ Bestsellers</button>
+      <button class="app-chip" data-chip="under3000" onclick="appSelectChip('under3000', this)">⚡ Under ₹3000</button>
+      <button class="app-chip" data-chip="silk" onclick="appSelectChip('silk', this)">🥻 Pure Silk</button>
+      <button class="app-chip" data-chip="jewellery" onclick="appSelectChip('jewellery', this)">💎 Jewellery</button>
+      <button class="app-chip" data-chip="offers" onclick="appSelectChip('offers', this)">🏷️ 40%+ Off</button>
+    </div>
+
+  </div>
+
   <!-- MAIN PRODUCTS SECTION: CURATED SELECTION -->
   <section class="products-section curated-showcase-section" id="products">
     <!-- Corner Decorative Botanical Accents -->
@@ -2386,6 +2511,58 @@
         video.src = '';
       }
     </script>
+
+    <!-- FLIPKART-STYLE STICKY BOTTOM APP NAVIGATION BAR -->
+    <div class="app-bottom-nav" id="appBottomNav">
+      <a href="/" class="app-nav-item active" id="navHome">
+        <div class="app-nav-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        </div>
+        <span class="app-nav-label">Home</span>
+        <span class="app-nav-dot"></span>
+      </a>
+      <a href="collections.html" class="app-nav-item" id="navCategories">
+        <div class="app-nav-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg>
+        </div>
+        <span class="app-nav-label">Categories</span>
+      </a>
+      <a href="ai-stylist.html" class="app-nav-item app-nav-stylist" id="navStylist">
+        <div class="app-nav-icon stylist-sparkle">
+          ✨
+        </div>
+        <span class="app-nav-label">AI Stylist</span>
+      </a>
+      <a href="javascript:void(0)" onclick="toggleWishlist()" class="app-nav-item" id="navWishlist">
+        <div class="app-nav-icon" style="position:relative;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          <span class="app-nav-badge wish-count-badge" id="appWishBadge">0</span>
+        </div>
+        <span class="app-nav-label">Wishlist</span>
+      </a>
+      <a href="javascript:void(0)" onclick="openAuth()" class="app-nav-item" id="navAccount">
+        <div class="app-nav-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        </div>
+        <span class="app-nav-label">Account</span>
+      </a>
+    </div>
+
+    <!-- PINCODE SELECTOR BOTTOM SHEET MODAL -->
+    <div id="pincodeModal" class="modal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); z-index: 10002; align-items: flex-end; justify-content: center;">
+      <div class="modal-content" style="background: #1c140c; width: 100%; max-width: 500px; border-radius: 20px 20px 0 0; padding: 25px 20px calc(30px + var(--sab, env(safe-area-inset-bottom, 0px))) 20px; border: 1px solid rgba(201,168,76,0.3); border-bottom: none; box-shadow: 0 -10px 40px rgba(0,0,0,0.6); animation: slideUpModal 0.3s ease;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+          <h3 style="color: #fff; font-family: 'Playfair Display', serif; font-size: 18px; margin: 0;">Choose Delivery Location</h3>
+          <span style="color: #bbb; font-size: 24px; cursor: pointer;" onclick="closePincodeSelector()">×</span>
+        </div>
+        <p style="color: #b0a496; font-size: 12px; margin-bottom: 15px;">Enter your delivery pincode to check instant availability and express dispatch times.</p>
+        <div style="display: flex; gap: 8px;">
+          <input type="number" id="pincodeInput" placeholder="Enter 6-digit Pincode (e.g. 641001)" style="flex: 1; padding: 12px 14px; border-radius: 8px; border: 1px solid rgba(201,168,76,0.3); background: #2a1e13; color: #fff; font-size: 13px; font-family: 'Poppins', sans-serif;">
+          <button class="btn-primary" onclick="applyUserPincode()" style="padding: 12px 18px; font-size: 12px; font-weight: 700; border-radius: 8px;">Check</button>
+        </div>
+      </div>
+    </div>
+
 </body>
 
 </html>

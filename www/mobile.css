@@ -2363,4 +2363,739 @@
         color: #4A4036 !important;
         font-weight: 400 !important;
     }
-}
+
+    /* ================================================================
+       FLIPKART / AMAZON LUXURY MOBILE APP EXPERIENCE & ANIMATIONS
+       ================================================================ */
+
+    /* ── A. APP CONTAINER & PADDING ADJUSTMENT ── */
+    body {
+        padding-bottom: calc(68px + var(--sab, env(safe-area-inset-bottom, 0px))) !important;
+    }
+
+    .app-mobile-container {
+        display: block;
+        width: 100%;
+        background: #120c06;
+        padding: 0 0 15px 0;
+        box-sizing: border-box;
+    }
+
+    /* ── B. PINCODE DELIVERY STRIP (AMAZON / FLIPKART STYLE) ── */
+    .app-delivery-strip {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        background: linear-gradient(90deg, #1f160e 0%, #291d12 100%);
+        padding: 10px 15px;
+        border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+        color: #e6dfd5;
+        font-size: 11px;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .app-delivery-left {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+    }
+
+    .app-pin-icon {
+        width: 14px;
+        height: 14px;
+        color: #C9A84C;
+    }
+
+    .app-delivery-label strong {
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .app-delivery-arrow {
+        color: #C9A84C;
+        font-size: 12px;
+    }
+
+    .app-delivery-badge {
+        font-size: 10px;
+        font-weight: 600;
+        color: #4caf50;
+        background: rgba(76, 175, 80, 0.12);
+        padding: 3px 8px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        border: 1px solid rgba(76, 175, 80, 0.25);
+    }
+
+    /* ── C. ANIMATED APP SEARCH BAR ── */
+    .app-search-section {
+        padding: 12px 15px 8px 15px;
+        background: #120c06;
+    }
+
+    .app-search-input-box {
+        display: flex;
+        align-items: center;
+        background: #241910;
+        border: 1.5px solid rgba(201, 168, 76, 0.35);
+        border-radius: 28px;
+        padding: 2px 14px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.35);
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .app-search-input-box:focus-within {
+        border-color: #C9A84C;
+        box-shadow: 0 0 15px rgba(201, 168, 76, 0.35);
+        background: #2a1e13;
+    }
+
+    .app-search-icon {
+        width: 18px;
+        height: 18px;
+        color: #C9A84C;
+        margin-right: 8px;
+        flex-shrink: 0;
+    }
+
+    #appSearchInput {
+        flex: 1;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: #fff;
+        font-size: 13px;
+        padding: 10px 0;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    #appSearchInput::placeholder {
+        color: #998a7a;
+        font-size: 12.5px;
+        transition: opacity 0.3s ease;
+    }
+
+    .app-search-voice {
+        background: transparent;
+        border: none;
+        color: #C9A84C;
+        padding: 6px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .app-search-voice svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* ── D. CIRCULAR STORY CATEGORY BUBBLES ── */
+    .app-stories-row {
+        display: flex;
+        gap: 14px;
+        padding: 14px 15px;
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .app-stories-row::-webkit-scrollbar {
+        display: none;
+    }
+
+    .app-story-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        min-width: 64px;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .app-story-item:active {
+        transform: scale(0.92);
+    }
+
+    .app-story-avatar {
+        width: 58px;
+        height: 58px;
+        border-radius: 50%;
+        padding: 2.5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        background: #1A1209;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+
+    .app-story-avatar img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+        background: #2a1f14;
+    }
+
+    .app-story-icon-content {
+        font-size: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ring-gold {
+        background: linear-gradient(45deg, #8B6914, #F5E1A4, #C9A84C, #FFE89E);
+    }
+
+    .ring-purple {
+        background: linear-gradient(45deg, #7b1fa2, #ba68c8, #ff4081);
+    }
+
+    .ring-offer {
+        background: linear-gradient(45deg, #e53935, #ff7043, #ffd54f);
+    }
+
+    .pulse-animation {
+        animation: storyPulse 2s infinite;
+    }
+
+    @keyframes storyPulse {
+        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(186, 104, 200, 0.4)); }
+        50% { transform: scale(1.04); filter: drop-shadow(0 0 10px rgba(255, 64, 129, 0.7)); }
+    }
+
+    .app-story-title {
+        font-size: 10.5px;
+        color: #d1c5b8;
+        font-weight: 500;
+        text-align: center;
+        white-space: nowrap;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .app-story-item.active .app-story-title {
+        color: #C9A84C;
+        font-weight: 700;
+    }
+
+    /* ── E. FLIPKART TOUCH CAROUSEL BANNER ── */
+    .app-banner-carousel {
+        position: relative;
+        margin: 6px 15px 12px 15px;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(201, 168, 76, 0.2);
+    }
+
+    .app-carousel-track {
+        display: flex;
+        transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        width: 100%;
+    }
+
+    .app-banner-slide {
+        min-width: 100%;
+        box-sizing: border-box;
+        padding: 22px 18px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        min-height: 140px;
+    }
+
+    .app-banner-tag {
+        display: inline-block;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 1.5px;
+        color: #C9A84C;
+        background: rgba(201, 168, 76, 0.15);
+        padding: 3px 8px;
+        border-radius: 20px;
+        margin-bottom: 6px;
+        width: fit-content;
+    }
+
+    .app-banner-content h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 18px;
+        color: #fff;
+        margin: 0 0 4px 0;
+        line-height: 1.25;
+    }
+
+    .app-banner-content p {
+        font-size: 11px;
+        color: #d1c5b8;
+        margin: 0 0 10px 0;
+        line-height: 1.4;
+    }
+
+    .app-banner-btn {
+        align-self: flex-start;
+        background: linear-gradient(135deg, #C9A84C, #A07828);
+        color: #1A1209;
+        border: none;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 10.5px;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    }
+
+    .app-carousel-dots {
+        position: absolute;
+        bottom: 8px;
+        right: 14px;
+        display: flex;
+        gap: 5px;
+    }
+
+    .app-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.35);
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .app-dot.active {
+        width: 16px;
+        border-radius: 6px;
+        background: #C9A84C;
+    }
+
+    /* ── F. FLASH DEAL OF THE DAY TICKER ── */
+    .app-deal-ticker {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 0 15px 12px 15px;
+        padding: 10px 14px;
+        background: linear-gradient(90deg, #24140a 0%, #3d1c10 100%);
+        border-radius: 12px;
+        border: 1px solid rgba(229, 57, 53, 0.3);
+        box-shadow: 0 4px 14px rgba(229, 57, 53, 0.15);
+    }
+
+    .app-deal-left {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+    }
+
+    .app-deal-flame {
+        font-size: 14px;
+        animation: flameBounce 1s infinite alternate;
+    }
+
+    @keyframes flameBounce {
+        from { transform: translateY(0) scale(1); }
+        to { transform: translateY(-2px) scale(1.15); }
+    }
+
+    .app-deal-title {
+        color: #fff;
+        font-weight: 700;
+        font-size: 11.5px;
+        letter-spacing: 0.5px;
+    }
+
+    .app-deal-timer {
+        background: #110804;
+        color: #ff9800;
+        padding: 2px 7px;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 10px;
+        font-family: monospace;
+        border: 1px solid rgba(255, 152, 0, 0.3);
+    }
+
+    .app-deal-cta {
+        font-size: 10px;
+        font-weight: 700;
+        color: #C9A84C;
+        letter-spacing: 0.8px;
+        cursor: pointer;
+    }
+
+    /* ── G. HORIZONTAL FILTER CHIPS ── */
+    .app-chips-scroll {
+        display: flex;
+        gap: 8px;
+        padding: 0 15px 12px 15px;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .app-chips-scroll::-webkit-scrollbar {
+        display: none;
+    }
+
+    .app-chip {
+        padding: 7px 14px;
+        border-radius: 20px;
+        background: #20170f;
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        color: #d1c5b8;
+        font-size: 11px;
+        font-weight: 500;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: all 0.25s ease;
+        flex-shrink: 0;
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .app-chip.active {
+        background: linear-gradient(135deg, #C9A84C, #9a7322);
+        color: #1A1209;
+        font-weight: 700;
+        border-color: #F5E1A4;
+        box-shadow: 0 3px 12px rgba(201, 168, 76, 0.3);
+        transform: translateY(-1px);
+    }
+
+    /* ── H. FLIPKART / AMAZON 2-COLUMN PRODUCT GRID & CARDS ── */
+    .products-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 12px !important;
+        padding: 10px 14px 20px 14px !important;
+    }
+
+    .product-card {
+        background: #1c140c !important;
+        border-radius: 14px !important;
+        overflow: hidden !important;
+        border: 1px solid rgba(201, 168, 76, 0.15) !important;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35) !important;
+        display: flex !important;
+        flex-direction: column !important;
+        position: relative !important;
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease !important;
+    }
+
+    .product-card:active {
+        transform: scale(0.97) !important;
+    }
+
+    .product-img {
+        position: relative !important;
+        aspect-ratio: 3/4 !important;
+        overflow: hidden !important;
+        background: #2b1f13 !important;
+    }
+
+    .product-img img.img-main {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+        transition: transform 0.4s ease !important;
+    }
+
+    /* Flipkart Badges on Card */
+    .app-card-discount {
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        background: linear-gradient(135deg, #e53935, #c62828);
+        color: #fff;
+        font-size: 8.5px;
+        font-weight: 800;
+        padding: 3px 7px;
+        border-radius: 6px;
+        z-index: 5;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    .app-card-rating {
+        position: absolute;
+        bottom: 8px;
+        left: 8px;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(4px);
+        color: #fff;
+        font-size: 9px;
+        font-weight: 700;
+        padding: 3px 7px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        z-index: 5;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .app-card-rating em {
+        color: #9e9e9e;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 8px;
+    }
+
+    .product-wish {
+        position: absolute !important;
+        top: 8px !important;
+        right: 8px !important;
+        width: 32px !important;
+        height: 32px !important;
+        background: rgba(0, 0, 0, 0.6) !important;
+        backdrop-filter: blur(4px) !important;
+        border-radius: 50% !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        z-index: 6 !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    }
+
+    .product-wish svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    .product-info {
+        padding: 10px 10px 12px 10px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        flex-grow: 1 !important;
+    }
+
+    .product-type {
+        font-size: 8.5px !important;
+        color: #C9A84C !important;
+        font-weight: 600 !important;
+        letter-spacing: 1px !important;
+        text-transform: uppercase !important;
+        margin-bottom: 3px !important;
+    }
+
+    .product-name {
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        color: #f5ede6 !important;
+        line-height: 1.3 !important;
+        margin: 0 0 6px 0 !important;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+        height: 31px !important;
+    }
+
+    .app-card-price-row {
+        display: flex;
+        align-items: baseline;
+        gap: 6px;
+        margin-bottom: 6px;
+    }
+
+    .price-main {
+        font-size: 15px !important;
+        font-weight: 700 !important;
+        color: #fff !important;
+    }
+
+    .price-mrp {
+        font-size: 10.5px;
+        color: #887d72;
+        text-decoration: line-through;
+    }
+
+    .price-save {
+        font-size: 10px;
+        font-weight: 700;
+        color: #4caf50;
+    }
+
+    .app-card-delivery {
+        font-size: 9px;
+        color: #b0a496;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        margin-bottom: 8px;
+    }
+
+    .product-card .btn-primary {
+        width: 100% !important;
+        padding: 8px 0 !important;
+        font-size: 10.5px !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.5px !important;
+        border-radius: 8px !important;
+        margin-top: auto !important;
+        background: linear-gradient(135deg, #C9A84C, #8e6d2c) !important;
+        color: #1A1209 !important;
+        border: none !important;
+    }
+
+    /* ── I. SKELETON SHIMMER LOADING (USER CONDITION) ── */
+    .app-skeleton-card {
+        background: #1c140c;
+        border-radius: 14px;
+        overflow: hidden;
+        border: 1px solid rgba(201, 168, 76, 0.1);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .app-skeleton-img {
+        aspect-ratio: 3/4;
+        width: 100%;
+        background: linear-gradient(90deg, #241910 0%, #362619 50%, #241910 100%);
+        background-size: 200% 100%;
+        animation: shimmerSlide 1.5s infinite;
+    }
+
+    .app-skeleton-info {
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .app-skeleton-line {
+        height: 12px;
+        border-radius: 4px;
+        background: linear-gradient(90deg, #241910 0%, #362619 50%, #241910 100%);
+        background-size: 200% 100%;
+        animation: shimmerSlide 1.5s infinite;
+    }
+
+    @keyframes shimmerSlide {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+
+    /* ── J. SCROLL ANIMATION & REVEAL (USER CONDITION) ── */
+    .app-scroll-reveal {
+        opacity: 0;
+        transform: translateY(24px) scale(0.96);
+        transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        will-change: opacity, transform;
+    }
+
+    .app-scroll-reveal.revealed {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+
+    /* ── K. FLIPKART STICKY BOTTOM NAVIGATION BAR ── */
+    .app-bottom-nav {
+        display: flex !important;
+        position: fixed !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: calc(56px + var(--sab, env(safe-area-inset-bottom, 0px))) !important;
+        padding-bottom: var(--sab, env(safe-area-inset-bottom, 0px)) !important;
+        background: rgba(18, 12, 6, 0.96) !important;
+        backdrop-filter: blur(14px) !important;
+        -webkit-backdrop-filter: blur(14px) !important;
+        border-top: 1px solid rgba(201, 168, 76, 0.25) !important;
+        z-index: 9999 !important;
+        align-items: center !important;
+        justify-content: space-around !important;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.6) !important;
+    }
+
+    .app-nav-item {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        color: #a39587 !important;
+        text-decoration: none !important;
+        font-size: 9.5px !important;
+        font-weight: 500 !important;
+        flex: 1 !important;
+        height: 100% !important;
+        gap: 2px !important;
+        position: relative !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .app-nav-item:active {
+        transform: scale(0.9);
+    }
+
+    .app-nav-icon {
+        width: 22px !important;
+        height: 22px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .app-nav-icon svg {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    .app-nav-item.active {
+        color: #C9A84C !important;
+        font-weight: 700 !important;
+    }
+
+    .app-nav-item.active .app-nav-dot {
+        position: absolute;
+        bottom: calc(4px + var(--sab, env(safe-area-inset-bottom, 0px)));
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: #C9A84C;
+        box-shadow: 0 0 6px #C9A84C;
+    }
+
+    .stylist-sparkle {
+        font-size: 16px;
+        animation: spinSparkle 3s linear infinite;
+    }
+
+    @keyframes spinSparkle {
+        0% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(180deg) scale(1.2); }
+        100% { transform: rotate(360deg) scale(1); }
+    }
+
+    .app-nav-badge {
+        position: absolute;
+        top: -4px;
+        right: -6px;
+        background: #e91e63;
+        color: #fff;
+        font-size: 8px;
+        font-weight: 700;
+        min-width: 14px;
+        height: 14px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 3px;
+        box-shadow: 0 2px 5px rgba(233, 30, 99, 0.5);
+    }
+
+    /* Hide standard floating buttons when app bottom nav is active */
+    .ai-fab, .whatsapp-fab {
+        bottom: calc(70px + var(--sab, env(safe-area-inset-bottom, 0px))) !important;
+    }
+}
