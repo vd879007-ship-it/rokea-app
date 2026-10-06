@@ -1,0 +1,68 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Helper Authorization Functions ──────────────────────────────────
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated() && request.auth.token.admin == true;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // ── 1. PRODUCTS COLLECTION ──────────────────────────────────────────
+    // Public catalog: Anyone can browse products.
+    // Management: ONLY authenticated admins with verified Custom Claims can modify products.
+    match /products/{productId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ── 2. USERS COLLECTION ─────────────────────────────────────────────
+    // Privacy: Customers can only read and update their own profile and saved measurements.
+    // Admins can view customer listings for customer support.
+    match /users/{userId} {
+      allow read: if isOwner(userId) || isAdmin();
+      allow create, update: if isOwner(userId) || isAdmin();
+      allow delete: if isOwner(userId) || isAdmin();
+    }
+
+    // ── 3. ORDERS COLLECTION ────────────────────────────────────────────
+    // Security: Authenticated users can only read their own purchase history.
+    // Client cannot forge 'PAID' or 'verified' status directly; orders are written
+    // via server-side verification endpoints.
+    // Admins have full access to manage and track fulfillment.
+    match /orders/{orderId} {
+      allow read: if isAdmin() || (isAuthenticated() && resource.data.userId == request.auth.uid);
+      allow create: if false; // Orders must be created via verified server-side endpoints
+      allow update, delete: if isAdmin();
+    }
+
+    // ── 4. LEADS & CONTACT ENQUIRIES ────────────────────────────────────
+    // Customers can submit contact inquiries and consultation requests.
+    // Only admins can inspect, read, and delete customer leads.
+    match /leads/{leadId} {
+      allow create: if request.resource.data.name is string 
+                    && request.resource.data.phone is string;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // ── 5. CUSTOM BLOUSE TAILORING ORDERS ───────────────────────────────
+    match /blouse_orders/{blouseId} {
+      allow create: if true;
+      allow read: if isAdmin() || (isAuthenticated() && resource.data.userId == request.auth.uid);
+      allow update, delete: if isAdmin();
+    }
+
+    // ── 6. DEFAULT DENY ─────────────────────────────────────────────────
+    // Explicitly lock down all other collections and subcollections.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,65 @@
+name: Build Android APK & AAB
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch: # Allows manual trigger from GitHub Actions tab
+
+jobs:
+  build-android:
+    name: Build Android APK & AAB
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 2. Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 3. Set up Java JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: 4. Install Dependencies
+        run: npm install
+
+      - name: 5. Build Web Bundle
+        run: npm run build
+
+      - name: 6. Sync Capacitor Android
+        run: npx cap sync android
+
+      - name: 7. Make Gradlew Executable
+        run: chmod +x ./android/gradlew
+
+      - name: 8. Build Debug APK (Installable directly on phone)
+        run: |
+          cd android
+          ./gradlew assembleDebug --no-daemon
+
+      - name: 9. Build Release AAB (For Google Play Store)
+        run: |
+          cd android
+          ./gradlew bundleRelease --no-daemon
+
+      - name: 10. Upload APK to GitHub Artifacts (Ready to Install)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Rokea-by-RK-Debug-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 30
+
+      - name: 11. Upload AAB to GitHub Artifacts (For Play Store)
+        uses: actions/upload-artifact@v4
+        with:
+          name: Rokea-by-RK-Release-AAB
+          path: android/app/build/outputs/bundle/release/app-release.aab
+          retention-days: 30
