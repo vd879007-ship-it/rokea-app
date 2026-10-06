@@ -6,8 +6,10 @@
 
 @media (max-width: 1024px) {
 
-    /* ── 1. HIDE DESKTOP NAV & LEGACY WEBSITE SECTIONS ON MOBILE ── */
-    nav,
+    /* ── 1. HIDE DESKTOP NAV & ALL LEGACY WEBSITE SECTIONS ON MOBILE ── */
+    nav:not(.app-bottom-nav),
+    section,
+    footer,
     .hero,
     .marquee-bar,
     .splash-scroll-indicator,
@@ -21,7 +23,11 @@
     .custom-blouse-section,
     .contact-section,
     .faq-section,
-    footer,
+    .google-reviews-section,
+    .instagram-section,
+    .premium-features-section,
+    .why-choose-rokea-section,
+    .newsletter,
     .mobile-app-header-container,
     .mobile-app-banner-slider,
     .mobile-app-stories-container,
@@ -2110,11 +2116,12 @@
         color: #4A4036 !important;
         font-weight: 400 !important;
     }
+}
 
-    /* ================================================================
-       ROKEA BY RK — EXACT LUXURY MOBILE APP TEMPLATE (5 SCREENS)
-       MATCHING MOCKUP DESIGN SYSTEM PIXEL-FOR-PIXEL
-       ================================================================ */
+/* ================================================================
+   ROKEA BY RK — EXACT LUXURY MOBILE APP TEMPLATE (5 SCREENS)
+   MATCHING MOCKUP DESIGN SYSTEM PIXEL-FOR-PIXEL
+   ================================================================ */
 
     :root {
         --app-bg: #FBF8F4;
@@ -3429,5 +3436,4 @@
         bottom: calc(72px + var(--sab, env(safe-area-inset-bottom, 0px))) !important;
         right: 16px !important;
     }
-}
 
