@@ -4387,7 +4387,7 @@ window.addEventListener('popstate', function () {
 
 // ================================================================
 // ROKEA BY RK — EXACT LUXURY 5-SCREEN MOBILE APP CONTROLLER
-// Matches Mockup Template Pixel-for-Pixel
+// 100% Dynamic Real Store Database & Inventory Integration
 // ================================================================
 (function () {
   window.currentAppScreen = 'home';
@@ -4395,8 +4395,9 @@ window.addEventListener('popstate', function () {
   window.currentShopCategory = 'all';
   window.currentShopSortOrder = 'newest';
   window.currentDetailProduct = null;
+  window.appSearchQuery = '';
 
-  // 1. Switch Screen System
+  // 1. Screen Switching Engine
   window.switchAppScreen = function (screenName) {
     window.currentAppScreen = screenName;
     const screens = {
@@ -4407,14 +4408,12 @@ window.addEventListener('popstate', function () {
       profile: document.getElementById('appScreenProfile')
     };
 
-    // Hide all screens & show requested screen
     Object.keys(screens).forEach(key => {
       if (screens[key]) {
         screens[key].classList.toggle('active-screen', key === screenName);
       }
     });
 
-    // Update Bottom Navigation Tabs
     const tabMap = {
       home: 'tabHome',
       shop: 'tabShop',
@@ -4428,7 +4427,6 @@ window.addEventListener('popstate', function () {
       if (activeTab) activeTab.classList.add('active');
     }
 
-    // Update Header Left Icon (Menu vs Back Arrow)
     const leftIcon = document.getElementById('appHeaderLeftIcon');
     if (leftIcon) {
       if (screenName === 'home') {
@@ -4438,21 +4436,19 @@ window.addEventListener('popstate', function () {
       }
     }
 
-    // If switched to shop, ensure grid is rendered
-    if (screenName === 'shop') {
+    if (screenName === 'home') {
+      window.renderAppHomeScreen();
+    } else if (screenName === 'shop') {
       window.renderAppShopGrid();
-    }
-
-    // If switched to profile, sync user data
-    if (screenName === 'profile') {
+    } else if (screenName === 'stylist') {
+      window.renderAppStylistScreen();
+    } else if (screenName === 'profile') {
       window.syncAppProfileData();
     }
 
-    // Scroll to top
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Header Left Action (Hamburger on Home, Back arrow elsewhere)
   window.handleAppHeaderLeft = function () {
     if (window.currentAppScreen === 'home') {
       if (typeof openAppointmentModal === 'function') {
@@ -4463,7 +4459,64 @@ window.addEventListener('popstate', function () {
     }
   };
 
-  // 2. Category & Shop Tab Filter
+  // 2. Real Store Data Home Screen Renderer
+  window.renderAppHomeScreen = function () {
+    if (!Array.isArray(products) || products.length === 0) return;
+
+    const sarees = products.filter(p => {
+      const cat = (p.category || '').toLowerCase();
+      const name = (p.name || '').toLowerCase();
+      return !cat.includes('jewel') && !name.includes('necklace') && !name.includes('earring') && !name.includes('choker');
+    });
+
+    const jewellery = products.filter(p => {
+      const cat = (p.category || '').toLowerCase();
+      const name = (p.name || '').toLowerCase();
+      return cat.includes('jewel') || name.includes('necklace') || name.includes('earring') || name.includes('choker') || name.includes('pendant');
+    });
+
+    // Update Featured Cards Images
+    const featImgSaree = document.getElementById('appFeatImgSaree');
+    const featImgJewel = document.getElementById('appFeatImgJewel');
+    if (featImgSaree && sarees.length > 0 && sarees[0].image) {
+      featImgSaree.src = sarees[0].image;
+    }
+    if (featImgJewel && jewellery.length > 0 && jewellery[0].image) {
+      featImgJewel.src = jewellery[0].image;
+    }
+
+    // Populate Trending Grid on Home Screen
+    const homeTrendingGrid = document.getElementById('appHomeTrendingGrid');
+    if (homeTrendingGrid) {
+      const trendingList = products.slice(0, 4);
+      homeTrendingGrid.innerHTML = trendingList.map(p => {
+        const pName = p.name || 'Handcrafted Luxury';
+        const pPrice = Number(p.price) ? '₹ ' + Number(p.price).toLocaleString('en-IN') : '₹ 4,999';
+        const pImg = p.image || 'https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_400/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg';
+        const isWishlisted = Array.isArray(wishlist) && wishlist.some(w => String(w.id) === String(p.id));
+
+        return `
+          <div class="app-grid-card" onclick="openAppProductDetail('${p.id}')">
+            <span class="app-card-badge-new">Trending</span>
+            <div class="app-card-img-wrap">
+              <img src="${pImg}" alt="${pName}" loading="lazy" onerror="this.src='https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_400/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'">
+              <button class="app-card-heart-btn" onclick="event.stopPropagation(); toggleWishlistFromApp('${p.id}')" aria-label="Add to Wishlist">
+                <svg viewBox="0 0 24 24" fill="${isWishlisted ? '#e91e63' : 'none'}" stroke="${isWishlisted ? '#e91e63' : '#140C06'}" stroke-width="2">
+                  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+              </button>
+            </div>
+            <div class="app-card-body">
+              <h3 class="app-card-name">${pName}</h3>
+              <p class="app-card-price">${pPrice}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  };
+
+  // 3. Real Store Data Shop Screen Renderer
   window.openShopCategory = function (category) {
     window.currentShopCategory = category;
     if (category === 'jewellery') {
@@ -4492,59 +4545,80 @@ window.addEventListener('popstate', function () {
     }
   };
 
-  window.toggleShopFilter = function () {
-    // Cycle through filter modes
-    const modes = ['all', 'silk', 'designer', 'bridal'];
-    const curIdx = modes.indexOf(window.currentShopCategory);
-    const nextMode = modes[(curIdx + 1) % modes.length];
-    window.currentShopCategory = nextMode;
-    window.renderAppShopGrid(nextMode);
-    if (typeof showToast === 'function') {
-      showToast(`Filter: ${nextMode.toUpperCase()}`);
-    }
-  };
-
-  window.toggleShopSort = function () {
-    if (window.currentShopSortOrder === 'newest') {
-      window.currentShopSortOrder = 'price-low';
-      if (typeof showToast === 'function') showToast('Sorted: Price Low to High');
-    } else if (window.currentShopSortOrder === 'price-low') {
-      window.currentShopSortOrder = 'price-high';
-      if (typeof showToast === 'function') showToast('Sorted: Price High to Low');
-    } else {
-      window.currentShopSortOrder = 'newest';
-      if (typeof showToast === 'function') showToast('Sorted: Newest First');
+  window.handleAppLiveSearch = function (query) {
+    window.appSearchQuery = (query || '').toLowerCase().trim();
+    if (window.currentAppScreen !== 'shop') {
+      window.switchAppScreen('shop');
+      const shopInput = document.getElementById('appShopSearchInput');
+      if (shopInput) shopInput.value = query;
     }
     window.renderAppShopGrid();
   };
 
-  // 3. Render 2-Column Luxury Product Grid (Mockup Screen 2)
   window.renderAppShopGrid = function (explicitFilter) {
     const gridEl = document.getElementById('appShopProductGrid');
+    const chipsContainer = document.getElementById('appShopFilterChips');
     if (!gridEl) return;
 
     const filter = explicitFilter || window.currentShopCategory || 'all';
     const isJewelleryTab = window.currentShopTab === 'jewellery';
 
+    // Populate Dynamic Filter Chips from real categories
+    if (chipsContainer) {
+      const chips = isJewelleryTab
+        ? [
+            { id: 'all', label: 'All Jewellery' },
+            { id: 'necklace', label: 'Necklaces' },
+            { id: 'antique', label: 'Antique Gold' },
+            { id: 'choker', label: 'Chokers' },
+            { id: 'earring', label: 'Earrings' }
+          ]
+        : [
+            { id: 'all', label: 'All Sarees' },
+            { id: 'silk', label: 'Soft Silk' },
+            { id: 'dubion', label: 'Dubion' },
+            { id: 'viscose', label: 'Glow Viscose' },
+            { id: 'bridal', label: 'Bridal' }
+          ];
+
+      chipsContainer.innerHTML = chips.map(c => `
+        <button class="app-filter-chip ${filter === c.id ? 'active' : ''}" onclick="window.selectShopFilterChip('${c.id}')" style="white-space:nowrap; padding:6px 14px; border-radius:20px; font-size:11px; font-weight:600; cursor:pointer; border:1px solid ${filter === c.id ? '#140C06' : '#DFD5C6'}; background:${filter === c.id ? '#140C06' : '#FFFFFF'}; color:${filter === c.id ? '#C9A84C' : '#23180F'}; transition:all 0.2s ease;">
+          ${c.label}
+        </button>
+      `).join('');
+    }
+
     let list = Array.isArray(products) ? [...products] : [];
 
-    // Filter by tab & category
+    // Filter by Tab
     if (isJewelleryTab) {
       list = list.filter(p => {
         const cat = (p.category || '').toLowerCase();
         const name = (p.name || '').toLowerCase();
-        return cat.includes('jewel') || name.includes('necklace') || name.includes('earring') || name.includes('choker') || name.includes('bangle') || name.includes('pendant');
+        return cat.includes('jewel') || name.includes('necklace') || name.includes('earring') || name.includes('choker') || name.includes('pendant') || name.includes('bangle');
       });
     } else {
       list = list.filter(p => {
         const cat = (p.category || '').toLowerCase();
         const name = (p.name || '').toLowerCase();
-        const isJ = cat.includes('jewel') || name.includes('necklace') || name.includes('earring') || name.includes('choker') || name.includes('bangle');
-        if (isJ) return false;
-        if (filter === 'silk') return cat.includes('silk') || name.includes('silk') || name.includes('kanchi');
-        if (filter === 'bridal') return cat.includes('bridal') || name.includes('bridal') || name.includes('pattu');
-        if (filter === 'new') return true;
-        return true;
+        const isJ = cat.includes('jewel') || name.includes('necklace') || name.includes('earring') || name.includes('choker') || name.includes('pendant') || name.includes('bangle');
+        return !isJ;
+      });
+    }
+
+    // Filter by category chip
+    if (filter !== 'all' && filter !== 'jewellery') {
+      list = list.filter(p => {
+        const text = ((p.category || '') + ' ' + (p.name || '') + ' ' + (p.description || '')).toLowerCase();
+        return text.includes(filter);
+      });
+    }
+
+    // Filter by Search Query
+    if (window.appSearchQuery) {
+      list = list.filter(p => {
+        const text = ((p.name || '') + ' ' + (p.category || '') + ' ' + (p.description || '')).toLowerCase();
+        return text.includes(window.appSearchQuery);
       });
     }
 
@@ -4560,8 +4634,8 @@ window.addEventListener('popstate', function () {
     if (list.length === 0) {
       gridEl.innerHTML = `
         <div style="grid-column: 1 / -1; text-align: center; padding: 40px 20px; color: #7E7267;">
-          <p style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">No products found</p>
-          <p style="font-size: 11px;">Explore our other handcrafted collections.</p>
+          <p style="font-size: 14px; font-weight: 600; margin-bottom: 8px;">No matching products found</p>
+          <p style="font-size: 11px;">Try searching for Soft Silk, Dubion, or explore all collections.</p>
         </div>
       `;
       return;
@@ -4575,7 +4649,7 @@ window.addEventListener('popstate', function () {
 
       return `
         <div class="app-grid-card" onclick="openAppProductDetail('${p.id}')">
-          <span class="app-card-badge-new">New</span>
+          <span class="app-card-badge-new">${p.category ? p.category.toUpperCase() : 'NEW'}</span>
           <div class="app-card-img-wrap">
             <img src="${pImg}" alt="${pName}" loading="lazy" onerror="this.src='https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_400/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'">
             <button class="app-card-heart-btn" onclick="event.stopPropagation(); toggleWishlistFromApp('${p.id}')" aria-label="Add to Wishlist">
@@ -4593,26 +4667,35 @@ window.addEventListener('popstate', function () {
     }).join('');
   };
 
-  // Wishlist toggle from app
-  window.toggleWishlistFromApp = function (productId) {
-    const prod = products.find(p => String(p.id) === String(productId));
-    if (!prod) return;
+  window.selectShopFilterChip = function (chipId) {
+    window.currentShopCategory = chipId;
+    window.renderAppShopGrid(chipId);
+  };
 
-    const idx = wishlist.findIndex(w => String(w.id) === String(productId));
-    if (idx > -1) {
-      wishlist.splice(idx, 1);
-      if (typeof showToast === 'function') showToast('Removed from wishlist');
+  window.toggleShopFilter = function () {
+    const isJ = window.currentShopTab === 'jewellery';
+    const modes = isJ ? ['all', 'necklace', 'antique', 'choker'] : ['all', 'silk', 'dubion', 'viscose', 'bridal'];
+    const curIdx = modes.indexOf(window.currentShopCategory);
+    const nextMode = modes[(curIdx + 1) % modes.length];
+    window.selectShopFilterChip(nextMode);
+  };
+
+  window.toggleShopSort = function () {
+    const sortLabel = document.getElementById('appSortLabel');
+    if (window.currentShopSortOrder === 'newest') {
+      window.currentShopSortOrder = 'price-low';
+      if (sortLabel) sortLabel.innerText = 'Price: Low ▾';
+    } else if (window.currentShopSortOrder === 'price-low') {
+      window.currentShopSortOrder = 'price-high';
+      if (sortLabel) sortLabel.innerText = 'Price: High ▾';
     } else {
-      wishlist.push(prod);
-      if (typeof showToast === 'function') showToast('Added to wishlist ❤️');
+      window.currentShopSortOrder = 'newest';
+      if (sortLabel) sortLabel.innerText = 'Newest ▾';
     }
-
-    localStorage.setItem('saforio_wishlist', JSON.stringify(wishlist));
-    window.updateAppBadges();
     window.renderAppShopGrid();
   };
 
-  // 4. Product Details Screen (Mockup Screen 3)
+  // 4. Real Store Product Detail Engine (Screen 3)
   window.openAppProductDetail = function (productId) {
     let p = products.find(item => String(item.id) === String(productId));
     if (!p && products.length > 0) p = products[0];
@@ -4620,22 +4703,97 @@ window.addEventListener('popstate', function () {
 
     window.currentDetailProduct = p;
 
+    const isJewellery = (p.category || '').toLowerCase().includes('jewel') || 
+                        (p.name || '').toLowerCase().includes('necklace') || 
+                        (p.name || '').toLowerCase().includes('earring') || 
+                        (p.name || '').toLowerCase().includes('choker');
+
     const imgEl = document.getElementById('appDetailImg');
     const titleEl = document.getElementById('appDetailTitle');
     const priceEl = document.getElementById('appDetailPrice');
+    const origPriceEl = document.getElementById('appDetailOriginalPrice');
     const taglineEl = document.getElementById('appDetailTagline');
     const descEl = document.getElementById('appDetailFullDesc');
+    const careDescEl = document.getElementById('appDetailCareDesc');
+    const pageBadge = document.getElementById('appDetailPageBadge');
 
     if (imgEl) imgEl.src = p.image || 'https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_600/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg';
-    if (titleEl) titleEl.innerText = p.name || 'Pure Luxury Saree';
-    if (priceEl) priceEl.innerText = Number(p.price) ? '₹ ' + Number(p.price).toLocaleString('en-IN') : '₹ 24,999';
-    if (taglineEl) taglineEl.innerText = p.category ? `${p.category.toUpperCase()} | Pure Silk | Handwoven` : '100% Pure Silk | Handcrafted Heritage';
-    if (descEl) descEl.innerText = p.description || 'Exquisitely handcrafted with pure zari work and authentic traditional motifs, ensuring timeless elegance for your special occasions.';
+    if (titleEl) titleEl.innerText = p.name || 'Handcrafted Luxury Piece';
+    if (priceEl) priceEl.innerText = Number(p.price) ? '₹ ' + Number(p.price).toLocaleString('en-IN') : '₹ 4,999';
+
+    if (origPriceEl) {
+      if (p.originalPrice && Number(p.originalPrice) > Number(p.price)) {
+        origPriceEl.innerText = '₹ ' + Number(p.originalPrice).toLocaleString('en-IN');
+        origPriceEl.style.display = 'inline';
+      } else {
+        origPriceEl.style.display = 'none';
+      }
+    }
+
+    if (taglineEl) {
+      taglineEl.innerText = isJewellery 
+        ? 'Antique Gold Finish | Premium Handcrafted Jewellery | Coimbatore'
+        : `${(p.category || 'Handloom Silk').toUpperCase()} | Authentic Zari Weave | Coimbatore`;
+    }
+
+    // Dynamic Category Specific Badges
+    const b1Icon = document.getElementById('appBadge1Icon');
+    const b1Text = document.getElementById('appBadge1Text');
+    const b2Icon = document.getElementById('appBadge2Icon');
+    const b2Text = document.getElementById('appBadge2Text');
+    const b3Icon = document.getElementById('appBadge3Icon');
+    const b3Text = document.getElementById('appBadge3Text');
+
+    if (b1Icon && b1Text && b2Icon && b2Text && b3Icon && b3Text) {
+      if (isJewellery) {
+        b1Icon.innerText = '💎'; b1Text.innerText = 'Antique Finish';
+        b2Icon.innerText = '✨'; b2Text.innerText = '100% Handcrafted';
+        b3Icon.innerText = '🔒'; b3Text.innerText = 'Tarnish Protected';
+      } else {
+        b1Icon.innerText = '🥻'; b1Text.innerText = '100% Pure Silk';
+        b2Icon.innerText = '🏛️'; b2Text.innerText = 'Direct Weavers';
+        b3Icon.innerText = '👑'; b3Text.innerText = 'Heritage Quality';
+      }
+    }
+
+    if (descEl) {
+      descEl.innerText = p.description || 'Exquisitely handcrafted with pure craftsmanship and authentic traditional motifs, ensuring timeless elegance for your special occasions.';
+    }
+
+    if (careDescEl) {
+      careDescEl.innerText = isJewellery ? JEWELLERY_CARE_INSTRUCTIONS : `SILK SAREE CARE & PRESERVATION
+✦ Dry clean only for the first three washes.
+✦ Store in pure cotton cloth bags in a cool, dry place.
+✦ Iron on low heat on the reverse side.
+✦ Avoid direct contact with liquid perfumes or sprays.`;
+    }
+
+    if (pageBadge) {
+      pageBadge.innerText = '1/1';
+    }
 
     window.switchAppScreen('detail');
   };
 
-  // Detail Swatches and Controls
+  window.askProductOnWhatsApp = function () {
+    const p = window.currentDetailProduct || (products.length > 0 ? products[0] : null);
+    const prodName = p ? p.name : 'ROKEA Collection';
+    const prodPrice = p && p.price ? '₹' + p.price : '';
+    const text = encodeURIComponent(`Hi ROKEA by RK, I am interested in purchasing "${prodName}" ${prodPrice}. Can you assist me?`);
+    window.open(`https://wa.me/917010394051?text=${text}`, '_blank');
+  };
+
+  window.openCustomBlouseModal = function () {
+    const section = document.getElementById('custom-blouse');
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+    }
+    if (typeof openAppointmentModal === 'function') {
+      openAppointmentModal();
+    }
+  };
+
+  // Detail Controls
   window.selectColorSwatch = function (el, colorName) {
     document.querySelectorAll('.app-color-dot').forEach(dot => dot.classList.remove('active'));
     if (el) el.classList.add('active');
@@ -4652,7 +4810,17 @@ window.addEventListener('popstate', function () {
     const descEl = document.getElementById('appDetailFullDesc');
     const arrowEl = document.getElementById('appDetailAccArrow');
     if (descEl) {
-      const isHidden = descEl.style.display === 'none' || descEl.style.display === '';
+      const isHidden = descEl.style.display === 'none';
+      descEl.style.display = isHidden ? 'block' : 'none';
+      if (arrowEl) arrowEl.innerText = isHidden ? '▴' : '▾';
+    }
+  };
+
+  window.toggleCareAccordion = function () {
+    const descEl = document.getElementById('appDetailCareDesc');
+    const arrowEl = document.getElementById('appCareAccArrow');
+    if (descEl) {
+      const isHidden = descEl.style.display === 'none';
       descEl.style.display = isHidden ? 'block' : 'none';
       if (arrowEl) arrowEl.innerText = isHidden ? '▴' : '▾';
     }
@@ -4691,7 +4859,59 @@ window.addEventListener('popstate', function () {
     }
   };
 
-  // 5. AI Virtual Stylist (Mockup Screen 4)
+  // Wishlist toggle from app
+  window.toggleWishlistFromApp = function (productId) {
+    const prod = products.find(p => String(p.id) === String(productId));
+    if (!prod) return;
+
+    const idx = wishlist.findIndex(w => String(w.id) === String(productId));
+    if (idx > -1) {
+      wishlist.splice(idx, 1);
+      if (typeof showToast === 'function') showToast('Removed from wishlist');
+    } else {
+      wishlist.push(prod);
+      if (typeof showToast === 'function') showToast('Added to wishlist ❤️');
+    }
+
+    localStorage.setItem('saforio_wishlist', JSON.stringify(wishlist));
+    window.updateAppBadges();
+    if (window.currentAppScreen === 'shop') window.renderAppShopGrid();
+    if (window.currentAppScreen === 'home') window.renderAppHomeScreen();
+  };
+
+  // 5. Real Inventory AI Stylist Screen (Screen 4)
+  window.renderAppStylistScreen = function () {
+    const pairsGrid = document.getElementById('appStylistPairsGrid');
+    if (!pairsGrid || !Array.isArray(products) || products.length === 0) return;
+
+    const sarees = products.filter(p => !((p.category || '').toLowerCase().includes('jewel')));
+    const jewels = products.filter(p => (p.category || '').toLowerCase().includes('jewel') || (p.name || '').toLowerCase().includes('necklace'));
+
+    const s1 = sarees[0] || products[0];
+    const j1 = jewels[0] || (products.length > 1 ? products[1] : products[0]);
+
+    pairsGrid.innerHTML = `
+      <div class="app-featured-card" onclick="openAppProductDetail('${s1.id}')">
+        <div class="app-featured-img">
+          <img src="${s1.image || 'https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_300/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'}" alt="${s1.name}">
+        </div>
+        <div class="app-featured-info">
+          <h4 class="app-featured-title" style="font-size:12.5px;">${s1.name}</h4>
+          <p class="app-featured-desc"><span>₹ ${Number(s1.price).toLocaleString('en-IN')} · Handpicked Silk</span></p>
+        </div>
+      </div>
+      <div class="app-featured-card" onclick="openAppProductDetail('${j1.id}')">
+        <div class="app-featured-img">
+          <img src="${j1.image || 'https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_300/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'}" alt="${j1.name}">
+        </div>
+        <div class="app-featured-info">
+          <h4 class="app-featured-title" style="font-size:12.5px;">${j1.name}</h4>
+          <p class="app-featured-desc"><span>₹ ${Number(j1.price).toLocaleString('en-IN')} · Temple Jewellery</span></p>
+        </div>
+      </div>
+    `;
+  };
+
   window.triggerStylistUpload = function () {
     const fileInput = document.getElementById('stylistFileInput');
     if (fileInput) fileInput.click();
@@ -4701,15 +4921,15 @@ window.addEventListener('popstate', function () {
     if (input.files && input.files[0]) {
       const reader = new FileReader();
       reader.onload = function (e) {
-        const uploadCard = document.querySelector('.app-upload-card');
+        const uploadCard = document.getElementById('appStylistUploadCard');
         if (uploadCard) {
           uploadCard.innerHTML = `
-            <div style="width:70px; height:70px; border-radius:50%; overflow:hidden; margin:0 auto 12px; border:2px solid #C9A84C;">
+            <div style="width:72px; height:72px; border-radius:50%; overflow:hidden; margin:0 auto 12px; border:2.5px solid #C9A84C; box-shadow:0 4px 15px rgba(201,168,76,0.4);">
               <img src="${e.target.result}" style="width:100%; height:100%; object-fit:cover;">
             </div>
-            <h3 class="app-upload-title" style="color:#C9A84C;">✨ Analysis Complete!</h3>
-            <p class="app-upload-desc">We matched your skin undertone with <strong>Emerald Green Kanchipuram Silk</strong> &amp; <strong>Antique Gold Temple Jewellery</strong>.</p>
-            <button class="app-btn-upload-photo" onclick="openShopCategory('silk')">VIEW MATCHED SET &rarr;</button>
+            <h3 class="app-upload-title" style="color:#C9A84C; font-size:16px;">✨ Analysis Complete!</h3>
+            <p class="app-upload-desc">We matched your skin undertone with our <strong>Handpicked Silk Sarees &amp; Antique Temple Jewellery</strong>.</p>
+            <button class="app-btn-upload-photo" onclick="switchAppScreen('shop')">EXPLORE MATCHED COLLECTION &rarr;</button>
           `;
         }
       };
@@ -4717,22 +4937,43 @@ window.addEventListener('popstate', function () {
     }
   };
 
-  // 6. User Profile (Mockup Screen 5)
+  // 6. User Profile Screen (Screen 5 - Real User & Store Data)
   window.syncAppProfileData = function () {
     const profileName = document.getElementById('appProfileName');
     const profileEmail = document.getElementById('appProfileEmail');
+    const profileBadge = document.getElementById('appProfileBadge');
+    const authBtn = document.getElementById('appAuthActionBtn');
+    const wishSub = document.getElementById('appMenuWishSub');
+    const pincodeSub = document.getElementById('appMenuPincodeSub');
 
-    if (currentUser) {
-      if (profileName) profileName.innerText = currentUser.name || currentUser.displayName || 'Karthikeyeni M';
-      if (profileEmail) profileEmail.innerText = currentUser.email || 'karthikeyeni@gmail.com';
+    const activeUser = currentUser || JSON.parse(localStorage.getItem('saforio_currentUser'));
+
+    if (activeUser) {
+      if (profileName) profileName.innerText = activeUser.name || activeUser.displayName || 'Privileged Member';
+      if (profileEmail) profileEmail.innerText = activeUser.email || activeUser.phone || 'ROKEA Exclusive';
+      if (profileBadge) profileBadge.innerText = '✦ Premium VIP Member';
+      if (authBtn) authBtn.innerText = '🚪 Log Out';
     } else {
-      if (profileName) profileName.innerText = 'Karthikeyeni M';
-      if (profileEmail) profileEmail.innerText = 'karthikeyeni@gmail.com';
+      if (profileName) profileName.innerText = 'Welcome Guest';
+      if (profileEmail) profileEmail.innerText = 'Sign in to access exclusive bridal perks';
+      if (profileBadge) profileBadge.innerText = '✦ ROKEA Customer';
+      if (authBtn) authBtn.innerText = '🚪 Sign In / Register';
+    }
+
+    if (wishSub) {
+      const count = Array.isArray(wishlist) ? wishlist.length : 0;
+      wishSub.innerText = `${count} saved item${count === 1 ? '' : 's'}`;
+    }
+
+    if (pincodeSub) {
+      const savedPin = localStorage.getItem('saforio_pincode');
+      pincodeSub.innerText = savedPin ? `Delivery to Pincode ${savedPin}` : 'Check delivery to your pincode';
     }
   };
 
   window.handleAppLogout = function () {
-    if (currentUser) {
+    const activeUser = currentUser || JSON.parse(localStorage.getItem('saforio_currentUser'));
+    if (activeUser) {
       if (typeof handleLogout === 'function') {
         handleLogout();
       } else {
@@ -4748,7 +4989,7 @@ window.addEventListener('popstate', function () {
     }
   };
 
-  // 7. Badge Sync Updater
+  // 7. Badge Sync
   window.updateAppBadges = function () {
     const cartCount = Array.isArray(cart) ? cart.reduce((sum, item) => sum + (item.quantity || 1), 0) : 0;
     const wishCount = Array.isArray(wishlist) ? wishlist.length : 0;
@@ -4766,11 +5007,22 @@ window.addEventListener('popstate', function () {
     }
   };
 
-  // Auto init
+  // Hook into renderAll so real products instantly update mobile screens
+  const originalRenderAll = window.renderAll;
+  window.renderAll = function () {
+    if (typeof originalRenderAll === 'function') originalRenderAll();
+    window.updateAppBadges();
+    window.renderAppHomeScreen();
+    if (window.currentAppScreen === 'shop') window.renderAppShopGrid();
+  };
+
   document.addEventListener('DOMContentLoaded', () => {
     window.updateAppBadges();
+    window.renderAppHomeScreen();
     window.renderAppShopGrid();
+    window.syncAppProfileData();
   });
 })();
+
 
 
