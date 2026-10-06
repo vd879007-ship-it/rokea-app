@@ -2277,8 +2277,32 @@
         font-weight: 700;
         letter-spacing: 2px;
         color: #C9A84C;
+    /* ── 1. HERO BANNER FULL-BLEED (MATCHING UPLOADED IMAGE) ── */
+    .app-home-hero {
+        min-height: 290px;
+        padding: 30px 20px 42px 20px;
+        background: linear-gradient(to right, rgba(17, 10, 5, 0.94) 0%, rgba(17, 10, 5, 0.7) 45%, rgba(17, 10, 5, 0.15) 100%), url('https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_800/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg');
+        background-size: cover;
+        background-position: right center;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    .app-hero-content {
+        max-width: 65%;
+        z-index: 2;
+    }
+
+    .app-hero-tag {
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: 2px;
+        color: #C9A84C;
         text-transform: uppercase;
-        margin-bottom: 6px;
+        margin-bottom: 8px;
         display: flex;
         align-items: center;
         gap: 4px;
@@ -2286,58 +2310,53 @@
 
     .app-hero-title {
         font-family: 'Playfair Display', serif;
-        font-size: 21px;
+        font-size: 23px;
         font-weight: 600;
         color: #FFFFFF;
-        line-height: 1.25;
-        margin: 0 0 8px 0;
+        line-height: 1.22;
+        margin: 0 0 10px 0;
     }
 
     .app-hero-subtitle {
         font-size: 10.5px;
         color: #D1C5B8;
         line-height: 1.45;
-        margin: 0 0 14px 0;
+        margin: 0 0 18px 0;
     }
 
     .app-hero-btn {
         background: linear-gradient(135deg, #C9A84C 0%, #A07828 100%);
         color: #140C06;
         border: none;
-        padding: 8px 16px;
+        padding: 9px 18px;
         border-radius: 24px;
-        font-size: 10.5px;
+        font-size: 10px;
         font-weight: 700;
         letter-spacing: 1px;
         cursor: pointer;
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        box-shadow: 0 4px 12px rgba(201, 168, 76, 0.4);
+        box-shadow: 0 4px 14px rgba(201, 168, 76, 0.45);
     }
 
-    .app-hero-visual {
-        width: 110px;
-        height: 140px;
-        border-radius: 16px;
-        overflow: hidden;
-        flex-shrink: 0;
-        border: 1.5px solid rgba(201, 168, 76, 0.4);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-    }
-
-    .app-hero-visual img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    /* ── WHITE / CREAM CONTENT SHEET ── */
+    .app-home-sheet {
+        background: #FAF6F0;
+        border-radius: 24px 24px 0 0;
+        margin-top: -22px;
+        padding-top: 22px;
+        position: relative;
+        z-index: 5;
+        box-shadow: 0 -8px 25px rgba(0, 0, 0, 0.12);
     }
 
     /* ── 2. CATEGORY TILES (4 TILES ON HOME SCREEN) ── */
     .app-home-categories {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 10px;
-        padding: 0 16px 20px 16px;
+        gap: 12px;
+        padding: 0 18px 22px 18px;
     }
 
     .app-cat-tile {
@@ -2356,15 +2375,15 @@
     .app-cat-box {
         width: 100%;
         aspect-ratio: 1/1;
-        border-radius: 16px;
+        border-radius: 18px;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 22px;
-        background: #F3EBDD;
-        border: 1px solid rgba(201, 168, 76, 0.25);
+        background: #FFFFFF;
+        border: 1px solid rgba(201, 168, 76, 0.2);
         color: #8B6914;
-        box-shadow: 0 4px 10px rgba(43, 31, 23, 0.05);
+        box-shadow: 0 4px 12px rgba(43, 31, 23, 0.04);
+        transition: all 0.2s ease;
     }
 
     .app-cat-tile.active .app-cat-box {
@@ -2388,26 +2407,26 @@
 
     /* ── 3. FEATURED COLLECTIONS (HOME SCREEN 2 CARDS) ── */
     .app-featured-section {
-        padding: 0 16px 24px 16px;
+        padding: 0 18px 24px 18px;
     }
 
     .app-section-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
     }
 
     .app-section-title {
         font-family: 'Playfair Display', serif;
-        font-size: 17px;
+        font-size: 18px;
         font-weight: 700;
         color: var(--app-text-main);
         margin: 0;
     }
 
     .app-section-link {
-        font-size: 11px;
+        font-size: 11.5px;
         font-weight: 600;
         color: #8B6914;
         text-decoration: none;
@@ -2422,7 +2441,7 @@
 
     .app-featured-card {
         background: #FFFFFF;
-        border-radius: 16px;
+        border-radius: 18px;
         overflow: hidden;
         border: 1px solid var(--app-card-border);
         box-shadow: 0 6px 16px rgba(43, 31, 23, 0.06);
@@ -2455,7 +2474,7 @@
 
     .app-featured-title {
         font-family: 'Playfair Display', serif;
-        font-size: 14px;
+        font-size: 15px;
         font-weight: 700;
         color: var(--app-text-main);
         margin: 0 0 3px 0;
@@ -2469,6 +2488,20 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        gap: 6px;
+    }
+
+    .app-circle-arrow {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 1px solid #C9A84C;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #C9A84C;
+        font-size: 11px;
+        flex-shrink: 0;
     }
 
     /* ================================================================

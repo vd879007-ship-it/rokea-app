@@ -340,86 +340,76 @@
       </div>
     </header>
 
-    <!-- ── SCREEN 1: HOME SCREEN (MOCKUP SCREEN 1 - REAL DATA HOOKED) ── -->
+    <!-- ── SCREEN 1: HOME SCREEN (EXACT MATCH TO TEMPLATE MOCKUP) ── -->
     <div class="app-screen-container active-screen" id="appScreenHome">
       
-      <!-- HERO BANNER CARD -->
+      <!-- HERO BANNER FULL-BLEED -->
       <div class="app-home-hero" onclick="switchAppScreen('shop')">
-        <div class="app-hero-left">
+        <div class="app-hero-overlay"></div>
+        <div class="app-hero-content">
           <div class="app-hero-tag">✦ TIMELESS TRADITION ✦ MODERN YOU</div>
-          <h1 class="app-hero-title" id="appHeroTitle">Handpicked<br>Sarees &amp; Jewellery</h1>
-          <p class="app-hero-subtitle" id="appHeroSubtitle">Discover authentic handloom silk, dubion sarees &amp; antique jewellery in Coimbatore.</p>
+          <h1 class="app-hero-title">Handpicked<br>Sarees &amp; Jewellery</h1>
+          <p class="app-hero-subtitle">Discover exquisite sarees, jewellery and handcrafted elegance — curated for you.</p>
           <button class="app-hero-btn" onclick="event.stopPropagation(); switchAppScreen('shop')">EXPLORE COLLECTIONS &rarr;</button>
         </div>
-        <div class="app-hero-visual">
-          <img id="appHeroImg" src="https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_400/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg" alt="ROKEA Luxury Saree">
-        </div>
       </div>
 
-      <!-- SEARCH BAR (DIRECT SEARCH REAL DATA) -->
-      <div class="app-search-wrap" style="padding: 0 16px 14px 16px;">
-        <div style="background:#fff; border-radius:14px; border:1px solid var(--app-card-border); display:flex; align-items:center; padding:10px 14px; gap:10px; box-shadow:0 4px 12px rgba(43,31,23,0.04);">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#8B6914" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="appHomeSearchInput" placeholder="Search Soft Silk, Dubion, Necklaces..." style="border:none; outline:none; width:100%; font-size:12px; font-family:'Poppins',sans-serif; background:transparent; color:#23180F;" oninput="handleAppLiveSearch(this.value)">
-        </div>
-      </div>
-
-      <!-- 4 CATEGORY TILES (REAL COUNTS & CATEGORIES) -->
-      <div class="app-home-categories">
-        <div class="app-cat-tile active" onclick="openShopCategory('all')">
-          <div class="app-cat-box">🥻</div>
-          <span class="app-cat-label">All Sarees</span>
-        </div>
-        <div class="app-cat-tile" onclick="openShopCategory('jewellery')">
-          <div class="app-cat-box">💎</div>
-          <span class="app-cat-label">Jewellery</span>
-        </div>
-        <div class="app-cat-tile" onclick="openShopCategory('silk')">
-          <div class="app-cat-box">👑</div>
-          <span class="app-cat-label">Pure Silk</span>
-        </div>
-        <div class="app-cat-tile" onclick="openShopCategory('new')">
-          <div class="app-cat-box">✨</div>
-          <span class="app-cat-label">New Arrivals</span>
-        </div>
-      </div>
-
-      <!-- FEATURED COLLECTIONS (REAL DYNAMIC CARDS) -->
-      <div class="app-featured-section">
-        <div class="app-section-header">
-          <h2 class="app-section-title">Featured Collections</h2>
-          <span class="app-section-link" onclick="switchAppScreen('shop')">View All &rarr;</span>
-        </div>
-        <div class="app-featured-grid" id="appHomeFeaturedGrid">
-          <div class="app-featured-card" onclick="openShopCategory('silk')">
-            <div class="app-featured-img">
-              <img id="appFeatImgSaree" src="https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_300/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg" alt="Sarees">
+      <!-- WHITE / CREAM SHEET WITH ROUNDED TOP CORNERS -->
+      <div class="app-home-sheet">
+        <!-- 4 CATEGORY TILES (MOCKUP) -->
+        <div class="app-home-categories">
+          <div class="app-cat-tile active" onclick="openShopCategory('all')">
+            <div class="app-cat-box">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.4z"/></svg>
             </div>
-            <div class="app-featured-info">
-              <h3 class="app-featured-title">Handpicked Sarees</h3>
-              <p class="app-featured-desc"><span id="appFeatSareeSub">Soft Silk, Dubion &amp; Viscose</span> <span>&rarr;</span></p>
-            </div>
+            <span class="app-cat-label">Sarees</span>
           </div>
-          <div class="app-featured-card" onclick="openShopCategory('jewellery')">
-            <div class="app-featured-img">
-              <img id="appFeatImgJewel" src="https://static.wixstatic.com/media/9881b8_1e967a508927429188094cfbb323fcf6~mv2.jpg/v1/fill/w_300,h_225,al_c,q_80/jewellery.jpg" alt="Jewellery" onerror="this.src='https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_300/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'">
+          <div class="app-cat-tile" onclick="openShopCategory('jewellery')">
+            <div class="app-cat-box">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 19 8.5 12 22 5 8.5 12 2"/><line x1="5" y1="8.5" x2="19" y2="8.5"/></svg>
             </div>
-            <div class="app-featured-info">
-              <h3 class="app-featured-title">Heritage Jewellery</h3>
-              <p class="app-featured-desc"><span id="appFeatJewelSub">Necklaces, Chokers &amp; Sets</span> <span>&rarr;</span></p>
+            <span class="app-cat-label">Jewellery</span>
+          </div>
+          <div class="app-cat-tile" onclick="openShopCategory('silk')">
+            <div class="app-cat-box">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 4l3 12h14l3-12-6 7-4-7-4 7-6-7z"/><circle cx="12" cy="19" r="2"/></svg>
             </div>
+            <span class="app-cat-label">Bridal</span>
+          </div>
+          <div class="app-cat-tile" onclick="openShopCategory('new')">
+            <div class="app-cat-box">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2l2.4 7.2h7.6l-6.2 4.5 2.4 7.3-6.2-4.5-6.2 4.5 2.4-7.3-6.2-4.5h7.6z"/></svg>
+            </div>
+            <span class="app-cat-label">New Arrivals</span>
           </div>
         </div>
-      </div>
 
-      <!-- POPULAR / BESTSELLERS FROM STORE DATABASE -->
-      <div class="app-featured-section" style="padding-top:0;">
-        <div class="app-section-header">
-          <h2 class="app-section-title">Trending Now</h2>
-          <span class="app-section-link" onclick="switchAppScreen('shop')">Shop More &rarr;</span>
-        </div>
-        <div class="app-product-grid" id="appHomeTrendingGrid" style="padding:0;">
-          <!-- Dynamically populated from live store database -->
+        <!-- FEATURED COLLECTIONS (2 CARDS EXACTLY AS IN IMAGE) -->
+        <div class="app-featured-section">
+          <div class="app-section-header">
+            <h2 class="app-section-title">Featured Collections</h2>
+            <span class="app-section-link" onclick="switchAppScreen('shop')">View All &rarr;</span>
+          </div>
+          <div class="app-featured-grid">
+            <div class="app-featured-card" onclick="openShopCategory('silk')">
+              <div class="app-featured-img">
+                <img id="appFeatImgSaree" src="https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_400/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg" alt="Sarees">
+              </div>
+              <div class="app-featured-info">
+                <h3 class="app-featured-title">Sarees</h3>
+                <p class="app-featured-desc"><span>Traditional elegance for every occasion</span> <span class="app-circle-arrow">&rarr;</span></p>
+              </div>
+            </div>
+            <div class="app-featured-card" onclick="openShopCategory('jewellery')">
+              <div class="app-featured-img">
+                <img id="appFeatImgJewel" src="https://static.wixstatic.com/media/9881b8_1e967a508927429188094cfbb323fcf6~mv2.jpg/v1/fill/w_400,h_300,al_c,q_80/jewellery.jpg" alt="Jewellery" onerror="this.src='https://res.cloudinary.com/drkgkgiat/image/upload/f_auto,q_auto,w_400/v1777447204/rk_saree_banner_copy.jpg_d6mphh.jpg'">
+              </div>
+              <div class="app-featured-info">
+                <h3 class="app-featured-title">Jewellery</h3>
+                <p class="app-featured-desc"><span>Timeless pieces, endless stories.</span> <span class="app-circle-arrow">&rarr;</span></p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
